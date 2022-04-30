@@ -3,7 +3,7 @@
  *   @file:    aht10.c
  *
  *   @author:  valeriy.grimalskiy
- *   @company: NIK El.
+ *   @company: Lab.
  */
 
 #include "aht10.h"
@@ -60,13 +60,16 @@ void AHT10_Request(const AHT10_Config_t *config)
 {
 	if((config) && (config->Entity))
 	{
-		if(!config->Entity->SendedFlag)
+		if(config->Entity->WorkMode == AHT10_WorkMode_MANUAL)
 		{
-			//Send
-			config->I2C_Functions.Send(AHT10_I2C_ADDRESS, (uint8_t *)cmd_Measure, 3);
+			if(!config->Entity->SendedFlag)
+			{
+				//Send
+				config->I2C_Functions.Send(AHT10_I2C_ADDRESS, (uint8_t *)cmd_Measure, 3);
 
-			config->Entity->TimeCounter = 0;
-			config->Entity->SendedFlag = true;
+				config->Entity->TimeCounter = 0;
+				config->Entity->SendedFlag = true;
+			}
 		}
 	}
 }
@@ -82,9 +85,9 @@ void AHT10_Reset(const AHT10_Config_t *config)
 	}
 }
 
-void AHT10_Run(const AHT10_Config_t *config, AHT10_Data_t *meas_data)
+void AHT10_Run(const AHT10_Config_t *config)
 {
-	if(config && config->Entity && meas_data)
+	if(config && config->Entity)
 	{
 		if(config->I2C_Functions.Send && config->I2C_Functions.Receive)
 		{
@@ -142,7 +145,7 @@ void AHT10_Run(const AHT10_Config_t *config, AHT10_Data_t *meas_data)
 							config->Entity->SendedFlag = false;
 							
 							//Send firs request if we are in automatic mode
-							if(config->Entity->WorkMode == AHT10_WorkMode__AUTOMATIC)
+							if(config->Entity->WorkMode == AHT10_WorkMode_AUTOMATIC)
 							{
 								//Send
 								config->I2C_Functions.Send(AHT10_I2C_ADDRESS, (uint8_t *)cmd_Measure, 3);
@@ -179,14 +182,21 @@ void AHT10_Run(const AHT10_Config_t *config, AHT10_Data_t *meas_data)
 							if(~raw_data[0] & 0x80)
 							{
 								uint32_t extracted_data;
+								float temperature = 0.0f;
+								float humidity = 0.0f;
 
 								// Convert to Temperature in °C
 								extracted_data = (((uint32_t)raw_data[3] & 15) << 16) | ((uint32_t)raw_data[4] << 8) | raw_data[5];
-								meas_data->Temperature = (float)(extracted_data * 200.0f / 1048576.0f) - 50.0f;
+								temperature = (float)(extracted_data * 200.0f / 1048576.0f) - 50.0f;
 
 								// Convert to Relative Humidity in %
 								extracted_data = ((uint32_t)raw_data[1] << 12) | ((uint32_t)raw_data[2] << 4) | (raw_data[3] >> 4);
-								meas_data->Humidity = (float)(extracted_data * 100.0f / 1048576.0f);
+								humidity = (float)(extracted_data * 100.0f / 1048576.0f);
+
+								if(config->DataReadyCallback)
+								{
+									config->DataReadyCallback(temperature, humidity);
+								}
 							}
 
 							config->Entity->SendedFlag = false;
@@ -194,7 +204,7 @@ void AHT10_Run(const AHT10_Config_t *config, AHT10_Data_t *meas_data)
 					}
 					else
 					{
-						if(config->Entity->WorkMode == AHT10_WorkMode__AUTOMATIC)
+						if(config->Entity->WorkMode == AHT10_WorkMode_AUTOMATIC)
 						{
 							if(config->Entity->TimeCounter >= config->Entity->Period)
 							{

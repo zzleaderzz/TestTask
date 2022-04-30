@@ -16,7 +16,7 @@
       arm_target_device_name="nRF52840_xxAA"
       arm_target_interface_type="SWD"
       c_preprocessor_definitions="BOARD_PCA10056;BSP_DEFINES_ONLY;CONFIG_GPIO_AS_PINRESET;FLOAT_ABI_HARD;INITIALIZE_USER_SECTIONS;NO_VTOR_CONFIG;NRF52840_XXAA;"
-      c_user_include_directories="../../../SDK/nRF5/config;../../../SDK/nRF5/components;../../../SDK/nRF5/components/boards;../../../SDK/nRF5/components/drivers_nrf/nrf_soc_nosd;../../../SDK/nRF5/components/libraries/atomic;../../../SDK/nRF5/components/libraries/balloc;../../../SDK/nRF5/components/libraries/bsp;../../../SDK/nRF5/components/libraries/delay;../../../SDK/nRF5/components/libraries/experimental_section_vars;../../../SDK/nRF5/components/libraries/log;../../../SDK/nRF5/components/libraries/log/src;../../../SDK/nRF5/components/libraries/memobj;../../../SDK/nRF5/components/libraries/ringbuf;../../../SDK/nRF5/components/libraries/strerror;../../../SDK/nRF5/components/libraries/util;../../../SDK/nRF5/components/toolchain/cmsis/include;../../../SDK/nRF5/external/fprintf;../../../SDK/nRF5/integration/nrfx;../../../SDK/nRF5/integration/nrfx/legacy;../../../SDK/nRF5/modules/nrfx;../../../SDK/nRF5/modules/nrfx/drivers/include;../../../SDK/nRF5/modules/nrfx/hal;../../../SDK/nRF5/modules/nrfx/mdk;Sources;Sources/Application;Sources/Application/Interfaces;Sources/Application/Modules;Sources/Drivers;Sources/System;Sources/Lib;Sources/Lib/AHT10"
+      c_user_include_directories="../../../SDK/nRF5/config;../../../SDK/nRF5/components;../../../SDK/nRF5/components/boards;../../../SDK/nRF5/components/drivers_nrf/nrf_soc_nosd;../../../SDK/nRF5/components/libraries/atomic;../../../SDK/nRF5/components/libraries/balloc;../../../SDK/nRF5/components/libraries/bsp;../../../SDK/nRF5/components/libraries/delay;../../../SDK/nRF5/components/libraries/experimental_section_vars;../../../SDK/nRF5/components/libraries/log;../../../SDK/nRF5/components/libraries/log/src;../../../SDK/nRF5/components/libraries/memobj;../../../SDK/nRF5/components/libraries/ringbuf;../../../SDK/nRF5/components/libraries/strerror;../../../SDK/nRF5/components/libraries/util;../../../SDK/nRF5/components/toolchain/cmsis/include;../../../SDK/nRF5/external/fprintf;../../../SDK/nRF5/integration/nrfx;../../../SDK/nRF5/integration/nrfx/legacy;../../../SDK/nRF5/modules/nrfx;../../../SDK/nRF5/modules/nrfx/drivers/include;../../../SDK/nRF5/modules/nrfx/hal;../../../SDK/nRF5/modules/nrfx/mdk;Sources;Sources/Application;Sources/Application/Interfaces;Sources/Application/Modules;Sources/Drivers;Sources/System;Sources/Lib;Sources/Lib/AHT10;Sources/Lib/SoftwareTimer"
       debug_register_definition_file="../../../SDK/nRF5/modules/nrfx/mdk/nrf52840.svd"
       debug_start_from_entry_point_symbol="No"
       debug_target_connection="J-Link"
@@ -61,6 +61,7 @@
       <file file_name="../../../SDK/nRF5/integration/nrfx/legacy/nrf_drv_uart.c" />
       <file file_name="../../../SDK/nRF5/modules/nrfx/soc/nrfx_atomic.c" />
       <file file_name="../../../SDK/nRF5/modules/nrfx/drivers/src/prs/nrfx_prs.c" />
+      <file file_name="../../../SDK/nRF5/modules/nrfx/drivers/src/nrfx_timer.c" />
       <file file_name="../../../SDK/nRF5/modules/nrfx/drivers/src/nrfx_twi.c" />
       <file file_name="../../../SDK/nRF5/modules/nrfx/drivers/src/nrfx_twim.c" />
       <file file_name="../../../SDK/nRF5/modules/nrfx/drivers/src/nrfx_uart.c" />
@@ -79,6 +80,17 @@
         </folder>
         <file file_name="Sources/Lib/SysTick.c" />
         <file file_name="Sources/Lib/SysTick.h" />
+        <folder Name="SoftwareTimer">
+          <file file_name="Sources/Lib/SoftwareTimer/SoftwareTimer.c" />
+          <file file_name="Sources/Lib/SoftwareTimer/SoftwareTimer.h" />
+          <file file_name="Sources/Lib/SoftwareTimer/SoftwareTimer_api.c">
+            <configuration Name="Common" build_exclude_from_build="Yes" />
+          </file>
+          <file file_name="Sources/Lib/SoftwareTimer/SoftwareTimer_api.h">
+            <configuration Name="Common" build_exclude_from_build="Yes" />
+          </file>
+        </folder>
+        <file file_name="Sources/Lib/defs.h" />
       </folder>
       <folder Name="Application">
         <file file_name="Sources/Application/main.c" />
@@ -86,10 +98,14 @@
         <folder Name="Interfaces">
           <file file_name="Sources/Application/Interfaces/if_twi0.c" />
           <file file_name="Sources/Application/Interfaces/if_twi0.h" />
+          <file file_name="Sources/Application/Interfaces/if_hwtimer0.c" />
+          <file file_name="Sources/Application/Interfaces/if_hwtimer0.h" />
         </folder>
         <folder Name="Modules">
           <file file_name="Sources/Application/Modules/mod_climate.c" />
           <file file_name="Sources/Application/Modules/mod_climate.h" />
+          <file file_name="Sources/Application/Modules/mod_swtimer.c" />
+          <file file_name="Sources/Application/Modules/mod_swtimer.h" />
         </folder>
       </folder>
       <folder Name="Drivers" />

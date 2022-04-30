@@ -3,7 +3,7 @@
  *   @file:    mod_climate.c
  *
  *   @author:  valeriy.grimalskiy
- *   @company: NIK El.
+ *   @company: Lab.
  */
 
 #include "mod_climate.h"
@@ -18,9 +18,18 @@
 /*-- Imported functions -----------------------------------------------------*/
 /*-- Local Macro Definitions ------------------------------------------------*/
 /*-- Local Typedefs ---------------------------------------------------------*/
+typedef struct
+{
+	float Temperature;
+	float Humidity;
+} ClimateData_t;
+
 /*-- Local function prototypes ----------------------------------------------*/
+void AHT10_DataReceivedCallback(float temperature, float humidity);
+
 /*-- Local variables --------------------------------------------------------*/
-static AHT10_Data_t data;
+static ClimateData_t cl_data = { 0.0f, 0.0f };
+
 static AHT10_Entity_t ath10_entity;
 static const AHT10_Config_t ath10_cfg = 
 {
@@ -29,9 +38,15 @@ static const AHT10_Config_t ath10_cfg =
         .Send = If_TWI0_Send,
         .Receive = If_TWI0_Receive
     },
+	.DataReadyCallback = AHT10_DataReceivedCallback,
     .Entity = &ath10_entity
 };
 /*-- Local functions --------------------------------------------------------*/
+void AHT10_DataReceivedCallback(float temperature, float humidity)
+{
+	cl_data.Temperature = temperature;
+	cl_data.Humidity = humidity;
+}
 
 /*-- Exported functions -----------------------------------------------------*/
 void Mod_Climate_Init(void)
@@ -39,18 +54,18 @@ void Mod_Climate_Init(void)
 	If_TWI0_Init();
 	If_TWI0_Enable();
 
-	AHT10_Set_WorkMode(&ath10_cfg, AHT10_WorkMode__AUTOMATIC);
+	AHT10_Set_WorkMode(&ath10_cfg, AHT10_WorkMode_AUTOMATIC);
 	AHT10_Set_Period(&ath10_cfg, 500);
 }
 
 float Mod_Climate_GetTemperature(void)
 {
-	return data.Temperature;
+	return cl_data.Temperature;
 }
 
 float Mod_Climate_GetHumidity(void)
 {
-	return data.Humidity;
+	return cl_data.Humidity;
 }
 
 void Mod_Climate_Tick(uint32_t ms)
@@ -60,7 +75,7 @@ void Mod_Climate_Tick(uint32_t ms)
 
 void Mod_Climate_Run(void)
 {
-	AHT10_Run(&ath10_cfg, &data);
+	AHT10_Run(&ath10_cfg);
 }
 
 /*-- EOF --------------------------------------------------------------------*/

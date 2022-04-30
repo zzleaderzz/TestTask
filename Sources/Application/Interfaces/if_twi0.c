@@ -3,7 +3,7 @@
  *   @file:    if_twi0.c
  *
  *   @author:  valeriy.grimalskiy
- *   @company: NIK El.
+ *   @company: Lab.
  */
 
 #include "if_twi0.h"
@@ -17,12 +17,10 @@
 /*-- Project specific includes ----------------------------------------------*/
 /*-- Imported functions -----------------------------------------------------*/
 /*-- Local Macro Definitions ------------------------------------------------*/
-#define I2C_INSTANCE_ID						0
-
 /*-- Local Typedefs ---------------------------------------------------------*/
 /*-- Local function prototypes ----------------------------------------------*/
 /*-- Local variables --------------------------------------------------------*/
-static const nrf_drv_twi_t twi = NRF_DRV_TWI_INSTANCE(I2C_INSTANCE_ID);
+static const nrf_drv_twi_t twi = NRF_DRV_TWI_INSTANCE(0);
 static const nrf_drv_twi_config_t twi_config = 
 {
    .scl                = ARDUINO_SCL_PIN,		  //P0.27

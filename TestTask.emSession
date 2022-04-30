@@ -5,7 +5,7 @@
   <BreakpointListItem trigger="" line="612" counter="0" hardwareBreakpoint="" isFunctionBreakpoint="false" action="" expression="" group="Breakpoints" type="Breakpoint" state="2" filename="../../../SDK/nRF5/components/libraries/log/src/nrf_log_frontend.c" useHWbreakpoint="false"/>
   <BreakpointListItem trigger="" line="138" counter="0" hardwareBreakpoint="" isFunctionBreakpoint="false" action="" expression="" group="Breakpoints" type="Breakpoint" state="2" filename="../../../SDK/nRF5/modules/nrfx/soc/nrfx_coredep.h" useHWbreakpoint="false"/>
   <BreakpointListItem trigger="" line="72" counter="0" hardwareBreakpoint="" isFunctionBreakpoint="false" action="" expression="" group="Breakpoints" type="Breakpoint" state="2" filename="../../../SDK/nRF5/modules/nrfx/mdk/ses_startup_nrf52840.s" useHWbreakpoint="false"/>
-  <Exceptions set="MemManage;UsageFault_Coprocessor;UsageFault_CheckingError;UsageFault_StateError;BusFault;ExceptionEntryReturnFault;HardFault"/>
+  <BreakpointListItem trigger="" line="21" counter="0" hardwareBreakpoint="" isFunctionBreakpoint="false" action="" expression="" group="Breakpoints" type="Breakpoint" state="4" filename="Sources/Application/Modules/temperature.h" useHWbreakpoint="false"/>
  </Breakpoints>
  <ExecutionProfileWindow/>
  <FrameBufferWindow>
@@ -26,14 +26,15 @@
  <Project>
   <ProjectSessionItem path="TestTask"/>
   <ProjectSessionItem path="TestTask;TestTask"/>
-  <ProjectSessionItem path="TestTask;TestTask;Board Definition"/>
-  <ProjectSessionItem path="TestTask;TestTask;None"/>
-  <ProjectSessionItem path="TestTask;TestTask;nRF_Drivers"/>
-  <ProjectSessionItem path="TestTask;TestTask;nRF_Log"/>
   <ProjectSessionItem path="TestTask;TestTask;Sources"/>
   <ProjectSessionItem path="TestTask;TestTask;Sources;Application"/>
+  <ProjectSessionItem path="TestTask;TestTask;Sources;Application;Interfaces"/>
+  <ProjectSessionItem path="TestTask;TestTask;Sources;Application;Modules"/>
+  <ProjectSessionItem path="TestTask;TestTask;Sources;Drivers"/>
   <ProjectSessionItem path="TestTask;TestTask;Sources;Lib"/>
   <ProjectSessionItem path="TestTask;TestTask;Sources;Lib;AHT10"/>
+  <ProjectSessionItem path="TestTask;TestTask;Sources;Lib;SoftwareTimer"/>
+  <ProjectSessionItem path="TestTask;TestTask;Sources;System"/>
  </Project>
  <Register1>
   <RegisterWindow visibleNodes="CPU - Current Context/r0;CPU - Current Context/r1;CPU - Current Context/r2;CPU - Current Context/r3;CPU - Current Context/r4;CPU - Current Context/r5;CPU - Current Context/r6;CPU - Current Context/r7;CPU - Current Context/r8;CPU - Current Context/r9;CPU - Current Context/r10;CPU - Current Context/r11;CPU - Current Context/r12;CPU - Current Context/sp(r13);CPU - Current Context/lr(r14);CPU - Current Context/pc(r15);CPU - Current Context/apsr;CPU/r0;CPU/r1;CPU/r2;CPU/r3;CPU/r4;CPU/r5;CPU/r6;CPU/r7;CPU/r8;CPU/r9;CPU/r10;CPU/r11;CPU/r12;CPU/sp(r13);CPU/lr(r14);CPU/pc(r15);CPU/xpsr;CPU/MSP;CPU/PSP;CPU/PRIMASK;CPU/BASEPRI;CPU/FAULTMASK;CPU/CONTROL;CPU/internal" binaryNodes="" asciiNodes="" openNodes="CPU - Current Context" name="TestTask" decimalNodes="" octalNodes="" unsignedNodes=""/>
@@ -55,7 +56,7 @@
  </TraceWindow>
  <Watch1>
   <Watches active="1" update="Twice a Second">
-   <Watchpoint expression="data" name="data" radix="11" linenumber="211" filename="Sources/Application/main.c"/>
+   <Watchpoint expression="data" name="data" radix="11" linenumber="116" filename="Sources/Application/main.c"/>
   </Watches>
  </Watch1>
  <Watch2>
@@ -68,17 +69,7 @@
   <Watches active="0" update="Never"/>
  </Watch4>
  <Files>
-  <SessionOpenFile windowGroup="DockEditLeft" x="12" y="173" useTextEdit="1" path="Sources/Application/main.c" left="0" top="158" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="8" y="145" useTextEdit="1" openedFrom="E:/Development/Droid/Nordic/Projects/nRF5/TestTask/Sources/Application/main.c" path="Sources/Lib/AHT10/aht10.c" left="0" top="144" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="16" y="34" useTextEdit="1" openedFrom="E:/Development/Droid/Nordic/Projects/nRF5/TestTask/Sources/Lib/AHT10/aht10.c" path="Sources/Lib/AHT10/aht10.h" left="0" top="14" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="21" y="543" useTextEdit="1" path="../../../SDK/nRF5/integration/nrfx/legacy/nrf_drv_twi.h" left="0" top="515" codecName=""/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="393" useTextEdit="1" openedFrom="E:/Development/Droid/Nordic/SDK/nRF5/integration/nrfx/legacy/nrf_drv_twi.h" path="../../../SDK/nRF5/modules/nrfx/drivers/src/nrfx_twim.c" left="0" top="366" codecName=""/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="15" y="163" useTextEdit="1" openedFrom="E:/Development/Droid/Nordic/SDK/nRF5/modules/nrfx/drivers/src/nrfx_twim.c" path="../../../SDK/nRF5/modules/nrfx/drivers/include/nrfx_twim.h" left="0" top="133" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="309" useTextEdit="1" path="../../../SDK/nRF5/modules/nrfx/drivers/nrfx_common.h" left="0" top="283" codecName=""/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="424" useTextEdit="1" path="../../../SDK/nRF5/modules/nrfx/hal/nrf_twim.h" left="0" top="398" codecName=""/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="4" y="98" useTextEdit="1" openedFrom="E:/Development/Droid/Nordic/Projects/nRF5/TestTask/Sources/Application/main.c" path="../../../SDK/nRF5/components/libraries/util/app_util_platform.h" left="0" top="68" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="25" y="147" useTextEdit="1" openedFrom="E:/Development/Droid/Nordic/Projects/nRF5/TestTask/Sources/Application/main.c" path="../../../SDK/nRF5/components/libraries/util/app_error.h" left="0" top="136" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="53" y="61" useTextEdit="1" openedFrom="E:/Development/Droid/Nordic/Projects/nRF5/TestTask/Sources/Application/main.c" path="../../../SDK/nRF5/integration/nrfx/legacy/nrf_drv_systick.h" left="0" selected="1" top="33" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="16" y="64" useTextEdit="1" path="Sources/Application/main.c" left="0" selected="1" top="11" codecName="Default"/>
  </Files>
- <EMStudioWindow activeProject="TestTask" fileDialogDefaultFilter="*" autoConnectTarget="J-Link" buildConfiguration="Debug" sessionSettings="" debugSearchFileMap="" fileDialogInitialDirectory="E:/Development/Droid/Nordic/Projects/nRF5/TestTask/Sources/Lib/AHT10" debugSearchPath="" autoConnectCapabilities="3711"/>
+ <EMStudioWindow activeProject="TestTask" fileDialogDefaultFilter="*" autoConnectTarget="J-Link" buildConfiguration="Debug" sessionSettings="" debugSearchFileMap="" fileDialogInitialDirectory="E:/Development/Droid/Nordic/Projects/nRF5/TestTask/Sources/Lib" debugSearchPath="" autoConnectCapabilities="3711"/>
 </session>

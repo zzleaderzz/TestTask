@@ -3,7 +3,7 @@
  *   @file:    mod_climate.h
  *
  *   @author:  valeriy.grimalskiy
- *   @company: NIK El.
+ *   @company: Lab.
  */
 
 #ifndef _MOD_CLIMATE_H
