@@ -1,13 +1,13 @@
 /*-- File description -------------------------------------------------------*/
 /**
- *   @file:    if_hwtimer0.h
+ *   @file:    mod_accelerometer.h
  *
  *   @author:  valeriy.grimalskiy
  *   @company: Lab.
  */
 
-#ifndef _IF_HWTIMER0_H
-#define _IF_HWTIMER0_H
+#ifndef _MOD_ACCELEROMETER_H
+#define _MOD_ACCELEROMETER_H
 
 /*-- Standard C/C++ Libraries -----------------------------------------------*/
 #include <stdint.h>
@@ -17,17 +17,22 @@
 /*-- Project specific includes ----------------------------------------------*/
 /*-- Exported macro ---------------------------------------------------------*/
 /*-- Typedefs ---------------------------------------------------------------*/
-typedef void(*If_HwTimer0_Callback)(uint32_t period);
+typedef struct
+{
+	int16_t X;
+	int16_t Y;
+	int16_t Z;
+} AccelerometerData_t;
 
 /*-- Exported variables -----------------------------------------------------*/
+extern AccelerometerData_t AccelerometerData;
+
 /*-- Exported functions -----------------------------------------------------*/
-void If_HwTimer0_Init(uint32_t period_ms);
-void If_HwTimer0_DeInit(void);
+void Mod_Accelerometer_Init(void);
 
-void If_HwTimer0_RegisterCallback(If_HwTimer0_Callback callback);
+void Mod_Accelerometer_Tick(uint32_t ms);
 
-void If_HwTimer0_Enable(void);
-void If_HwTimer0_Disable(void);
+void Mod_Accelerometer_Run(void);
 
-#endif // _IF_HWTIMER0_H
+#endif // _MOD_ACCELEROMETER_H
 /*-- EOF --------------------------------------------------------------------*/

@@ -15,7 +15,6 @@
 /*-- Imported functions -----------------------------------------------------*/
 /*-- Local Macro Definitions ------------------------------------------------*/
 #define AHT10_WakeUpTime					25 //ms
-#define AHT10_ResetTime						25 //ms
 #define AHT10_InitTime						25 //ms
 #define AHT10_MeasurementTime				80 //ms
 
@@ -93,7 +92,7 @@ void AHT10_Run(const AHT10_Config_t *config)
 		{
 			switch(config->Entity->WorkStep)
 			{
-				case AHT10_Step_Startup:
+				case AHT10_Step_WakeUp:
 				{
 					if(config->Entity->SendedFlag)
 					{
@@ -117,7 +116,7 @@ void AHT10_Run(const AHT10_Config_t *config)
 				{
 					if(config->Entity->SendedFlag)
 					{
-						if(config->Entity->TimeCounter >= AHT10_ResetTime)
+						if(config->Entity->TimeCounter >= AHT10_WakeUpTime)
 						{
 							config->Entity->SendedFlag = false;
 

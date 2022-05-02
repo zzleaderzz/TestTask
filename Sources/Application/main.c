@@ -19,6 +19,7 @@
 /*-- Project specific includes ----------------------------------------------*/
 #include "mod_climate.h"
 #include "mod_swtimer.h"
+#include "mod_accelerometer.h"
 
 /*-- Imported functions -----------------------------------------------------*/
 #include "SysTick.h"
@@ -55,12 +56,14 @@ void main(void)
     bsp_board_init(BSP_INIT_LEDS);
 	
 	//Start climate module
-	Mod_Climate_Init();
+	//Mod_Climate_Init();
+	Mod_Accelerometer_Init();
 	
 
 	//Start Led Triggering
 	SwTimer_Start(SWTT_CONTINUOUS, 125, SWTP_LEVEL_LOWEST, LedToggle_TimerCallback, NULL);
 
+	
 
     while (true)
     {
@@ -69,7 +72,8 @@ void main(void)
         //    __WFE();
         //}while (m_xfer_done == false);
 
-		Mod_Climate_Run();
+		//Mod_Climate_Run();
+		Mod_Accelerometer_Run();
 
 		Mod_SwTimer_Run();
     }

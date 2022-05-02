@@ -13,6 +13,7 @@
 /*-- Imported functions -----------------------------------------------------*/
 #include "SysTick.h"
 #include "mod_climate.h"
+#include "mod_accelerometer.h"
 
 /*-- Local Macro Definitions ------------------------------------------------*/
 /*-- Local Typedefs ---------------------------------------------------------*/
@@ -24,6 +25,7 @@ void SysTick_Handler(void)
 {
 	SysTick_IncTick();
 	Mod_Climate_Tick(1);
+	Mod_Accelerometer_Tick(1);
 }
 
 /*-- EOF --------------------------------------------------------------------*/

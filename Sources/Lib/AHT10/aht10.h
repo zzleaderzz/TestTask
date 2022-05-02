@@ -31,7 +31,7 @@ typedef enum
 
 typedef enum
 {
-	AHT10_Step_Startup,
+	AHT10_Step_WakeUp,
 	AHT10_Step_Reset,
 	AHT10_Step_Init,
 	AHT10_Step_Working,

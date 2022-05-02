@@ -28,13 +28,7 @@
   <ProjectSessionItem path="TestTask;TestTask"/>
   <ProjectSessionItem path="TestTask;TestTask;Sources"/>
   <ProjectSessionItem path="TestTask;TestTask;Sources;Application"/>
-  <ProjectSessionItem path="TestTask;TestTask;Sources;Application;Interfaces"/>
-  <ProjectSessionItem path="TestTask;TestTask;Sources;Application;Modules"/>
   <ProjectSessionItem path="TestTask;TestTask;Sources;Drivers"/>
-  <ProjectSessionItem path="TestTask;TestTask;Sources;Lib"/>
-  <ProjectSessionItem path="TestTask;TestTask;Sources;Lib;AHT10"/>
-  <ProjectSessionItem path="TestTask;TestTask;Sources;Lib;SoftwareTimer"/>
-  <ProjectSessionItem path="TestTask;TestTask;Sources;System"/>
  </Project>
  <Register1>
   <RegisterWindow visibleNodes="CPU - Current Context/r0;CPU - Current Context/r1;CPU - Current Context/r2;CPU - Current Context/r3;CPU - Current Context/r4;CPU - Current Context/r5;CPU - Current Context/r6;CPU - Current Context/r7;CPU - Current Context/r8;CPU - Current Context/r9;CPU - Current Context/r10;CPU - Current Context/r11;CPU - Current Context/r12;CPU - Current Context/sp(r13);CPU - Current Context/lr(r14);CPU - Current Context/pc(r15);CPU - Current Context/apsr;CPU/r0;CPU/r1;CPU/r2;CPU/r3;CPU/r4;CPU/r5;CPU/r6;CPU/r7;CPU/r8;CPU/r9;CPU/r10;CPU/r11;CPU/r12;CPU/sp(r13);CPU/lr(r14);CPU/pc(r15);CPU/xpsr;CPU/MSP;CPU/PSP;CPU/PRIMASK;CPU/BASEPRI;CPU/FAULTMASK;CPU/CONTROL;CPU/internal" binaryNodes="" asciiNodes="" openNodes="CPU - Current Context" name="TestTask" decimalNodes="" octalNodes="" unsignedNodes=""/>
@@ -56,7 +50,8 @@
  </TraceWindow>
  <Watch1>
   <Watches active="1" update="Twice a Second">
-   <Watchpoint expression="data" name="data" radix="11" linenumber="116" filename="Sources/Application/main.c"/>
+   <Watchpoint expression="data" name="data" radix="11" linenumber="120" filename="Sources/Application/main.c"/>
+   <Watchpoint expression="AccelerometerData" name="AccelerometerData" radix="10" linenumber="28" filename="Sources/Application/Modules/mod_accelerometer.h"/>
   </Watches>
  </Watch1>
  <Watch2>
@@ -69,7 +64,15 @@
   <Watches active="0" update="Never"/>
  </Watch4>
  <Files>
-  <SessionOpenFile windowGroup="DockEditLeft" x="16" y="64" useTextEdit="1" path="Sources/Application/main.c" left="0" selected="1" top="11" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="22" y="58" useTextEdit="1" path="Sources/Application/main.c" left="0" selected="1" top="41" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="33" y="27" useTextEdit="1" path="Sources/Application/Modules/mod_accelerometer.h" left="0" top="0" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="84" useTextEdit="1" openedFrom="E:/Development/Droid/Nordic/Projects/nRF5/TestTask/Sources/System/ntf52_it.c" path="Sources/Application/Modules/mod_accelerometer.c" left="0" top="69" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="48" y="799" useTextEdit="1" path="Sources/Lib/BMA280/bma280.c" left="0" top="791" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="2" y="591" useTextEdit="1" path="Sources/Lib/SoftwareTimer/SoftwareTimer.c" left="0" top="565" codecName=""/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="14" y="27" useTextEdit="1" path="Sources/System/ntf52_it.c" left="0" top="0" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="56" y="20" useTextEdit="1" openedFrom="E:/Development/Droid/Nordic/Projects/nRF5/TestTask/Sources/Application/Modules/mod_accelerometer.c" path="Sources/Application/Interfaces/if_exti.c" left="0" top="6" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="20" y="81" useTextEdit="1" openedFrom="E:/Development/Droid/Nordic/Projects/nRF5/TestTask/Sources/Application/Interfaces/if_exti.c" path="../../../SDK/nRF5/components/boards/pca10056.h" left="0" top="53" codecName="Default"/>
+  <SessionOpenFile windowGroup="HUD {6d9e334d-961e-4b8b-978c-16d889e593dd} Middle" x="37" y="19" useTextEdit="1" openedFrom="E:/Development/Droid/Nordic/Projects/nRF5/TestTask/Sources/Application/Modules/mod_accelerometer.c" path="Sources/Lib/BMA280/bma280.h" left="0" top="0" codecName="Default"/>
  </Files>
- <EMStudioWindow activeProject="TestTask" fileDialogDefaultFilter="*" autoConnectTarget="J-Link" buildConfiguration="Debug" sessionSettings="" debugSearchFileMap="" fileDialogInitialDirectory="E:/Development/Droid/Nordic/Projects/nRF5/TestTask/Sources/Lib" debugSearchPath="" autoConnectCapabilities="3711"/>
+ <EMStudioWindow activeProject="TestTask" fileDialogDefaultFilter="*" autoConnectTarget="J-Link" buildConfiguration="Debug" sessionSettings="" debugSearchFileMap="" fileDialogInitialDirectory="E:/Development/Droid/Nordic/Projects/nRF5/TestTask/Sources/Application/Interfaces" debugSearchPath="" autoConnectCapabilities="3711"/>
 </session>

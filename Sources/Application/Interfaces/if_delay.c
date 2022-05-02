@@ -1,81 +1,34 @@
 /*-- File description -------------------------------------------------------*/
 /**
- *   @file:    mod_climate.c
+ *   @file:    if_delay.c
  *
  *   @author:  valeriy.grimalskiy
  *   @company: Lab.
  */
 
-#include "mod_climate.h"
+#include "if_delay.h"
 
 /*-- Standard C/C++ Libraries -----------------------------------------------*/
 /*-- Other libraries --------------------------------------------------------*/
 /*-- Hardware specific libraries --------------------------------------------*/
-#include "if_twi0.h"
-#include "aht10.h"
+#include "nrf_delay.h"
 
 /*-- Project specific includes ----------------------------------------------*/
 /*-- Imported functions -----------------------------------------------------*/
 /*-- Local Macro Definitions ------------------------------------------------*/
 /*-- Local Typedefs ---------------------------------------------------------*/
-typedef struct
-{
-	float Temperature;
-	float Humidity;
-} ClimateData_t;
-
 /*-- Local function prototypes ----------------------------------------------*/
-static void AHT10_DataReceivedCallback(float temperature, float humidity);
-
 /*-- Local variables --------------------------------------------------------*/
-static ClimateData_t cl_data = { 0.0f, 0.0f };
-
-static AHT10_Entity_t ath10_entity;
-static const AHT10_Config_t ath10_cfg = 
-{
-    .I2C_Functions =
-    {
-        .Send = If_TWI0_Send,
-        .Receive = If_TWI0_Receive
-    },
-	.DataReadyCallback = AHT10_DataReceivedCallback,
-    .Entity = &ath10_entity
-};
 /*-- Local functions --------------------------------------------------------*/
-static void AHT10_DataReceivedCallback(float temperature, float humidity)
-{
-	cl_data.Temperature = temperature;
-	cl_data.Humidity = humidity;
-}
-
 /*-- Exported functions -----------------------------------------------------*/
-void Mod_Climate_Init(void)
+void If_Delay_us(uint32_t us)
 {
-	If_TWI0_Init();
-	If_TWI0_Enable();
-
-	AHT10_Set_WorkMode(&ath10_cfg, AHT10_WorkMode_AUTOMATIC);
-	AHT10_Set_Period(&ath10_cfg, 500);
+	nrf_delay_us(us);
 }
 
-float Mod_Climate_GetTemperature(void)
+void If_Delay_ms(uint32_t ms)
 {
-	return cl_data.Temperature;
-}
-
-float Mod_Climate_GetHumidity(void)
-{
-	return cl_data.Humidity;
-}
-
-void Mod_Climate_Tick(uint32_t ms)
-{
-	AHT10_Tick(&ath10_cfg, ms);
-}
-
-void Mod_Climate_Run(void)
-{
-	AHT10_Run(&ath10_cfg);
+	nrf_delay_us(ms);
 }
 
 /*-- EOF --------------------------------------------------------------------*/

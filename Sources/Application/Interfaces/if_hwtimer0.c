@@ -24,7 +24,7 @@ static uint32_t time_period_ms = 1; //Time(in miliseconds) between consecutive c
 static If_HwTimer0_Callback timer_callback = 0;
 
 /*-- Local functions --------------------------------------------------------*/
-void timer_led_event_handler(nrf_timer_event_t event_type, void* p_context)
+void HwTimer0_Event_Handler(nrf_timer_event_t event_type, void* p_context)
 {
     switch (event_type)
     {
@@ -55,7 +55,7 @@ void If_HwTimer0_Init(uint32_t period_ms)
 
 	//Init timer
     nrf_drv_timer_config_t timer_cfg = NRF_DRV_TIMER_DEFAULT_CONFIG;
-    err_code = nrf_drv_timer_init(&timer, &timer_cfg, timer_led_event_handler);
+    err_code = nrf_drv_timer_init(&timer, &timer_cfg, HwTimer0_Event_Handler);
     APP_ERROR_CHECK(err_code);
 
 	//Configure timer
