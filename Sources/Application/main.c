@@ -15,11 +15,13 @@
 
 /*-- Hardware specific libraries --------------------------------------------*/
 #include "boards.h"
+#include "if_exti.h"
 
 /*-- Project specific includes ----------------------------------------------*/
 #include "mod_climate.h"
 #include "mod_swtimer.h"
 #include "mod_accelerometer.h"
+#include "mod_audio_player.h"
 
 /*-- Imported functions -----------------------------------------------------*/
 #include "SysTick.h"
@@ -35,7 +37,7 @@ void LedToggle_TimerCallback(void *param)
 	bsp_board_led_invert(i);
 
 	i++;
-	if(i == LEDS_NUMBER)
+	if(i == (LEDS_NUMBER - 1))
 	{
 		i = 0;
 	}
@@ -51,6 +53,9 @@ void main(void)
 	Mod_SwTimer_Init();
 	Mod_SwTimer_Start();
 
+	//Init external interrupts from buttons
+	If_Exti_Init();
+	If_Exti_Enable();
 
     // Configure board
     bsp_board_init(BSP_INIT_LEDS);
@@ -58,22 +63,18 @@ void main(void)
 	//Start climate module
 	//Mod_Climate_Init();
 	Mod_Accelerometer_Init();
-	
+	Mod_AudioPlayer_Init();
 
 	//Start Led Triggering
 	SwTimer_Start(SWTT_CONTINUOUS, 125, SWTP_LEVEL_LOWEST, LedToggle_TimerCallback, NULL);
 
-	
 
+	//Main loop
     while (true)
     {
-        //do
-        //{
-        //    __WFE();
-        //}while (m_xfer_done == false);
-
 		//Mod_Climate_Run();
 		Mod_Accelerometer_Run();
+		Mod_AudioPlayer_Run();
 
 		Mod_SwTimer_Run();
     }

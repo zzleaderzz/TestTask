@@ -73,12 +73,9 @@ static void Accelerometer_DataReady_Callback(BMA280_Data_t *data)
 void Mod_Accelerometer_Init(void)
 {
 	If_TWI0_Init();
-
-	If_Exti_Init();
-	If_Exti_RegisterCallback(Accelerometer_INT_Callback);
-
 	If_TWI0_Enable();
-	If_Exti_Enable();
+	
+	If_Exti_RegisterCallback(If_Exti_Button_1, Accelerometer_INT_Callback);
 
 	//BMA280_Set_Period(&bma280_cfg, 250);
 	//BMA280_Set_WorkMode(&bma280_cfg, BMA280_WorkMode_AUTOMATIC);
