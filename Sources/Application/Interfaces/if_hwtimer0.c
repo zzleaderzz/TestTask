@@ -19,7 +19,7 @@
 /*-- Local Typedefs ---------------------------------------------------------*/
 /*-- Local function prototypes ----------------------------------------------*/
 /*-- Local variables --------------------------------------------------------*/
-static const nrf_drv_timer_t timer = NRF_DRV_TIMER_INSTANCE(0);
+static const nrf_drv_timer_t timer = NRF_DRV_TIMER_INSTANCE(1);
 static uint32_t time_period_ms = 1; //Time(in miliseconds) between consecutive compare events.
 static If_HwTimer0_Callback timer_callback = 0;
 

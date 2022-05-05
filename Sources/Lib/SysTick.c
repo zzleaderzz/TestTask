@@ -104,23 +104,74 @@ void SysTick_Delay(uint32_t delay)
 	}
 }
 
-bool SysTick_Wait(SysTick_WaitEntity_t *entity, uint32_t ms)
+bool SysTick_WaitBefore(SysTick_WaitEntity_t *entity, uint32_t ms, bool repeat)
 {
 	if(!entity->Started)
 	{
 		entity->StartTime = SysTick_GetTick();
 		entity->SetupMs = ms;
 		entity->Started = true;
+
+		return false;
 	}
 	else
 	{
 		if((SysTick_GetTick() - entity->StartTime) > entity->SetupMs)
 		{
-			entity->Started = false;
+			if(repeat)
+			{
+				entity->StartTime = SysTick_GetTick();
+				entity->SetupMs = ms;
+				entity->Started = true;
+			}
+			else
+			{
+				entity->Started = false;
+			}
+
+			return true;
+		}
+		else
+		{
+			return false;
 		}
 	}
-	
-	return !entity->Started;
+}
+
+bool SysTick_WaitAfter(SysTick_WaitEntity_t *entity, uint32_t ms, bool repeat)
+{
+	if(!entity->Started)
+	{
+		//Start
+		entity->StartTime = SysTick_GetTick();
+		entity->SetupMs = ms;
+		entity->Started = true;
+
+		return true;
+	}
+	else
+	{
+		if((SysTick_GetTick() - entity->StartTime) > entity->SetupMs)
+		{
+			if(repeat)
+			{
+				//Restart
+				entity->StartTime = SysTick_GetTick();
+				entity->SetupMs = ms;
+				entity->Started = true;
+			}
+			else
+			{
+				entity->Started = false;
+			}
+
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
 }
 
 //TODO not tested

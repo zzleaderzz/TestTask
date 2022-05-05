@@ -15,6 +15,7 @@
 #include "if_twi0.h"
 #include "if_exti.h"
 #include "if_delay.h"
+#include "SysTick.h"
 
 /*-- Project specific includes ----------------------------------------------*/
 /*-- Imported functions -----------------------------------------------------*/
@@ -59,7 +60,11 @@ AccelerometerData_t AccelerometerData;
 /*-- Local functions --------------------------------------------------------*/
 static void Accelerometer_INT_Callback(void)
 {
-	interrupt_triggered = true;
+	static SysTick_WaitEntity_t wait_entity;
+	if(SysTick_WaitAfter(&wait_entity, 200, true))
+	{
+		interrupt_triggered = true;
+	}
 }
 
 static void Accelerometer_DataReady_Callback(BMA280_Data_t *data)

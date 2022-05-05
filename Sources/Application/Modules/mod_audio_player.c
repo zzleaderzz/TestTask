@@ -15,6 +15,7 @@
 /*-- Hardware specific libraries --------------------------------------------*/
 #include "if_i2s.h"
 #include "if_exti.h"
+#include "SysTick.h"
 #include "boards.h"
 
 /*-- Project specific includes ----------------------------------------------*/
@@ -86,32 +87,44 @@ static void I2S_BufferFillNeededCallback(If_I2S_Buffer_item_t *buffer, const uin
 
 static void AudioPlayer_Button2_Callback(void)
 {
-	static AudioPlayer_Track_e current_track = AudioPlayer_Track_1;
-
-	Mod_AudioPlayer_Play(current_track);
-
-	current_track++;
-
-	if(current_track > AudioPlayer_Track_2)
+	static SysTick_WaitEntity_t wait_entity;
+	if(SysTick_WaitAfter(&wait_entity, 200, true))
 	{
-		current_track = AudioPlayer_Track_1;
+		static AudioPlayer_Track_e current_track = AudioPlayer_Track_1;
+
+		Mod_AudioPlayer_Play(current_track);
+
+		current_track++;
+
+		if(current_track > AudioPlayer_Track_2)
+		{
+			current_track = AudioPlayer_Track_1;
+		}
 	}
 }
 
 static void AudioPlayer_Button3_Callback(void)
 {
-	Mod_AudioPlayer_Stop();
+	static SysTick_WaitEntity_t wait_entity;
+	if(SysTick_WaitAfter(&wait_entity, 200, true))
+	{
+		Mod_AudioPlayer_Stop();
+	}
 }
 
 static void AudioPlayer_Button4_Callback(void)
 {
-	if(player_status == AudioPlayer_Status_Play)
+	static SysTick_WaitEntity_t wait_entity;
+	if(SysTick_WaitAfter(&wait_entity, 200, true))
 	{
-		Mod_AudioPlayer_Pause();
-	}
-	else if (player_status == AudioPlayer_Status_Paused)
-	{
-		Mod_AudioPlayer_Resume();
+		if(player_status == AudioPlayer_Status_Play)
+		{
+			Mod_AudioPlayer_Pause();
+		}
+		else if (player_status == AudioPlayer_Status_Paused)
+		{
+			Mod_AudioPlayer_Resume();
+		}
 	}
 }
 
@@ -145,8 +158,10 @@ void Mod_AudioPlayer_Play(AudioPlayer_Track_e track)
 
 			case AudioPlayer_Track_2:
 			{
+				//TODO: Set 2nd track
 				track_data = (uint16_t *)Melody_Bergen;
 				track_data_length = (MELODY_BERGEN_SIZE / sizeof(uint16_t));
+				//return;
 			}
 			break;
 
