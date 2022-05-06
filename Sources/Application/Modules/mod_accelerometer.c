@@ -18,6 +18,9 @@
 #include "SysTick.h"
 
 /*-- Project specific includes ----------------------------------------------*/
+#include "mod_ble.h"
+#include "mod_indication.h"
+
 /*-- Imported functions -----------------------------------------------------*/
 /*-- Local Macro Definitions ------------------------------------------------*/
 /*-- Local Typedefs ---------------------------------------------------------*/
@@ -61,7 +64,7 @@ AccelerometerData_t AccelerometerData;
 static void Accelerometer_INT_Callback(void)
 {
 	static SysTick_WaitEntity_t wait_entity;
-	if(SysTick_WaitAfter(&wait_entity, 200, true))
+	if(SysTick_WaitAfter(&wait_entity, 250, true))
 	{
 		interrupt_triggered = true;
 	}
@@ -113,6 +116,12 @@ void Mod_Accelerometer_Run(void)
 			AccelerometerData.X = (int16_t)bma280_data.Acceleration.X;
 			AccelerometerData.Y = (int16_t)bma280_data.Acceleration.Y;
 			AccelerometerData.Z = (int16_t)bma280_data.Acceleration.Z;
+
+			//Indicate update
+			Mod_Indication_SetStatus_Accelerometer(IndiStatus_Accelerometer_DataUpdated);
+
+			//Update thru bluetooth
+			Mod_Ble_Accelerometer_NewData(AccelerometerData.X, AccelerometerData.Y, AccelerometerData.Z);
 		}
 
 		interrupt_triggered = false;

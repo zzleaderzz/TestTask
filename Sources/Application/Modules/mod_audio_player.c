@@ -16,9 +16,9 @@
 #include "if_i2s.h"
 #include "if_exti.h"
 #include "SysTick.h"
-#include "boards.h"
 
 /*-- Project specific includes ----------------------------------------------*/
+#include "mod_indication.h"
 #include "mod_audio_tracks.h"
 
 /*-- Imported functions -----------------------------------------------------*/
@@ -30,6 +30,7 @@ static uint16_t *track_data = 0;
 static uint32_t track_data_length = 0;
 static uint32_t track_index_counter = 0;
 static AudioPlayer_Status_e player_status = AudioPlayer_Status_Stopped;
+static AudioPlayer_Track_e player_track = AudioPlayer_Track_1;
 static bool pause_requested = false;
 
 /*-- Local functions --------------------------------------------------------*/
@@ -44,7 +45,7 @@ static void I2S_BufferFillNeededCallback(If_I2S_Buffer_item_t *buffer, const uin
 
 		player_status = AudioPlayer_Status_Paused;
 
-		bsp_board_led_off(3);
+		Mod_Indication_SetStatus_Audio(IndiStatus_Audio_Paused);
 	}
 	else
 	{
@@ -55,9 +56,10 @@ static void I2S_BufferFillNeededCallback(If_I2S_Buffer_item_t *buffer, const uin
 			//Stop playing
 			If_I2S_Disable();
 
+			player_track = AudioPlayer_Track_None;
 			player_status = AudioPlayer_Status_Stopped;
 
-			bsp_board_led_off(3);
+			Mod_Indication_SetStatus_Audio(IndiStatus_Audio_Stop);
 		}
 		else
 		{
@@ -78,7 +80,7 @@ static void I2S_BufferFillNeededCallback(If_I2S_Buffer_item_t *buffer, const uin
 				}
 			}
 
-			bsp_board_led_invert(3);
+			Mod_Indication_SetStatus_Audio(IndiStatus_Audio_Trigger);
 		}
 	}
 
@@ -88,7 +90,7 @@ static void I2S_BufferFillNeededCallback(If_I2S_Buffer_item_t *buffer, const uin
 static void AudioPlayer_Button2_Callback(void)
 {
 	static SysTick_WaitEntity_t wait_entity;
-	if(SysTick_WaitAfter(&wait_entity, 200, true))
+	if(SysTick_WaitAfter(&wait_entity, 250, true))
 	{
 		static AudioPlayer_Track_e current_track = AudioPlayer_Track_1;
 
@@ -106,7 +108,7 @@ static void AudioPlayer_Button2_Callback(void)
 static void AudioPlayer_Button3_Callback(void)
 {
 	static SysTick_WaitEntity_t wait_entity;
-	if(SysTick_WaitAfter(&wait_entity, 200, true))
+	if(SysTick_WaitAfter(&wait_entity, 250, true))
 	{
 		Mod_AudioPlayer_Stop();
 	}
@@ -115,7 +117,7 @@ static void AudioPlayer_Button3_Callback(void)
 static void AudioPlayer_Button4_Callback(void)
 {
 	static SysTick_WaitEntity_t wait_entity;
-	if(SysTick_WaitAfter(&wait_entity, 200, true))
+	if(SysTick_WaitAfter(&wait_entity, 250, true))
 	{
 		if(player_status == AudioPlayer_Status_Play)
 		{
@@ -133,6 +135,7 @@ void Mod_AudioPlayer_Init(void)
 {
 	If_I2S_Init(I2S_BufferFillNeededCallback);
 
+	//Register buttons callbacks
 	If_Exti_RegisterCallback(If_Exti_Button_2, AudioPlayer_Button2_Callback);
 	If_Exti_RegisterCallback(If_Exti_Button_3, AudioPlayer_Button3_Callback);
 	If_Exti_RegisterCallback(If_Exti_Button_4, AudioPlayer_Button4_Callback);
@@ -143,14 +146,27 @@ AudioPlayer_Status_e Mod_AudioPlayer_GetStatus(void)
 	return player_status;
 }
 
+AudioPlayer_Track_e Mod_AudioPlayer_GetTrack(void)
+{
+	return player_track;
+}
+
 void Mod_AudioPlayer_Play(AudioPlayer_Track_e track)
 {
 	if(player_status == AudioPlayer_Status_Stopped)
 	{
 		switch(track)
 		{
+			case AudioPlayer_Track_None:
+			{
+				player_track = AudioPlayer_Track_None;
+				return;
+			}
+			break;
+
 			case AudioPlayer_Track_1:
 			{
+				player_track = AudioPlayer_Track_1;
 				track_data = (uint16_t *)Melody_U;
 				track_data_length = (MELODY_U_SIZE / sizeof(uint16_t));
 			}
@@ -158,10 +174,11 @@ void Mod_AudioPlayer_Play(AudioPlayer_Track_e track)
 
 			case AudioPlayer_Track_2:
 			{
+				player_track = AudioPlayer_Track_2;
 				//TODO: Set 2nd track
-				track_data = (uint16_t *)Melody_Bergen;
-				track_data_length = (MELODY_BERGEN_SIZE / sizeof(uint16_t));
-				//return;
+				//track_data = (uint16_t *)Melody_Bergen;
+				//track_data_length = (MELODY_BERGEN_SIZE / sizeof(uint16_t));
+				return;
 			}
 			break;
 
@@ -175,6 +192,7 @@ void Mod_AudioPlayer_Play(AudioPlayer_Track_e track)
 		track_index_counter = 0;
 
 		player_status = AudioPlayer_Status_Play;
+		Mod_Indication_SetStatus_Audio(IndiStatus_Audio_Play);
 
 		//Start playing
 		If_I2S_Enable();
@@ -194,6 +212,7 @@ void Mod_AudioPlayer_Resume(void)
 	if(player_status == AudioPlayer_Status_Paused)
 	{
 		player_status = AudioPlayer_Status_Play;
+		Mod_Indication_SetStatus_Audio(IndiStatus_Audio_Play);
 
 		//Start playing
 		If_I2S_Enable();
@@ -207,19 +226,18 @@ void Mod_AudioPlayer_Stop(void)
 		//Stop playing
 		If_I2S_Disable();
 
+		player_track = AudioPlayer_Track_None;
 		player_status = AudioPlayer_Status_Stopped;
 
-		bsp_board_led_off(3);
+		Mod_Indication_SetStatus_Audio(IndiStatus_Audio_Stop);
 	}
 	else if (player_status == AudioPlayer_Status_Paused)
 	{
+		player_track = AudioPlayer_Track_None;
 		player_status = AudioPlayer_Status_Stopped;
+
+		Mod_Indication_SetStatus_Audio(IndiStatus_Audio_Stop);
 	}
-}
-
-void Mod_AudioPlayer_Tick(uint32_t ms)
-{
-
 }
 
 void Mod_AudioPlayer_Run(void)

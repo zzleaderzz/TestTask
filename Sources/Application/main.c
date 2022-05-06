@@ -14,14 +14,15 @@
 #include "SoftwareTimer.h"
 
 /*-- Hardware specific libraries --------------------------------------------*/
-#include "boards.h"
 #include "if_exti.h"
 
 /*-- Project specific includes ----------------------------------------------*/
+#include "mod_indication.h"
 #include "mod_climate.h"
 #include "mod_swtimer.h"
 #include "mod_accelerometer.h"
 #include "mod_audio_player.h"
+#include "mod_ble.h"
 
 /*-- Imported functions -----------------------------------------------------*/
 #include "SysTick.h"
@@ -30,19 +31,6 @@
 /*-- Local Typedefs ---------------------------------------------------------*/
 /*-- Local function prototypes ----------------------------------------------*/
 /*-- Local variables --------------------------------------------------------*/
-void LedToggle_TimerCallback(void *param)
-{
-	static uint8_t i = 0;
-
-	bsp_board_led_invert(i);
-
-	i++;
-	if(i == (LEDS_NUMBER - 1))
-	{
-		i = 0;
-	}
-}
-
 /*-- Local functions --------------------------------------------------------*/
 void main(void)
 {
@@ -56,18 +44,17 @@ void main(void)
 	//Init external interrupts from buttons
 	If_Exti_Init();
 	If_Exti_Enable();
-
-    // Configure board
-    bsp_board_init(BSP_INIT_LEDS);
 	
-	//Start climate module
+	//Start modules
+	Mod_Indication_Init();
+
 	//Mod_Climate_Init();
 	Mod_Accelerometer_Init();
 	Mod_AudioPlayer_Init();
+	Mod_Ble_Init();
 
-	//Start Led Triggering
-	SwTimer_Start(SWTT_CONTINUOUS, 125, SWTP_LEVEL_LOWEST, LedToggle_TimerCallback, NULL);
-
+	//Set indication
+	Mod_Indication_SetStatus_Application(IndiStatus_Application_Run);
 
 	//Main loop
     while (true)
@@ -75,6 +62,9 @@ void main(void)
 		//Mod_Climate_Run();
 		Mod_Accelerometer_Run();
 		Mod_AudioPlayer_Run();
+		Mod_Ble_Run();
+
+		Mod_Indication_Run();
 
 		Mod_SwTimer_Run();
     }
