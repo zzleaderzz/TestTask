@@ -15,11 +15,12 @@
 
 /*-- Hardware specific libraries --------------------------------------------*/
 #include "if_exti.h"
+#include "if_swtimer.h"
 
 /*-- Project specific includes ----------------------------------------------*/
+#include "mod_power_management.h"
 #include "mod_indication.h"
 #include "mod_climate.h"
-#include "mod_swtimer.h"
 #include "mod_accelerometer.h"
 #include "mod_audio_player.h"
 #include "mod_ble.h"
@@ -38,8 +39,8 @@ void main(void)
 	Systick_InitTick(1);
 
 	//Start sw timer module
-	Mod_SwTimer_Init();
-	Mod_SwTimer_Start();
+	If_SwTimer_Init();
+	If_SwTimer_Start();
 
 	//Init external interrupts from buttons
 	If_Exti_Init();
@@ -52,9 +53,10 @@ void main(void)
 	Mod_Accelerometer_Init();
 	Mod_AudioPlayer_Init();
 	Mod_Ble_Init();
+	Mod_PowerManagement_Init();
 
 	//Set indication
-	Mod_Indication_SetStatus_Application(IndiStatus_Application_Run);
+	Mod_Indication_SetState_Application(IndiStatus_Application_Run);
 
 	//Main loop
     while (true)
@@ -63,10 +65,11 @@ void main(void)
 		Mod_Accelerometer_Run();
 		Mod_AudioPlayer_Run();
 		Mod_Ble_Run();
-
 		Mod_Indication_Run();
 
-		Mod_SwTimer_Run();
+		If_SwTimer_Run();
+
+		Mod_PowerManagement_Run();
     }
 }
 

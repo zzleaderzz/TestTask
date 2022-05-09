@@ -1,42 +1,28 @@
 /*-- File description -------------------------------------------------------*/
 /**
- *   @file:    mod_accelerometer.h
+ *   @file:    mod_general.h
  *
  *   @author:  valeriy.grimalskiy
  *   @company: Lab.
  */
 
-#ifndef _MOD_ACCELEROMETER_H
-#define _MOD_ACCELEROMETER_H
+#ifndef _MOD_GENERAL_H
+#define _MOD_GENERAL_H
 
 /*-- Standard C/C++ Libraries -----------------------------------------------*/
-#include <stdint.h>
-#include <stdbool.h>
-
 /*-- Other libraries --------------------------------------------------------*/
 /*-- Hardware specific libraries --------------------------------------------*/
 /*-- Project specific includes ----------------------------------------------*/
 /*-- Exported macro ---------------------------------------------------------*/
 /*-- Typedefs ---------------------------------------------------------------*/
-typedef struct
+typedef enum
 {
-	int16_t X;
-	int16_t Y;
-	int16_t Z;
-} AccelerometerData_t;
+	ModStatus_Idle,
+	ModStatus_Busy
+} ModGeneral_Status_e;
 
 /*-- Exported variables -----------------------------------------------------*/
-extern AccelerometerData_t AccelerometerData;
-
 /*-- Exported functions -----------------------------------------------------*/
-void Mod_Accelerometer_Init(void);
 
-bool Mod_Accelerometer_IsBusy(void);
-void Mod_Accelerometer_EnterSleepMode(void);
-
-void Mod_Accelerometer_Tick(uint32_t ms);
-
-void Mod_Accelerometer_Run(void);
-
-#endif // _MOD_ACCELEROMETER_H
+#endif // _MOD_GENERAL_H
 /*-- EOF --------------------------------------------------------------------*/

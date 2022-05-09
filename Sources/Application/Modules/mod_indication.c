@@ -27,6 +27,7 @@
 /*-- Local Typedefs ---------------------------------------------------------*/
 /*-- Local function prototypes ----------------------------------------------*/
 /*-- Local variables --------------------------------------------------------*/
+static bool module_busy = false;
 static uint32_t led_app_timer_id = 0;
 static uint32_t led_bt_timer_id = 0;
 static uint32_t led_accel_timer_id = 0;
@@ -46,15 +47,31 @@ void Led_Accel_Off_TimerCallback(void *param)
 {
 	bsp_board_led_off(LED_ACCEL_STATE);
 	led_accel_timer_id = 0;
+
+	//Set status
+	module_busy = false;
 }
 
 /*-- Exported functions -----------------------------------------------------*/
 void Mod_Indication_Init(void)
 {
 	bsp_board_init(BSP_INIT_LEDS);
+
+	//Set status
+	module_busy = false;
 }
 
-void Mod_Indication_SetStatus_Application(Mod_Indication_Application_status_t status)
+bool Mod_Indication_IsBusy(void)
+{
+	return module_busy;
+}
+
+void Mod_Indication_EnterSleepMode(void)
+{
+
+}
+
+void Mod_Indication_SetState_Application(Mod_Indication_Application_status_e status)
 {
 	switch(status)
 	{
@@ -67,26 +84,17 @@ void Mod_Indication_SetStatus_Application(Mod_Indication_Application_status_t st
 			bsp_board_led_on(LED_APP_WORKING);
 		break;
 
-		case IndiStatus_Application_Sleep:
-			if(led_app_timer_id != 0)
-			{
-				SwTimer_Stop(led_app_timer_id);
-				led_app_timer_id = 0;
-			}
-			bsp_board_led_off(LED_APP_WORKING);
-		break;
-
 		case IndiStatus_Application_Run:
 			if(led_app_timer_id == 0)
 			{
-				bsp_board_led_on(LED_APP_WORKING);
+				bsp_board_led_off(LED_APP_WORKING);
 				led_app_timer_id = SwTimer_Start(SWTT_CONTINUOUS, 200, SWTP_LEVEL_LOWEST, Led_APP_Toggle_TimerCallback, NULL);
 			}
 		break;
 	}
 }
 
-void Mod_Indication_SetStatus_Bluetooth(Mod_Indication_Bluetooth_status_t status)
+void Mod_Indication_SetState_Bluetooth(Mod_Indication_Bluetooth_status_e status)
 {
 	switch(status)
 	{
@@ -118,7 +126,7 @@ void Mod_Indication_SetStatus_Bluetooth(Mod_Indication_Bluetooth_status_t status
 	}
 }
 
-void Mod_Indication_SetStatus_Accelerometer(Mod_Indication_Accelerometer_status_t status)
+void Mod_Indication_SetState_Accelerometer(Mod_Indication_Accelerometer_status_e status)
 {
 	switch(status)
 	{
@@ -129,6 +137,9 @@ void Mod_Indication_SetStatus_Accelerometer(Mod_Indication_Accelerometer_status_
 				led_accel_timer_id = 0;
 			}
 			bsp_board_led_off(LED_ACCEL_STATE);
+
+			//Set status
+			module_busy = false;
 		break;
 
 		case IndiStatus_Accelerometer_DataUpdated:
@@ -139,21 +150,18 @@ void Mod_Indication_SetStatus_Accelerometer(Mod_Indication_Accelerometer_status_
 			}
 			bsp_board_led_on(LED_ACCEL_STATE);
 			led_accel_timer_id = SwTimer_Start(SWTT_SINGLE, 50, SWTP_LEVEL_LOWEST, Led_Accel_Off_TimerCallback, NULL);
+
+			//Set status
+			module_busy = true;
 		break;
 	}
-
-
 }
 
-void Mod_Indication_SetStatus_Audio(Mod_Indication_Audio_status_t status)
+void Mod_Indication_SetState_Audio(Mod_Indication_Audio_status_e status)
 {
 	switch(status)
 	{
 		case IndiStatus_Audio_Idle:
-			bsp_board_led_off(LED_AUDIO_STATE);
-		break;
-
-		case IndiStatus_Audio_Stop:
 			bsp_board_led_off(LED_AUDIO_STATE);
 		break;
 
@@ -173,6 +181,7 @@ void Mod_Indication_SetStatus_Audio(Mod_Indication_Audio_status_t status)
 
 void Mod_Indication_Run(void)
 {
+
 }
 
 /*-- EOF --------------------------------------------------------------------*/

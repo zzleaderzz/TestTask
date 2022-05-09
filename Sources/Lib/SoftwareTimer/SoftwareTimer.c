@@ -41,7 +41,7 @@ __WEAK uint16_t SwTimer_MilisecondsElapsedGet(void);
 /*-- Local functions --------------------------------------------------------*/
 static inline void SwTimer_FreeTimer(uint8_t index)
 {
-	_swTimer[index].CallbackParameter = 0;
+	_swTimer[index].Parameter = 0;
 	_swTimer[index].CallbackFunction = 0;
 	_swTimer[index].Ticks = 0;
 	_swTimer[index].Period = 0;
@@ -50,22 +50,14 @@ static inline void SwTimer_FreeTimer(uint8_t index)
 	_swTimer[index].WorkCountSetup = (SwTimerType_t)0;
 	_swTimer[index].Priority = (SwTimerPriority_t)0;
 	_swTimer[index].Id = 0;
-
-	if(_swTimer[index].State == SWTS_RUNNING_DELAY)
-	{
-		_swTimer[index].State = SWTS_CLEAR_DELAY;
-	}
-	else
-	{
-		_swTimer[index].State = SWTS_CLEAR;
-	}
+	_swTimer[index].State = SWTS_CLEAR; //Must be last peration
 }
 
 static inline void SwTimer_RunTimerCalback(uint8_t index)
 {
 	if(_swTimer[index].CallbackFunction)
 	{
-		_swTimer[index].CallbackFunction(_swTimer[index].CallbackParameter);
+		_swTimer[index].CallbackFunction(_swTimer[index].Parameter);
 	}
 	
 	//Restart if timer is continuous
@@ -106,6 +98,7 @@ static void SwTimer_TicksCalculate(void)
 {
 	uint8_t i = 0;
 	uint16_t nextTickAfter_ms = SW_TIMER__ADVANCED_TICK_MAXIMUM_PERIOD_MS;
+	uint16_t elapsedTicks_ms = SwTimer_MilisecondsElapsedGet();
 	
 #if (SW_TIMER__EXTERNAL_TIMERS_SUPPORT)
 	bool foundExternal = false;
@@ -129,7 +122,7 @@ static void SwTimer_TicksCalculate(void)
 		//Find smallest value of ticks
 		for(i = 0; i < SW_TIMER__TIMERS_COUNT; i++)
 		{
-			if((_swTimer[i].State == SWTS_RUNNING) || (_swTimer[i].State == SWTS_RUNNING_DELAY))
+			if(_swTimer[i].State == SWTS_RUNNING)
 			{
 				if(_swTimer[i].StartDelay > 0)
 				{
@@ -266,7 +259,7 @@ bool SwTimer_IsPresent(uint32_t id)
 	return result;
 }
 
-uint32_t SwTimer_StartDelayed(uint32_t work_count, uint32_t startDelay_ms, uint32_t period_ms, uint8_t priority, SwTimerCallback_t callback, void *parameter)
+uint32_t SwTimer_StartDelayed(uint8_t workCount, uint32_t startDelay_ms, uint32_t period_ms, uint8_t priority, SwTimerCallback_t callback, void *parameter)
 {
 	uint8_t i = 0;
 	
@@ -274,14 +267,13 @@ uint32_t SwTimer_StartDelayed(uint32_t work_count, uint32_t startDelay_ms, uint3
 	{
 		if(_swTimer[i].State == SWTS_CLEAR)
 		{
-			_swTimer[i].State = SWTS_CONFIGURING;			
-			_swTimer[i].CallbackParameter = parameter;
+			_swTimer[i].Parameter = parameter;
 			_swTimer[i].CallbackFunction = callback;
 			_swTimer[i].Ticks = period_ms;
 			_swTimer[i].Period = period_ms;
 			_swTimer[i].StartDelay = startDelay_ms;
-			_swTimer[i].WorkCount = work_count;
-			_swTimer[i].WorkCountSetup = (SwTimerType_t)work_count;
+			_swTimer[i].WorkCount = workCount;
+			_swTimer[i].WorkCountSetup = (SwTimerType_t)workCount;
 			_swTimer[i].Priority = (SwTimerPriority_t)priority;
 			_swTimer[i].Id = SwTimer_CalculateNewId();
 			
@@ -301,9 +293,9 @@ uint32_t SwTimer_StartDelayed(uint32_t work_count, uint32_t startDelay_ms, uint3
 	return 0;
 }
 
-uint32_t SwTimer_Start(uint32_t work_count, uint32_t period_ms, uint8_t priority, SwTimerCallback_t callback, void *parameter)
+uint32_t SwTimer_Start(uint8_t workCount, uint32_t period_ms, uint8_t priority, SwTimerCallback_t callback, void *parameter)
 {
-	return SwTimer_StartDelayed(work_count, 0, period_ms, priority, callback, parameter);
+	return SwTimer_StartDelayed(workCount, 0, period_ms, priority, callback, parameter);
 }
 
 void SwTimer_Pause(uint32_t id)
@@ -416,8 +408,7 @@ void SwTimer_Delay(uint32_t period_ms)
 	{
 		if(_swTimer[i].State == SWTS_CLEAR)
 		{
-			_swTimer[i].State = SWTS_CONFIGURING;			
-			_swTimer[i].CallbackParameter = 0;
+			_swTimer[i].Parameter = 0;
 			_swTimer[i].CallbackFunction = 0;
 			_swTimer[i].Ticks = period_ms;
 			_swTimer[i].Period = period_ms;
@@ -428,31 +419,19 @@ void SwTimer_Delay(uint32_t period_ms)
 			_swTimer[i].Id = SwTimer_CalculateNewId();
 			
 			//Mark timer ready to work
-			_swTimer[i].State = SWTS_RUNNING_DELAY; //Must be last peration
+			_swTimer[i].State = SWTS_RUNNING; //Must be last peration
 			
 		#if (SW_TIMER__ADVANCED_TICK_CALCULATE_SUPPORT)
 			//Calculate next tick
 			SwTimer_TicksCalculate();
 		#endif
 			
-			//Wait delay
-			while(_swTimer[i].State != SWTS_CLEAR_DELAY)
-			{
-	//			if((_swTimer[i].State != SWTS_RUNNING_DELAY) && (_swTimer[i].State != SWTS_CLEAR_DELAY))
-	//			{
-	//				volatile int a = 0;
-	//				a++;
-	//			}
-			}
-			
-			//Clear Timer
-			_swTimer[i].State = SWTS_CLEAR;
-			
 			break;
 		}
 	}
 	
-
+	//Wait delay
+	while(_swTimer[i].State != SWTS_CLEAR);
 }
 
 //---------------------------------------------------------------------------
@@ -516,7 +495,7 @@ void SwTimer_External_Stop(uint32_t *variable)
 
 //---------------------------------------------------------------------------
 
-void SwTimer_Tick(uint32_t ms_per_tick)
+void SwTimer_TickCounter(uint32_t msPerTick)
 {
 	//Pause ticks
 	SwTimer_TickPause();
@@ -543,35 +522,37 @@ void SwTimer_Tick(uint32_t ms_per_tick)
 	
 	for(i = 0; i < SW_TIMER__TIMERS_COUNT; i++)
 	{
-		if((_swTimer[i].State == SWTS_RUNNING) || (_swTimer[i].State == SWTS_RUNNING_DELAY))
+		if(_swTimer[i].State != SWTS_RUNNING)
 		{
-			if(_swTimer[i].StartDelay > ms_per_tick)
+			continue;
+		}
+		
+		if(_swTimer[i].StartDelay > msPerTick)
+		{
+			_swTimer[i].StartDelay -= msPerTick;
+		}
+		else if (_swTimer[i].StartDelay > 0)
+		{
+			_swTimer[i].StartDelay = 0;
+		}
+		else
+		{
+			if (_swTimer[i].Ticks > msPerTick)
 			{
-				_swTimer[i].StartDelay -= ms_per_tick;
-			}
-			else if (_swTimer[i].StartDelay > 0)
-			{
-				_swTimer[i].StartDelay = 0;
+				_swTimer[i].Ticks -= msPerTick;
 			}
 			else
 			{
-				if (_swTimer[i].Ticks > ms_per_tick)
+				_swTimer[i].Ticks = 0;
+				
+				//Call callback if it is a timer with a highest priority
+				if(_swTimer[i].Priority == SWTP_LEVEL_HIGHEST)
 				{
-					_swTimer[i].Ticks -= ms_per_tick;
+					SwTimer_RunTimerCalback(i);
 				}
 				else
 				{
-					_swTimer[i].Ticks = 0;
-					
-					//Call callback if it is a timer with a highest priority
-					if(_swTimer[i].Priority == SWTP_LEVEL_HIGHEST)
-					{
-						SwTimer_RunTimerCalback(i);
-					}
-					else
-					{
-						_swTimer[i].State = SWTS_WAIT_CALLBACK_CALL;
-					}
+					_swTimer[i].State = SWTS_WAIT_CALLBACK_CALL;
 				}
 			}
 		}

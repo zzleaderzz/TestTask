@@ -29,6 +29,9 @@ static void Accelerometer_INT_Callback(void);
 static void Accelerometer_DataReady_Callback(BMA280_Data_t *data);
 
 /*-- Local variables --------------------------------------------------------*/
+static bool module_busy = false;
+static SysTick_WaitEntity_t button1_debounce_entity;
+
 static BMA280_Entity_t bma280_entity;
 static const BMA280_Config_t bma280_cfg = 
 {
@@ -63,10 +66,12 @@ AccelerometerData_t AccelerometerData;
 /*-- Local functions --------------------------------------------------------*/
 static void Accelerometer_INT_Callback(void)
 {
-	static SysTick_WaitEntity_t wait_entity;
-	if(SysTick_WaitAfter(&wait_entity, 250, true))
+	if(SysTick_WaitAfter(&button1_debounce_entity, 250, true))
 	{
 		interrupt_triggered = true;
+
+		//Set status
+		module_busy = true;
 	}
 }
 
@@ -85,10 +90,23 @@ void Mod_Accelerometer_Init(void)
 	
 	If_Exti_RegisterCallback(If_Exti_Button_1, Accelerometer_INT_Callback);
 
+	//Set status
+	module_busy = true;
+
 	//BMA280_Set_Period(&bma280_cfg, 250);
 	//BMA280_Set_WorkMode(&bma280_cfg, BMA280_WorkMode_AUTOMATIC);
 
 	BMA280_Set_WorkMode(&bma280_cfg, BMA280_WorkMode_MANUAL);
+}
+
+bool Mod_Accelerometer_IsBusy(void)
+{
+	return module_busy;
+}
+
+void Mod_Accelerometer_EnterSleepMode(void)
+{
+	button1_debounce_entity.Started = false;
 }
 
 void Mod_Accelerometer_Tick(uint32_t ms)
@@ -118,13 +136,21 @@ void Mod_Accelerometer_Run(void)
 			AccelerometerData.Z = (int16_t)bma280_data.Acceleration.Z;
 
 			//Indicate update
-			Mod_Indication_SetStatus_Accelerometer(IndiStatus_Accelerometer_DataUpdated);
+			Mod_Indication_SetState_Accelerometer(IndiStatus_Accelerometer_DataUpdated);
 
 			//Update thru bluetooth
 			Mod_Ble_Accelerometer_NewData(AccelerometerData.X, AccelerometerData.Y, AccelerometerData.Z);
 		}
 
 		interrupt_triggered = false;
+	}
+	else if(BMA280_Get_Ready(&bma280_cfg))
+	{
+		if(SysTick_IsWaitElapsed(&button1_debounce_entity))
+		{
+			//Set status
+			module_busy = false;
+		}
 	}
 
 	BMA280_Run(&bma280_cfg);

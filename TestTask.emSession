@@ -67,11 +67,11 @@
   <Watches active="0" update="Never"/>
  </Watch4>
  <Files>
-  <SessionOpenFile windowGroup="DockEditLeft" x="22" y="22" useTextEdit="1" path="Sources/Application/Modules/BLE/mod_ble.c" left="0" selected="1" top="39" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="22" y="22" useTextEdit="1" path="Sources/Application/Modules/BLE/mod_ble.c" left="0" selected="1" top="22" codecName="Default"/>
   <SessionOpenFile windowGroup="DockEditLeft" x="20" y="22" useTextEdit="1" openedFrom="E:/Development/Droid/Nordic/Projects/nRF5/TestTask/Sources/Application/Modules/BLE/mod_ble.c" path="Sources/Application/Modules/mod_audio_player.h" left="0" top="4" codecName="Default"/>
   <SessionOpenFile windowGroup="DockEditLeft" x="2" y="204" useTextEdit="1" openedFrom="E:/Development/Droid/Nordic/Projects/nRF5/TestTask/Sources/Application/Modules/mod_audio_player.h" path="Sources/Application/Modules/mod_audio_player.c" left="0" top="190" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="76" y="15" useTextEdit="1" path="Sources/Application/main.c" left="0" top="0" codecName=""/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="17" y="158" useTextEdit="1" openedFrom="E:/Development/Droid/Nordic/Projects/nRF5/TestTask/Sources/Application/Modules/BLE/mod_ble.c" path="../../../SDK/nRF5/components/libraries/util/sdk_errors.h" left="0" top="122" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="76" y="15" useTextEdit="1" path="Sources/Application/main.c" left="0" top="0" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="17" y="158" useTextEdit="1" openedFrom="E:/Development/Droid/Nordic/Projects/nRF5/TestTask/Sources/Application/Modules/BLE/mod_ble.c" path="../../../SDK/nRF5/components/libraries/util/sdk_errors.h" left="0" top="129" codecName="Default"/>
  </Files>
- <EMStudioWindow activeProject="TestTask" fileDialogDefaultFilter="*" autoConnectTarget="J-Link" buildConfiguration="Debug" sessionSettings="" debugSearchFileMap="" fileDialogInitialDirectory="E:/Development/Droid/Nordic/Projects/nRF5/TestTask/Sources/Application/Modules" debugSearchPath="" autoConnectCapabilities="3711"/>
+ <EMStudioWindow activeProject="TestTask" fileDialogDefaultFilter="*" autoConnectTarget="J-Link" buildConfiguration="Debug" sessionSettings="" debugSearchFileMap="" fileDialogInitialDirectory="E:/Development/Droid/Nordic/Projects/nRF5/TestTask/Sources/Application/Modules" debugSearchPath="" autoConnectCapabilities="3199"/>
 </session>

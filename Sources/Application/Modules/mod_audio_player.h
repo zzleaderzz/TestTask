@@ -11,6 +11,7 @@
 
 /*-- Standard C/C++ Libraries -----------------------------------------------*/
 #include <stdint.h>
+#include <stdbool.h>
 
 /*-- Other libraries --------------------------------------------------------*/
 /*-- Hardware specific libraries --------------------------------------------*/
@@ -34,6 +35,9 @@ typedef enum
 /*-- Exported variables -----------------------------------------------------*/
 /*-- Exported functions -----------------------------------------------------*/
 void Mod_AudioPlayer_Init(void);
+
+bool Mod_AudioPlayer_IsBusy(void);
+void Mod_AudioPlayer_EnterSleepMode(void);
 
 AudioPlayer_Status_e Mod_AudioPlayer_GetStatus(void);
 AudioPlayer_Track_e Mod_AudioPlayer_GetTrack(void);

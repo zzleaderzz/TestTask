@@ -80,9 +80,7 @@
       <file file_name="../../../SDK/nRF5/components/libraries/atomic_fifo/nrf_atfifo.c" />
       <file file_name="../../../SDK/nRF5/components/libraries/atomic_flags/nrf_atflags.c" />
       <file file_name="../../../SDK/nRF5/components/libraries/atomic/nrf_atomic.c" />
-      <file file_name="../../../SDK/nRF5/components/libraries/pwr_mgmt/nrf_pwr_mgmt.c">
-        <configuration Name="Debug" build_exclude_from_build="Yes" />
-      </file>
+      <file file_name="../../../SDK/nRF5/components/libraries/pwr_mgmt/nrf_pwr_mgmt.c" />
       <file file_name="../../../SDK/nRF5/components/libraries/experimental_section_vars/nrf_section_iter.c" />
       <file file_name="../../../SDK/nRF5/components/libraries/sortlist/nrf_sortlist.c" />
       <file file_name="../../../SDK/nRF5/components/libraries/timer/app_timer2.c" />
@@ -125,10 +123,11 @@
           <file file_name="Sources/Application/Interfaces/if_delay.h" />
           <file file_name="Sources/Application/Interfaces/if_i2s.c" />
           <file file_name="Sources/Application/Interfaces/if_i2s.h" />
+          <file file_name="Sources/Application/Interfaces/if_swtimer.c" />
+          <file file_name="Sources/Application/Interfaces/if_swtimer.h" />
         </folder>
         <folder Name="Modules">
           <file file_name="Sources/Application/Modules/mod_climate.c" />
-          <file file_name="Sources/Application/Modules/mod_swtimer.c" />
           <file file_name="Sources/Application/Modules/mod_accelerometer.c" />
           <file file_name="Sources/Application/Modules/mod_audio_player.c" />
           <file file_name="Sources/Application/Modules/mod_audio_tracks.c" />
@@ -137,6 +136,9 @@
             <file file_name="Sources/Application/Modules/BLE/ble_aas.c" />
           </folder>
           <file file_name="Sources/Application/Modules/mod_indication.c" />
+          <file file_name="Sources/Application/Modules/mod_power_management.c" />
+          <file file_name="Sources/Application/Modules/mod_power_management.h" />
+          <file file_name="Sources/Application/Modules/mod_general.h" />
         </folder>
       </folder>
       <folder Name="Drivers" />

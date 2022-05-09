@@ -51,6 +51,8 @@ void SysTick_Delay(uint32_t Delay);
 bool SysTick_WaitBefore(SysTick_WaitEntity_t *entity, uint32_t ms, bool repeat);
 bool SysTick_WaitAfter(SysTick_WaitEntity_t *entity, uint32_t ms, bool repeat);
 
+bool SysTick_IsWaitElapsed(SysTick_WaitEntity_t *entity);
+
 #ifdef __cplusplus
 }
 #endif

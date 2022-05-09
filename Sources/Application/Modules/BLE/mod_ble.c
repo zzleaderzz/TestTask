@@ -19,10 +19,6 @@
 
 #include "mod_indication.h"
 
-//#include "ble_err.h"
-//#include "ble_hci.h"
-//#include "ble_srv_common.h"
-
 #include "ble_advdata.h"
 #include "ble_conn_params.h"
 #include "nrf_sdh.h"
@@ -32,7 +28,6 @@
 #include "ble_aas.h"
 #include "nrf_ble_gatt.h"
 #include "nrf_ble_qwr.h"
-#include "nrf_pwr_mgmt.h"
 
 
 /*-- Project specific includes ----------------------------------------------*/
@@ -45,19 +40,18 @@
 #define APP_BLE_OBSERVER_PRIO           3                                       //Application's BLE observer priority.
 #define APP_BLE_CONN_CFG_TAG            1                                       //A tag identifying the SoftDevice BLE configuration.
 
-#define APP_ADV_INTERVAL                64                                      //The advertising interval (in units of 0.625 ms; this value corresponds to 40 ms).
-#define APP_ADV_DURATION                BLE_GAP_ADV_TIMEOUT_GENERAL_UNLIMITED   //The advertising time-out (in units of seconds). When set to 0, we will never time out.
+#define APP_ADV_INTERVAL                MSEC_TO_UNITS(40, UNIT_0_625_MS)        //The advertising interval (in units of 0.625 ms; this value corresponds to 40 ms).
+#define APP_ADV_DURATION                MSEC_TO_UNITS(1000, UNIT_10_MS)         //The advertising time-out (in units of seconds). When set to 0, we will never time out.
+#define APP_ADV_ATTEMPT_PERIOD          APP_TIMER_TICKS(4000)                   //Time between each advertisement attempt.
 
-#define MIN_CONN_INTERVAL               MSEC_TO_UNITS(100, UNIT_1_25_MS)        //Minimum acceptable connection interval (0.5 seconds).
-#define MAX_CONN_INTERVAL               MSEC_TO_UNITS(200, UNIT_1_25_MS)        //Maximum acceptable connection interval (1 second).
+#define MIN_CONN_INTERVAL               MSEC_TO_UNITS(500, UNIT_1_25_MS)        //Minimum acceptable connection interval (0.5 seconds).
+#define MAX_CONN_INTERVAL               MSEC_TO_UNITS(1000, UNIT_1_25_MS)       //Maximum acceptable connection interval (1 second).
 #define SLAVE_LATENCY                   0                                       //Slave latency.
 #define CONN_SUP_TIMEOUT                MSEC_TO_UNITS(4000, UNIT_10_MS)         //Connection supervisory time-out (4 seconds).
 
 #define FIRST_CONN_PARAMS_UPDATE_DELAY  APP_TIMER_TICKS(20000)                  //Time from initiating event (connect or start of notification) to first time sd_ble_gap_conn_param_update is called (15 seconds).
 #define NEXT_CONN_PARAMS_UPDATE_DELAY   APP_TIMER_TICKS(5000)                   //Time between each call to sd_ble_gap_conn_param_update after the first call (5 seconds).
 #define MAX_CONN_PARAMS_UPDATE_COUNT    3                                       //Number of attempts before giving up the connection parameter negotiation.
-
-#define BUTTON_DETECTION_DELAY          APP_TIMER_TICKS(50)                     //Delay from a GPIOTE event until a button is reported as pushed (in number of timer ticks).
 
 /*-- Local Typedefs ---------------------------------------------------------*/
 typedef enum
@@ -71,6 +65,9 @@ typedef enum
 static void ble_advertising_start(void);
 
 /*-- Local variables --------------------------------------------------------*/
+static bool module_busy = false;
+APP_TIMER_DEF(m_advertisement_attempt_timer_id);                                //Advertisement attempt timer id.
+
 BLE_AAS_DEF(m_aas);                                                             //Accelerometer Audio Service instance.
 NRF_BLE_GATT_DEF(m_gatt);                                                       //GATT module instance.
 NRF_BLE_QWR_DEF(m_qwr);                                                         //Context for the Queued Write module.
@@ -118,17 +115,22 @@ static void ble_qwr_error_handler(uint32_t nrf_error)
  */
 static void ble_audio_write_handler(uint16_t conn_handle, ble_aas_t *p_aas, uint8_t audio_state)
 {
-    if (audio_state == BleAudioCmd_PlayTrack1)
-    {
-		Mod_AudioPlayer_Play(AudioPlayer_Track_1);
-    }
-    else if (audio_state == BleAudioCmd_PlayTrack2)
-    {
-		Mod_AudioPlayer_Play(AudioPlayer_Track_2);
-    }
-	else if (audio_state == BleAudioCmd_Stop)
+	switch(audio_state)
 	{
-		Mod_AudioPlayer_Stop();
+		case BleAudioCmd_PlayTrack1:
+			Mod_AudioPlayer_Play(AudioPlayer_Track_1);
+			break;
+
+		case BleAudioCmd_PlayTrack2:
+			Mod_AudioPlayer_Play(AudioPlayer_Track_2);
+			break;
+
+		case BleAudioCmd_Stop:
+			Mod_AudioPlayer_Stop();
+			break;
+
+		default:
+			break;
 	}
 }
 
@@ -145,28 +147,21 @@ static void ble_event_handler(ble_evt_t const *p_ble_evt, void *p_context)
     switch (p_ble_evt->header.evt_id)
     {
         case BLE_GAP_EVT_CONNECTED:
-			Mod_Indication_SetStatus_Bluetooth(IndiStatus_Bluetooth_Connected);
+			Mod_Indication_SetState_Bluetooth(IndiStatus_Bluetooth_Connected);
             m_conn_handle = p_ble_evt->evt.gap_evt.conn_handle;
             err_code = nrf_ble_qwr_conn_handle_assign(&m_qwr, m_conn_handle);
             APP_ERROR_CHECK(err_code);
-//            err_code = app_button_enable();
-//            APP_ERROR_CHECK(err_code);
             break;
 
         case BLE_GAP_EVT_DISCONNECTED:
-            Mod_Indication_SetStatus_Bluetooth(IndiStatus_Bluetooth_Advertising);
+            Mod_Indication_SetState_Bluetooth(IndiStatus_Bluetooth_Advertising);
             m_conn_handle = BLE_CONN_HANDLE_INVALID;
-//            err_code = app_button_disable();
-//            APP_ERROR_CHECK(err_code);
             ble_advertising_start();
             break;
 
         case BLE_GAP_EVT_SEC_PARAMS_REQUEST:
             // Pairing not supported
-            err_code = sd_ble_gap_sec_params_reply(m_conn_handle,
-                                                   BLE_GAP_SEC_STATUS_PAIRING_NOT_SUPP,
-                                                   NULL,
-                                                   NULL);
+            err_code = sd_ble_gap_sec_params_reply(m_conn_handle, BLE_GAP_SEC_STATUS_PAIRING_NOT_SUPP, NULL, NULL);
             APP_ERROR_CHECK(err_code);
             break;
 
@@ -200,6 +195,19 @@ static void ble_event_handler(ble_evt_t const *p_ble_evt, void *p_context)
                                              BLE_HCI_REMOTE_USER_TERMINATED_CONNECTION);
             APP_ERROR_CHECK(err_code);
             break;
+
+		case BLE_GAP_EVT_ADV_SET_TERMINATED:
+			Mod_Indication_SetState_Bluetooth(IndiStatus_Bluetooth_Idle);
+			//Advertisement duraction is elapsed
+			if(m_conn_handle == BLE_CONN_HANDLE_INVALID)
+			{
+				//Start timer to new advertisement attempt
+				app_timer_start(m_advertisement_attempt_timer_id, APP_ADV_ATTEMPT_PERIOD, NULL);
+
+				//Set status
+				module_busy = false;
+			}
+			break;
 
         default:
             // No implementation needed.
@@ -239,6 +247,12 @@ static void ble_conn_params_error_handler(uint32_t nrf_error)
     APP_ERROR_HANDLER(nrf_error);
 }
 
+
+static void ble_advertisement_attempt_timer_timeout_handler(void * p_context)
+{
+	ble_advertising_start();
+}
+
 /*-- Local functions --------------------------------------------------------*/
 /**@brief Function for the Timer initialization.
  *
@@ -249,18 +263,10 @@ static void ble_timers_init(void)
     // Initialize timer module, making it use the scheduler
     ret_code_t err_code = app_timer_init();
     APP_ERROR_CHECK(err_code);
+
+	// Create advertisements attempt timer
+	app_timer_create(&m_advertisement_attempt_timer_id, APP_TIMER_MODE_SINGLE_SHOT, ble_advertisement_attempt_timer_timeout_handler);
 }
-
-
-/**@brief Function for initializing power management.
- */
-//static void power_management_init(void)
-//{
-//    ret_code_t err_code;
-//    err_code = nrf_pwr_mgmt_init();
-//    APP_ERROR_CHECK(err_code);
-//}
-
 
 /**@brief Function for initializing the BLE stack.
  *
@@ -331,7 +337,7 @@ static void ble_services_init(void)
     ret_code_t err_code;
     
     // Initialize Queued Write Module.
-	nrf_ble_qwr_init_t qwr_init = {0};
+	nrf_ble_qwr_init_t qwr_init = { 0 };
     qwr_init.error_handler = ble_qwr_error_handler;
     err_code = nrf_ble_qwr_init(&m_qwr, &qwr_init);
     APP_ERROR_CHECK(err_code);
@@ -427,17 +433,20 @@ static void ble_connection_params_init(void)
 static void ble_advertising_start(void)
 {
     ret_code_t err_code;
+
+	//Set status
+	module_busy = true;
+
     err_code = sd_ble_gap_adv_start(m_adv_handle, APP_BLE_CONN_CFG_TAG);
     APP_ERROR_CHECK(err_code);
 
-    Mod_Indication_SetStatus_Bluetooth(IndiStatus_Bluetooth_Advertising);
+    Mod_Indication_SetState_Bluetooth(IndiStatus_Bluetooth_Advertising);
 }
 
 /*-- Exported functions -----------------------------------------------------*/
 void Mod_Ble_Init(void)
 {
 	ble_timers_init();
-	//power_management_init();
 	ble_stack_init();
 	ble_gap_params_init();
 	ble_gatt_init();
@@ -449,6 +458,16 @@ void Mod_Ble_Init(void)
     ble_advertising_start();
 }
 
+bool Mod_Ble_IsBusy(void)
+{
+	return module_busy;
+}
+
+void Mod_Ble_EnterSleepMode(void)
+{
+
+}
+
 void Mod_Ble_Accelerometer_NewData(uint16_t X, uint16_t Y, uint16_t Z)
 {
 	uint32_t err_code = ble_aas_on_accelerometer_new_data(m_conn_handle, &m_aas, X, Y, Z);
@@ -456,7 +475,8 @@ void Mod_Ble_Accelerometer_NewData(uint16_t X, uint16_t Y, uint16_t Z)
 	if (err_code != NRF_SUCCESS &&
 		err_code != BLE_ERROR_INVALID_CONN_HANDLE &&
 		err_code != NRF_ERROR_INVALID_STATE &&
-		err_code != BLE_ERROR_GATTS_SYS_ATTR_MISSING)
+		err_code != BLE_ERROR_GATTS_SYS_ATTR_MISSING &&
+		err_code != NRF_ERROR_RESOURCES)  //Looks like bluetooth queue is full...
 	{
 		APP_ERROR_CHECK(err_code);
 	}
@@ -503,8 +523,6 @@ void Mod_Ble_Run(void)
 		}
 		break;
 	}
-
-	//nrf_pwr_mgmt_run();
 }
 
 /*-- EOF --------------------------------------------------------------------*/

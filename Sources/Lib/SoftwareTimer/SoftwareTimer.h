@@ -23,15 +23,15 @@ extern "C" {
 /*-- Exported macro ---------------------------------------------------------*/
 #define SW_TIMER__EXTERNAL_TIMERS_SUPPORT                       0
 #if (SW_TIMER__EXTERNAL_TIMERS_SUPPORT)
-#define SW_TIMER__EXTERNAL_TIMERS_COUNT                         5
+	#define SW_TIMER__EXTERNAL_TIMERS_COUNT                     5
 #endif
 
-#define SW_TIMER__ADVANCED_TICK_CALCULATE_SUPPORT               0
+#define SW_TIMER__ADVANCED_TICK_CALCULATE_SUPPORT               1
 #if (SW_TIMER__ADVANCED_TICK_CALCULATE_SUPPORT)
-#define SW_TIMER__ADVANCED_TICK_MAXIMUM_PERIOD_MS            5000
+	#define SW_TIMER__ADVANCED_TICK_MAXIMUM_PERIOD_MS           5000
 #endif
 
-#define SW_TIMER__TIMERS_COUNT                                 25
+#define SW_TIMER__TIMERS_COUNT									25
 
 //Up to 255 priority levels
 //Can be useful for RTOS
@@ -68,12 +68,9 @@ typedef enum
 typedef enum
 {
 	SWTS_CLEAR = 0,
-	SWTS_CONFIGURING,
 	SWTS_RUNNING,
 	SWTS_PAUSED,
 	SWTS_WAIT_CALLBACK_CALL,
-	SWTS_RUNNING_DELAY,
-	SWTS_CLEAR_DELAY,
 }SwTimerState_t;
 
 typedef struct
@@ -87,15 +84,15 @@ typedef struct
 	uint32_t            Period;
 	uint32_t            Ticks;
 	SwTimerCallback_t   CallbackFunction;
-	void *              CallbackParameter;
+	void *              Parameter;
 }SwTimer_t;
 
 /*-- Exported variables -----------------------------------------------------*/
 /*-- Exported functions -----------------------------------------------------*/
 void SwTimer_Init(void);
 bool SwTimer_IsPresent(uint32_t id);
-uint32_t SwTimer_Start(uint32_t work_count, uint32_t period_ms, uint8_t priority, SwTimerCallback_t callback, void *parameter);
-uint32_t SwTimer_StartDelayed(uint32_t work_count, uint32_t start_delay_ms, uint32_t period_ms, uint8_t priority, SwTimerCallback_t callback, void *parameter);
+uint32_t SwTimer_Start(uint8_t workCount, uint32_t period_ms, uint8_t priority, SwTimerCallback_t callback, void *parameter);
+uint32_t SwTimer_StartDelayed(uint8_t workCount, uint32_t startDelay_ms, uint32_t period_ms, uint8_t priority, SwTimerCallback_t callback, void *parameter);
 void SwTimer_Pause(uint32_t id);
 void SwTimer_PauseFor(uint32_t id, uint32_t delay_ms);
 void SwTimer_Resume(uint32_t id);
@@ -104,13 +101,13 @@ void SwTimer_Refresh(uint32_t id);
 void SwTimer_Reload(uint32_t id, uint32_t period_ms);
 void SwTimer_Delay(uint32_t period_ms);
 
-#if (SW_TIMER__EXTERNAL_TIMERS_SUPPORT)
+#if defined (SW_TIMER__EXTERNAL_TIMERS_SUPPORT)
 bool SwTimer_External_IsPresent(uint32_t *variable);
 bool SwTimer_External_Start(uint32_t *variable);
 void SwTimer_External_Stop(uint32_t *variable);
 #endif
 
-void SwTimer_Tick(uint32_t ms_per_tick);
+void SwTimer_TickCounter(uint32_t msPerTick);
 void SwTimer_Run(uint8_t priority);
 
 #ifdef __cplusplus

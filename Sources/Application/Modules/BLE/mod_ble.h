@@ -22,6 +22,9 @@
 /*-- Exported functions -----------------------------------------------------*/
 void Mod_Ble_Init(void);
 
+bool Mod_Ble_IsBusy(void);
+void Mod_Ble_EnterSleepMode(void);
+
 void Mod_Ble_Accelerometer_NewData(uint16_t X, uint16_t Y, uint16_t Z);
 
 void Mod_Ble_Tick(uint32_t ms);

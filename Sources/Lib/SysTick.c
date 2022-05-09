@@ -174,6 +174,25 @@ bool SysTick_WaitAfter(SysTick_WaitEntity_t *entity, uint32_t ms, bool repeat)
 	}
 }
 
+bool SysTick_IsWaitElapsed(SysTick_WaitEntity_t *entity)
+{
+	if(entity->Started)
+	{
+		if((SysTick_GetTick() - entity->StartTime) > entity->SetupMs)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+	else
+	{
+		return true;
+	}
+}
+
 //TODO not tested
 bool SysTick_WaitTimeout(SysTick_WaitEntity_t *entity, uint32_t ms, bool exitFlag)
 {
