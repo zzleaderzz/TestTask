@@ -175,10 +175,8 @@ void Mod_AudioPlayer_Play(AudioPlayer_Track_e track)
 			case AudioPlayer_Track_2:
 			{
 				player_track = AudioPlayer_Track_2;
-				//TODO: Set 2nd track
-				//track_data = (uint16_t *)Melody_Bergen;
-				//track_data_length = (MELODY_BERGEN_SIZE / sizeof(uint16_t));
-				return;
+				track_data = (uint16_t *)Melody_Bergen;
+				track_data_length = (MELODY_BERGEN_SIZE / sizeof(uint16_t));
 			}
 			break;
 

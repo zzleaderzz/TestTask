@@ -16,7 +16,7 @@
 /*-- Hardware specific libraries --------------------------------------------*/
 /*-- Project specific includes ----------------------------------------------*/
 /*-- Exported macro ---------------------------------------------------------*/
-#define MELODY_U_SIZE                       475136u //~15 sec
+#define MELODY_U_SIZE                       296960u //~10 sec
 #define MELODY_BERGEN_SIZE					358400u //~11 sec
 
 /*-- Typedefs ---------------------------------------------------------------*/

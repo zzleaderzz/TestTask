@@ -9433,8 +9433,6 @@ Discarded input sections
  .text          0x0000000000000000        0x0 Output/Debug/Obj/TestTask/mod_audio_tracks.o
  .data          0x0000000000000000        0x0 Output/Debug/Obj/TestTask/mod_audio_tracks.o
  .bss           0x0000000000000000        0x0 Output/Debug/Obj/TestTask/mod_audio_tracks.o
- .rodata.Melody_Bergen
-                0x0000000000000000    0x57800 Output/Debug/Obj/TestTask/mod_audio_tracks.o
  .debug_macro   0x0000000000000000      0xb2c Output/Debug/Obj/TestTask/mod_audio_tracks.o
  .debug_macro   0x0000000000000000      0x23a Output/Debug/Obj/TestTask/mod_audio_tracks.o
  .debug_macro   0x0000000000000000      0x260 Output/Debug/Obj/TestTask/mod_audio_tracks.o
@@ -11458,7 +11456,7 @@ Linker script and memory map
                 0x0000000000000001                . = ASSERT (((__init_rodata_start__ == __init_rodata_end__) || ((__init_rodata_end__ - __FLASH1_segment_start__) <= __FLASH1_segment_size__)), error: .init_rodata is too large to fit in FLASH1 memory segment)
                 0x00000000000273cc                __text_load_start__ = ALIGN (__init_rodata_end__, 0x4)
 
-.text           0x00000000000273cc     0xa8cc
+.text           0x00000000000273cc     0xa8dc
                 0x00000000000273cc                __text_start__ = .
  *(.text .text.* .gnu.linkonce.t.* .glue_7t .glue_7 .gcc_except_table .ARM.extab* .gnu.linkonce.armextab.*)
  .glue_7        0x00000000000273cc        0x0 linker stubs
@@ -12584,148 +12582,148 @@ Linker script and memory map
                 0x0000000000030e24        0xc Output/Debug/Obj/TestTask/mod_audio_player.o
                 0x0000000000030e24                Mod_AudioPlayer_GetTrack
  .text.Mod_AudioPlayer_Play
-                0x0000000000030e30       0x88 Output/Debug/Obj/TestTask/mod_audio_player.o
+                0x0000000000030e30       0x98 Output/Debug/Obj/TestTask/mod_audio_player.o
                 0x0000000000030e30                Mod_AudioPlayer_Play
  .text.Mod_AudioPlayer_Pause
-                0x0000000000030eb8       0x1c Output/Debug/Obj/TestTask/mod_audio_player.o
-                0x0000000000030eb8                Mod_AudioPlayer_Pause
+                0x0000000000030ec8       0x1c Output/Debug/Obj/TestTask/mod_audio_player.o
+                0x0000000000030ec8                Mod_AudioPlayer_Pause
  .text.Mod_AudioPlayer_Resume
-                0x0000000000030ed4       0x24 Output/Debug/Obj/TestTask/mod_audio_player.o
-                0x0000000000030ed4                Mod_AudioPlayer_Resume
+                0x0000000000030ee4       0x24 Output/Debug/Obj/TestTask/mod_audio_player.o
+                0x0000000000030ee4                Mod_AudioPlayer_Resume
  .text.Mod_AudioPlayer_Stop
-                0x0000000000030ef8       0x48 Output/Debug/Obj/TestTask/mod_audio_player.o
-                0x0000000000030ef8                Mod_AudioPlayer_Stop
+                0x0000000000030f08       0x48 Output/Debug/Obj/TestTask/mod_audio_player.o
+                0x0000000000030f08                Mod_AudioPlayer_Stop
  .text.Mod_AudioPlayer_Run
-                0x0000000000030f40        0xa Output/Debug/Obj/TestTask/mod_audio_player.o
-                0x0000000000030f40                Mod_AudioPlayer_Run
+                0x0000000000030f50        0xa Output/Debug/Obj/TestTask/mod_audio_player.o
+                0x0000000000030f50                Mod_AudioPlayer_Run
  .text.sd_ble_gap_adv_set_configure
-                0x0000000000030f4a        0x8 Output/Debug/Obj/TestTask/mod_ble.o
- .text.sd_ble_gap_adv_start
-                0x0000000000030f52        0x8 Output/Debug/Obj/TestTask/mod_ble.o
- .text.sd_ble_gap_disconnect
                 0x0000000000030f5a        0x8 Output/Debug/Obj/TestTask/mod_ble.o
- .text.sd_ble_gap_ppcp_set
+ .text.sd_ble_gap_adv_start
                 0x0000000000030f62        0x8 Output/Debug/Obj/TestTask/mod_ble.o
- .text.sd_ble_gap_device_name_set
+ .text.sd_ble_gap_disconnect
                 0x0000000000030f6a        0x8 Output/Debug/Obj/TestTask/mod_ble.o
- .text.sd_ble_gap_sec_params_reply
+ .text.sd_ble_gap_ppcp_set
                 0x0000000000030f72        0x8 Output/Debug/Obj/TestTask/mod_ble.o
- .text.sd_ble_gap_phy_update
+ .text.sd_ble_gap_device_name_set
                 0x0000000000030f7a        0x8 Output/Debug/Obj/TestTask/mod_ble.o
- .text.sd_ble_gatts_sys_attr_set
+ .text.sd_ble_gap_sec_params_reply
                 0x0000000000030f82        0x8 Output/Debug/Obj/TestTask/mod_ble.o
- *fill*         0x0000000000030f8a        0x2 
+ .text.sd_ble_gap_phy_update
+                0x0000000000030f8a        0x8 Output/Debug/Obj/TestTask/mod_ble.o
+ .text.sd_ble_gatts_sys_attr_set
+                0x0000000000030f92        0x8 Output/Debug/Obj/TestTask/mod_ble.o
+ *fill*         0x0000000000030f9a        0x2 
  .text.ble_qwr_error_handler
-                0x0000000000030f8c       0x1c Output/Debug/Obj/TestTask/mod_ble.o
+                0x0000000000030f9c       0x1c Output/Debug/Obj/TestTask/mod_ble.o
  .text.ble_audio_write_handler
-                0x0000000000030fa8       0x46 Output/Debug/Obj/TestTask/mod_ble.o
- *fill*         0x0000000000030fee        0x2 
+                0x0000000000030fb8       0x46 Output/Debug/Obj/TestTask/mod_ble.o
+ *fill*         0x0000000000030ffe        0x2 
  .text.ble_event_handler
-                0x0000000000030ff0      0x1c4 Output/Debug/Obj/TestTask/mod_ble.o
+                0x0000000000031000      0x1c4 Output/Debug/Obj/TestTask/mod_ble.o
  .text.ble_on_conn_params_evt
-                0x00000000000311b4       0x40 Output/Debug/Obj/TestTask/mod_ble.o
+                0x00000000000311c4       0x40 Output/Debug/Obj/TestTask/mod_ble.o
  .text.ble_conn_params_error_handler
-                0x00000000000311f4       0x1c Output/Debug/Obj/TestTask/mod_ble.o
+                0x0000000000031204       0x1c Output/Debug/Obj/TestTask/mod_ble.o
  .text.ble_timers_init
-                0x0000000000031210       0x2c Output/Debug/Obj/TestTask/mod_ble.o
+                0x0000000000031220       0x2c Output/Debug/Obj/TestTask/mod_ble.o
  .text.ble_stack_init
-                0x000000000003123c       0x74 Output/Debug/Obj/TestTask/mod_ble.o
+                0x000000000003124c       0x74 Output/Debug/Obj/TestTask/mod_ble.o
  .text.ble_gap_params_init
-                0x00000000000312b0       0x9c Output/Debug/Obj/TestTask/mod_ble.o
+                0x00000000000312c0       0x9c Output/Debug/Obj/TestTask/mod_ble.o
  .text.ble_gatt_init
-                0x000000000003134c       0x34 Output/Debug/Obj/TestTask/mod_ble.o
+                0x000000000003135c       0x34 Output/Debug/Obj/TestTask/mod_ble.o
  .text.ble_services_init
-                0x0000000000031380       0x90 Output/Debug/Obj/TestTask/mod_ble.o
+                0x0000000000031390       0x90 Output/Debug/Obj/TestTask/mod_ble.o
  .text.ble_advertising_init
-                0x0000000000031410      0x104 Output/Debug/Obj/TestTask/mod_ble.o
+                0x0000000000031420      0x104 Output/Debug/Obj/TestTask/mod_ble.o
  .text.ble_connection_params_init
-                0x0000000000031514       0x70 Output/Debug/Obj/TestTask/mod_ble.o
+                0x0000000000031524       0x70 Output/Debug/Obj/TestTask/mod_ble.o
  .text.ble_advertising_start
-                0x0000000000031584       0x40 Output/Debug/Obj/TestTask/mod_ble.o
+                0x0000000000031594       0x40 Output/Debug/Obj/TestTask/mod_ble.o
  .text.Mod_Ble_Init
-                0x00000000000315c4       0x26 Output/Debug/Obj/TestTask/mod_ble.o
-                0x00000000000315c4                Mod_Ble_Init
- *fill*         0x00000000000315ea        0x2 
+                0x00000000000315d4       0x26 Output/Debug/Obj/TestTask/mod_ble.o
+                0x00000000000315d4                Mod_Ble_Init
+ *fill*         0x00000000000315fa        0x2 
  .text.Mod_Ble_Accelerometer_NewData
-                0x00000000000315ec       0x7c Output/Debug/Obj/TestTask/mod_ble.o
-                0x00000000000315ec                Mod_Ble_Accelerometer_NewData
+                0x00000000000315fc       0x7c Output/Debug/Obj/TestTask/mod_ble.o
+                0x00000000000315fc                Mod_Ble_Accelerometer_NewData
  .text.Mod_Ble_Run
-                0x0000000000031668       0x5c Output/Debug/Obj/TestTask/mod_ble.o
-                0x0000000000031668                Mod_Ble_Run
+                0x0000000000031678       0x5c Output/Debug/Obj/TestTask/mod_ble.o
+                0x0000000000031678                Mod_Ble_Run
  .text.sd_ble_gatts_service_add
-                0x00000000000316c4        0x8 Output/Debug/Obj/TestTask/ble_aas.o
- .text.sd_ble_gatts_hvx
-                0x00000000000316cc        0x8 Output/Debug/Obj/TestTask/ble_aas.o
- .text.sd_ble_uuid_vs_add
                 0x00000000000316d4        0x8 Output/Debug/Obj/TestTask/ble_aas.o
+ .text.sd_ble_gatts_hvx
+                0x00000000000316dc        0x8 Output/Debug/Obj/TestTask/ble_aas.o
+ .text.sd_ble_uuid_vs_add
+                0x00000000000316e4        0x8 Output/Debug/Obj/TestTask/ble_aas.o
  .text.on_audio_write
-                0x00000000000316dc       0x42 Output/Debug/Obj/TestTask/ble_aas.o
+                0x00000000000316ec       0x42 Output/Debug/Obj/TestTask/ble_aas.o
  .text.ble_add_characteristic_Accelerometer
-                0x000000000003171e       0x7c Output/Debug/Obj/TestTask/ble_aas.o
+                0x000000000003172e       0x7c Output/Debug/Obj/TestTask/ble_aas.o
  .text.ble_add_characteristic_Audio
-                0x000000000003179a       0x7e Output/Debug/Obj/TestTask/ble_aas.o
+                0x00000000000317aa       0x7e Output/Debug/Obj/TestTask/ble_aas.o
  .text.ble_aas_init
-                0x0000000000031818       0x98 Output/Debug/Obj/TestTask/ble_aas.o
-                0x0000000000031818                ble_aas_init
+                0x0000000000031828       0x98 Output/Debug/Obj/TestTask/ble_aas.o
+                0x0000000000031828                ble_aas_init
  .text.ble_ass_on_ble_evt
-                0x00000000000318b0       0x28 Output/Debug/Obj/TestTask/ble_aas.o
-                0x00000000000318b0                ble_ass_on_ble_evt
+                0x00000000000318c0       0x28 Output/Debug/Obj/TestTask/ble_aas.o
+                0x00000000000318c0                ble_ass_on_ble_evt
  .text.ble_aas_on_accelerometer_new_data
-                0x00000000000318d8       0x78 Output/Debug/Obj/TestTask/ble_aas.o
-                0x00000000000318d8                ble_aas_on_accelerometer_new_data
+                0x00000000000318e8       0x78 Output/Debug/Obj/TestTask/ble_aas.o
+                0x00000000000318e8                ble_aas_on_accelerometer_new_data
  .text.Led_APP_Toggle_TimerCallback
-                0x0000000000031950       0x14 Output/Debug/Obj/TestTask/mod_indication.o
-                0x0000000000031950                Led_APP_Toggle_TimerCallback
+                0x0000000000031960       0x14 Output/Debug/Obj/TestTask/mod_indication.o
+                0x0000000000031960                Led_APP_Toggle_TimerCallback
  .text.Led_BT_Toggle_TimerCallback
-                0x0000000000031964       0x14 Output/Debug/Obj/TestTask/mod_indication.o
-                0x0000000000031964                Led_BT_Toggle_TimerCallback
+                0x0000000000031974       0x14 Output/Debug/Obj/TestTask/mod_indication.o
+                0x0000000000031974                Led_BT_Toggle_TimerCallback
  .text.Led_Accel_Off_TimerCallback
-                0x0000000000031978       0x20 Output/Debug/Obj/TestTask/mod_indication.o
-                0x0000000000031978                Led_Accel_Off_TimerCallback
+                0x0000000000031988       0x20 Output/Debug/Obj/TestTask/mod_indication.o
+                0x0000000000031988                Led_Accel_Off_TimerCallback
  .text.Mod_Indication_Init
-                0x0000000000031998        0xc Output/Debug/Obj/TestTask/mod_indication.o
-                0x0000000000031998                Mod_Indication_Init
+                0x00000000000319a8        0xc Output/Debug/Obj/TestTask/mod_indication.o
+                0x00000000000319a8                Mod_Indication_Init
  .text.Mod_Indication_SetStatus_Application
-                0x00000000000319a4       0x98 Output/Debug/Obj/TestTask/mod_indication.o
-                0x00000000000319a4                Mod_Indication_SetStatus_Application
+                0x00000000000319b4       0x98 Output/Debug/Obj/TestTask/mod_indication.o
+                0x00000000000319b4                Mod_Indication_SetStatus_Application
  .text.Mod_Indication_SetStatus_Bluetooth
-                0x0000000000031a3c       0x98 Output/Debug/Obj/TestTask/mod_indication.o
-                0x0000000000031a3c                Mod_Indication_SetStatus_Bluetooth
+                0x0000000000031a4c       0x98 Output/Debug/Obj/TestTask/mod_indication.o
+                0x0000000000031a4c                Mod_Indication_SetStatus_Bluetooth
  .text.Mod_Indication_SetStatus_Accelerometer
-                0x0000000000031ad4       0x80 Output/Debug/Obj/TestTask/mod_indication.o
-                0x0000000000031ad4                Mod_Indication_SetStatus_Accelerometer
+                0x0000000000031ae4       0x80 Output/Debug/Obj/TestTask/mod_indication.o
+                0x0000000000031ae4                Mod_Indication_SetStatus_Accelerometer
  .text.Mod_Indication_SetStatus_Audio
-                0x0000000000031b54       0x5c Output/Debug/Obj/TestTask/mod_indication.o
-                0x0000000000031b54                Mod_Indication_SetStatus_Audio
+                0x0000000000031b64       0x5c Output/Debug/Obj/TestTask/mod_indication.o
+                0x0000000000031b64                Mod_Indication_SetStatus_Audio
  .text.Mod_Indication_Run
-                0x0000000000031bb0        0x4 Output/Debug/Obj/TestTask/mod_indication.o
-                0x0000000000031bb0                Mod_Indication_Run
+                0x0000000000031bc0        0x4 Output/Debug/Obj/TestTask/mod_indication.o
+                0x0000000000031bc0                Mod_Indication_Run
  .text.SysTick_Handler
-                0x0000000000031bb4       0x16 Output/Debug/Obj/TestTask/ntf52_it.o
-                0x0000000000031bb4                SysTick_Handler
- *fill*         0x0000000000031bca        0x2 
+                0x0000000000031bc4       0x16 Output/Debug/Obj/TestTask/ntf52_it.o
+                0x0000000000031bc4                SysTick_Handler
+ *fill*         0x0000000000031bda        0x2 
  .text.libc.memcpy
-                0x0000000000031bcc       0x4c C:/Program Files/SEGGER/SEGGER Embedded Studio for ARM 6.22a/lib/libc_v7em_fpv4_sp_d16_hard_t_le_eabi_balanced.a(strasmops_arm.o)
-                0x0000000000031bcc                __aeabi_memcpy
-                0x0000000000031bcc                memcpy
-                0x0000000000031bd8                __aeabi_memcpy8
-                0x0000000000031bd8                __aeabi_memcpy4
+                0x0000000000031bdc       0x4c C:/Program Files/SEGGER/SEGGER Embedded Studio for ARM 6.22a/lib/libc_v7em_fpv4_sp_d16_hard_t_le_eabi_balanced.a(strasmops_arm.o)
+                0x0000000000031bdc                __aeabi_memcpy
+                0x0000000000031bdc                memcpy
+                0x0000000000031be8                __aeabi_memcpy8
+                0x0000000000031be8                __aeabi_memcpy4
  .text.libc.__aeabi_memclr
-                0x0000000000031c18       0x6c C:/Program Files/SEGGER/SEGGER Embedded Studio for ARM 6.22a/lib/libc_v7em_fpv4_sp_d16_hard_t_le_eabi_balanced.a(strasmops_arm.o)
-                0x0000000000031c18                __aeabi_memclr8
-                0x0000000000031c18                __aeabi_memclr
-                0x0000000000031c18                __aeabi_memclr4
-                0x0000000000031c1a                __aeabi_memset4
-                0x0000000000031c1a                __aeabi_memset8
-                0x0000000000031c1a                __aeabi_memset
-                0x0000000000031c20                memset
+                0x0000000000031c28       0x6c C:/Program Files/SEGGER/SEGGER Embedded Studio for ARM 6.22a/lib/libc_v7em_fpv4_sp_d16_hard_t_le_eabi_balanced.a(strasmops_arm.o)
+                0x0000000000031c28                __aeabi_memclr8
+                0x0000000000031c28                __aeabi_memclr
+                0x0000000000031c28                __aeabi_memclr4
+                0x0000000000031c2a                __aeabi_memset4
+                0x0000000000031c2a                __aeabi_memset8
+                0x0000000000031c2a                __aeabi_memset
+                0x0000000000031c30                memset
  .text.__SEGGER_RTL_init_heap
-                0x0000000000031c84       0x14 C:/Program Files/SEGGER/SEGGER Embedded Studio for ARM 6.22a/lib/heapops_basic_v7em_little.a(heapops_basic.o)
-                0x0000000000031c84                __SEGGER_RTL_init_heap
-                0x0000000000031c98                . = ALIGN (MAX ((__text_start__ + 0x4), .), 0x4)
-                0x0000000000031c98                __text_end__ = (__text_start__ + SIZEOF (.text))
-                0x000000000000a8cc                __text_size__ = SIZEOF (.text)
-                0x0000000000031c98                __text_load_end__ = __text_end__
+                0x0000000000031c94       0x14 C:/Program Files/SEGGER/SEGGER Embedded Studio for ARM 6.22a/lib/heapops_basic_v7em_little.a(heapops_basic.o)
+                0x0000000000031c94                __SEGGER_RTL_init_heap
+                0x0000000000031ca8                . = ALIGN (MAX ((__text_start__ + 0x4), .), 0x4)
+                0x0000000000031ca8                __text_end__ = (__text_start__ + SIZEOF (.text))
+                0x000000000000a8dc                __text_size__ = SIZEOF (.text)
+                0x0000000000031ca8                __text_load_end__ = __text_end__
 
 .vfp11_veneer   0x0000000100000000        0x0
  .vfp11_veneer  0x0000000100000000        0x0 linker stubs
@@ -12736,179 +12734,179 @@ Linker script and memory map
 .iplt           0x0000000100000000        0x0
  .iplt          0x0000000100000000        0x0 Output/Debug/Obj/TestTask/thumb_crt0.o
                 0x0000000000000001                . = ASSERT (((__text_start__ == __text_end__) || ((__text_end__ - __FLASH1_segment_start__) <= __FLASH1_segment_size__)), error: .text is too large to fit in FLASH1 memory segment)
-                0x0000000000031c98                __sdh_soc_observers_load_start__ = ALIGN (__text_end__, 0x4)
+                0x0000000000031ca8                __sdh_soc_observers_load_start__ = ALIGN (__text_end__, 0x4)
 
 .sdh_soc_observers
-                0x0000000000031c98        0x8
-                0x0000000000031c98                __sdh_soc_observers_start__ = .
-                0x0000000000031c98                __start_sdh_soc_observers = __sdh_soc_observers_start__
+                0x0000000000031ca8        0x8
+                0x0000000000031ca8                __sdh_soc_observers_start__ = .
+                0x0000000000031ca8                __start_sdh_soc_observers = __sdh_soc_observers_start__
  *(SORT_BY_NAME(.sdh_soc_observers*))
  .sdh_soc_observers0
-                0x0000000000031c98        0x8 Output/Debug/Obj/TestTask/nrf_drv_clock.o
-                0x0000000000031ca0                __sdh_soc_observers_end__ = (__sdh_soc_observers_start__ + SIZEOF (.sdh_soc_observers))
+                0x0000000000031ca8        0x8 Output/Debug/Obj/TestTask/nrf_drv_clock.o
+                0x0000000000031cb0                __sdh_soc_observers_end__ = (__sdh_soc_observers_start__ + SIZEOF (.sdh_soc_observers))
                 0x0000000000000008                __sdh_soc_observers_size__ = SIZEOF (.sdh_soc_observers)
-                0x0000000000031ca0                __stop_sdh_soc_observers = __sdh_soc_observers_end__
-                0x0000000000031ca0                __sdh_soc_observers_load_end__ = __sdh_soc_observers_end__
+                0x0000000000031cb0                __stop_sdh_soc_observers = __sdh_soc_observers_end__
+                0x0000000000031cb0                __sdh_soc_observers_load_end__ = __sdh_soc_observers_end__
                 0x0000000000000001                . = ASSERT (((__sdh_soc_observers_start__ == __sdh_soc_observers_end__) || ((__sdh_soc_observers_end__ - __FLASH1_segment_start__) <= __FLASH1_segment_size__)), error: .sdh_soc_observers is too large to fit in FLASH1 memory segment)
-                0x0000000000031ca0                __pwr_mgmt_data_load_start__ = ALIGN (__sdh_soc_observers_end__, 0x4)
+                0x0000000000031cb0                __pwr_mgmt_data_load_start__ = ALIGN (__sdh_soc_observers_end__, 0x4)
 
-.pwr_mgmt_data  0x0000000000031ca0        0x0
-                0x0000000000031ca0                __pwr_mgmt_data_start__ = .
-                0x0000000000031ca0                __start_pwr_mgmt_data = __pwr_mgmt_data_start__
+.pwr_mgmt_data  0x0000000000031cb0        0x0
+                0x0000000000031cb0                __pwr_mgmt_data_start__ = .
+                0x0000000000031cb0                __start_pwr_mgmt_data = __pwr_mgmt_data_start__
  *(SORT_BY_NAME(.pwr_mgmt_data*))
-                0x0000000000031ca0                __pwr_mgmt_data_end__ = (__pwr_mgmt_data_start__ + SIZEOF (.pwr_mgmt_data))
+                0x0000000000031cb0                __pwr_mgmt_data_end__ = (__pwr_mgmt_data_start__ + SIZEOF (.pwr_mgmt_data))
                 0x0000000000000000                __pwr_mgmt_data_size__ = SIZEOF (.pwr_mgmt_data)
-                0x0000000000031ca0                __stop_pwr_mgmt_data = __pwr_mgmt_data_end__
-                0x0000000000031ca0                __pwr_mgmt_data_load_end__ = __pwr_mgmt_data_end__
+                0x0000000000031cb0                __stop_pwr_mgmt_data = __pwr_mgmt_data_end__
+                0x0000000000031cb0                __pwr_mgmt_data_load_end__ = __pwr_mgmt_data_end__
                 0x0000000000000001                . = ASSERT (((__pwr_mgmt_data_start__ == __pwr_mgmt_data_end__) || ((__pwr_mgmt_data_end__ - __FLASH1_segment_start__) <= __FLASH1_segment_size__)), error: .pwr_mgmt_data is too large to fit in FLASH1 memory segment)
-                0x0000000000031ca0                __sdh_ble_observers_load_start__ = ALIGN (__pwr_mgmt_data_end__, 0x4)
+                0x0000000000031cb0                __sdh_ble_observers_load_start__ = ALIGN (__pwr_mgmt_data_end__, 0x4)
 
 .sdh_ble_observers
-                0x0000000000031ca0       0x30
-                0x0000000000031ca0                __sdh_ble_observers_start__ = .
-                0x0000000000031ca0                __start_sdh_ble_observers = __sdh_ble_observers_start__
+                0x0000000000031cb0       0x30
+                0x0000000000031cb0                __sdh_ble_observers_start__ = .
+                0x0000000000031cb0                __start_sdh_ble_observers = __sdh_ble_observers_start__
  *(SORT_BY_NAME(.sdh_ble_observers*))
  .sdh_ble_observers0
-                0x0000000000031ca0        0x8 Output/Debug/Obj/TestTask/ble_conn_state.o
+                0x0000000000031cb0        0x8 Output/Debug/Obj/TestTask/ble_conn_state.o
  .sdh_ble_observers1
-                0x0000000000031ca8        0x8 Output/Debug/Obj/TestTask/ble_conn_params.o
+                0x0000000000031cb8        0x8 Output/Debug/Obj/TestTask/ble_conn_params.o
  .sdh_ble_observers1
-                0x0000000000031cb0        0x8 Output/Debug/Obj/TestTask/mod_ble.o
+                0x0000000000031cc0        0x8 Output/Debug/Obj/TestTask/mod_ble.o
  .sdh_ble_observers2
-                0x0000000000031cb8       0x10 Output/Debug/Obj/TestTask/mod_ble.o
+                0x0000000000031cc8       0x10 Output/Debug/Obj/TestTask/mod_ble.o
  .sdh_ble_observers3
-                0x0000000000031cc8        0x8 Output/Debug/Obj/TestTask/mod_ble.o
-                0x0000000000031cd0                __sdh_ble_observers_end__ = (__sdh_ble_observers_start__ + SIZEOF (.sdh_ble_observers))
+                0x0000000000031cd8        0x8 Output/Debug/Obj/TestTask/mod_ble.o
+                0x0000000000031ce0                __sdh_ble_observers_end__ = (__sdh_ble_observers_start__ + SIZEOF (.sdh_ble_observers))
                 0x0000000000000030                __sdh_ble_observers_size__ = SIZEOF (.sdh_ble_observers)
-                0x0000000000031cd0                __stop_sdh_ble_observers = __sdh_ble_observers_end__
-                0x0000000000031cd0                __sdh_ble_observers_load_end__ = __sdh_ble_observers_end__
+                0x0000000000031ce0                __stop_sdh_ble_observers = __sdh_ble_observers_end__
+                0x0000000000031ce0                __sdh_ble_observers_load_end__ = __sdh_ble_observers_end__
                 0x0000000000000001                . = ASSERT (((__sdh_ble_observers_start__ == __sdh_ble_observers_end__) || ((__sdh_ble_observers_end__ - __FLASH1_segment_start__) <= __FLASH1_segment_size__)), error: .sdh_ble_observers is too large to fit in FLASH1 memory segment)
-                0x0000000000031cd0                __sdh_req_observers_load_start__ = ALIGN (__sdh_ble_observers_end__, 0x4)
+                0x0000000000031ce0                __sdh_req_observers_load_start__ = ALIGN (__sdh_ble_observers_end__, 0x4)
 
 .sdh_req_observers
-                0x0000000000031cd0        0x0
-                0x0000000000031cd0                __sdh_req_observers_start__ = .
-                0x0000000000031cd0                __start_sdh_req_observers = __sdh_req_observers_start__
+                0x0000000000031ce0        0x0
+                0x0000000000031ce0                __sdh_req_observers_start__ = .
+                0x0000000000031ce0                __start_sdh_req_observers = __sdh_req_observers_start__
  *(SORT_BY_NAME(.sdh_req_observers*))
-                0x0000000000031cd0                __sdh_req_observers_end__ = (__sdh_req_observers_start__ + SIZEOF (.sdh_req_observers))
+                0x0000000000031ce0                __sdh_req_observers_end__ = (__sdh_req_observers_start__ + SIZEOF (.sdh_req_observers))
                 0x0000000000000000                __sdh_req_observers_size__ = SIZEOF (.sdh_req_observers)
-                0x0000000000031cd0                __stop_sdh_req_observers = __sdh_req_observers_end__
-                0x0000000000031cd0                __sdh_req_observers_load_end__ = __sdh_req_observers_end__
+                0x0000000000031ce0                __stop_sdh_req_observers = __sdh_req_observers_end__
+                0x0000000000031ce0                __sdh_req_observers_load_end__ = __sdh_req_observers_end__
                 0x0000000000000001                . = ASSERT (((__sdh_req_observers_start__ == __sdh_req_observers_end__) || ((__sdh_req_observers_end__ - __FLASH1_segment_start__) <= __FLASH1_segment_size__)), error: .sdh_req_observers is too large to fit in FLASH1 memory segment)
-                0x0000000000031cd0                __sdh_state_observers_load_start__ = ALIGN (__sdh_req_observers_end__, 0x4)
+                0x0000000000031ce0                __sdh_state_observers_load_start__ = ALIGN (__sdh_req_observers_end__, 0x4)
 
 .sdh_state_observers
-                0x0000000000031cd0        0x8
-                0x0000000000031cd0                __sdh_state_observers_start__ = .
-                0x0000000000031cd0                __start_sdh_state_observers = __sdh_state_observers_start__
+                0x0000000000031ce0        0x8
+                0x0000000000031ce0                __sdh_state_observers_start__ = .
+                0x0000000000031ce0                __start_sdh_state_observers = __sdh_state_observers_start__
  *(SORT_BY_NAME(.sdh_state_observers*))
  .sdh_state_observers0
-                0x0000000000031cd0        0x8 Output/Debug/Obj/TestTask/nrf_drv_clock.o
-                0x0000000000031cd8                __sdh_state_observers_end__ = (__sdh_state_observers_start__ + SIZEOF (.sdh_state_observers))
+                0x0000000000031ce0        0x8 Output/Debug/Obj/TestTask/nrf_drv_clock.o
+                0x0000000000031ce8                __sdh_state_observers_end__ = (__sdh_state_observers_start__ + SIZEOF (.sdh_state_observers))
                 0x0000000000000008                __sdh_state_observers_size__ = SIZEOF (.sdh_state_observers)
-                0x0000000000031cd8                __stop_sdh_state_observers = __sdh_state_observers_end__
-                0x0000000000031cd8                __sdh_state_observers_load_end__ = __sdh_state_observers_end__
+                0x0000000000031ce8                __stop_sdh_state_observers = __sdh_state_observers_end__
+                0x0000000000031ce8                __sdh_state_observers_load_end__ = __sdh_state_observers_end__
                 0x0000000000000001                . = ASSERT (((__sdh_state_observers_start__ == __sdh_state_observers_end__) || ((__sdh_state_observers_end__ - __FLASH1_segment_start__) <= __FLASH1_segment_size__)), error: .sdh_state_observers is too large to fit in FLASH1 memory segment)
-                0x0000000000031cd8                __sdh_stack_observers_load_start__ = ALIGN (__sdh_state_observers_end__, 0x4)
+                0x0000000000031ce8                __sdh_stack_observers_load_start__ = ALIGN (__sdh_state_observers_end__, 0x4)
 
 .sdh_stack_observers
-                0x0000000000031cd8        0x8
-                0x0000000000031cd8                __sdh_stack_observers_start__ = .
-                0x0000000000031cd8                __start_sdh_stack_observers = __sdh_stack_observers_start__
+                0x0000000000031ce8        0x8
+                0x0000000000031ce8                __sdh_stack_observers_start__ = .
+                0x0000000000031ce8                __start_sdh_stack_observers = __sdh_stack_observers_start__
  *(SORT_BY_NAME(.sdh_stack_observers*))
  .sdh_stack_observers0
-                0x0000000000031cd8        0x8 Output/Debug/Obj/TestTask/nrf_sdh_ble.o
-                0x0000000000031ce0                __sdh_stack_observers_end__ = (__sdh_stack_observers_start__ + SIZEOF (.sdh_stack_observers))
+                0x0000000000031ce8        0x8 Output/Debug/Obj/TestTask/nrf_sdh_ble.o
+                0x0000000000031cf0                __sdh_stack_observers_end__ = (__sdh_stack_observers_start__ + SIZEOF (.sdh_stack_observers))
                 0x0000000000000008                __sdh_stack_observers_size__ = SIZEOF (.sdh_stack_observers)
-                0x0000000000031ce0                __stop_sdh_stack_observers = __sdh_stack_observers_end__
-                0x0000000000031ce0                __sdh_stack_observers_load_end__ = __sdh_stack_observers_end__
+                0x0000000000031cf0                __stop_sdh_stack_observers = __sdh_stack_observers_end__
+                0x0000000000031cf0                __sdh_stack_observers_load_end__ = __sdh_stack_observers_end__
                 0x0000000000000001                . = ASSERT (((__sdh_stack_observers_start__ == __sdh_stack_observers_end__) || ((__sdh_stack_observers_end__ - __FLASH1_segment_start__) <= __FLASH1_segment_size__)), error: .sdh_stack_observers is too large to fit in FLASH1 memory segment)
-                0x0000000000031ce0                __nrf_queue_load_start__ = ALIGN (__sdh_stack_observers_end__, 0x4)
+                0x0000000000031cf0                __nrf_queue_load_start__ = ALIGN (__sdh_stack_observers_end__, 0x4)
 
-.nrf_queue      0x0000000000031ce0        0x0
-                0x0000000000031ce0                __nrf_queue_start__ = .
-                0x0000000000031ce0                __start_nrf_queue = __nrf_queue_start__
+.nrf_queue      0x0000000000031cf0        0x0
+                0x0000000000031cf0                __nrf_queue_start__ = .
+                0x0000000000031cf0                __start_nrf_queue = __nrf_queue_start__
  *(.nrf_queue*)
-                0x0000000000031ce0                __nrf_queue_end__ = (__nrf_queue_start__ + SIZEOF (.nrf_queue))
+                0x0000000000031cf0                __nrf_queue_end__ = (__nrf_queue_start__ + SIZEOF (.nrf_queue))
                 0x0000000000000000                __nrf_queue_size__ = SIZEOF (.nrf_queue)
-                0x0000000000031ce0                __stop_nrf_queue = __nrf_queue_end__
-                0x0000000000031ce0                __nrf_queue_load_end__ = __nrf_queue_end__
+                0x0000000000031cf0                __stop_nrf_queue = __nrf_queue_end__
+                0x0000000000031cf0                __nrf_queue_load_end__ = __nrf_queue_end__
                 0x0000000000000001                . = ASSERT (((__nrf_queue_start__ == __nrf_queue_end__) || ((__nrf_queue_end__ - __FLASH1_segment_start__) <= __FLASH1_segment_size__)), error: .nrf_queue is too large to fit in FLASH1 memory segment)
-                0x0000000000031ce0                __nrf_balloc_load_start__ = ALIGN (__nrf_queue_end__, 0x4)
+                0x0000000000031cf0                __nrf_balloc_load_start__ = ALIGN (__nrf_queue_end__, 0x4)
 
-.nrf_balloc     0x0000000000031ce0        0x0
-                0x0000000000031ce0                __nrf_balloc_start__ = .
-                0x0000000000031ce0                __start_nrf_balloc = __nrf_balloc_start__
+.nrf_balloc     0x0000000000031cf0        0x0
+                0x0000000000031cf0                __nrf_balloc_start__ = .
+                0x0000000000031cf0                __start_nrf_balloc = __nrf_balloc_start__
  *(.nrf_balloc*)
-                0x0000000000031ce0                __nrf_balloc_end__ = (__nrf_balloc_start__ + SIZEOF (.nrf_balloc))
+                0x0000000000031cf0                __nrf_balloc_end__ = (__nrf_balloc_start__ + SIZEOF (.nrf_balloc))
                 0x0000000000000000                __nrf_balloc_size__ = SIZEOF (.nrf_balloc)
-                0x0000000000031ce0                __stop_nrf_balloc = __nrf_balloc_end__
-                0x0000000000031ce0                __nrf_balloc_load_end__ = __nrf_balloc_end__
+                0x0000000000031cf0                __stop_nrf_balloc = __nrf_balloc_end__
+                0x0000000000031cf0                __nrf_balloc_load_end__ = __nrf_balloc_end__
                 0x0000000000000001                . = ASSERT (((__nrf_balloc_start__ == __nrf_balloc_end__) || ((__nrf_balloc_end__ - __FLASH1_segment_start__) <= __FLASH1_segment_size__)), error: .nrf_balloc is too large to fit in FLASH1 memory segment)
-                0x0000000000031ce0                __cli_command_load_start__ = ALIGN (__nrf_balloc_end__, 0x4)
+                0x0000000000031cf0                __cli_command_load_start__ = ALIGN (__nrf_balloc_end__, 0x4)
 
-.cli_command    0x0000000000031ce0        0x0
-                0x0000000000031ce0                __cli_command_start__ = .
-                0x0000000000031ce0                __start_cli_command = __cli_command_start__
+.cli_command    0x0000000000031cf0        0x0
+                0x0000000000031cf0                __cli_command_start__ = .
+                0x0000000000031cf0                __start_cli_command = __cli_command_start__
  *(.cli_command*)
-                0x0000000000031ce0                __cli_command_end__ = (__cli_command_start__ + SIZEOF (.cli_command))
+                0x0000000000031cf0                __cli_command_end__ = (__cli_command_start__ + SIZEOF (.cli_command))
                 0x0000000000000000                __cli_command_size__ = SIZEOF (.cli_command)
-                0x0000000000031ce0                __stop_cli_command = __cli_command_end__
-                0x0000000000031ce0                __cli_command_load_end__ = __cli_command_end__
+                0x0000000000031cf0                __stop_cli_command = __cli_command_end__
+                0x0000000000031cf0                __cli_command_load_end__ = __cli_command_end__
                 0x0000000000000001                . = ASSERT (((__cli_command_start__ == __cli_command_end__) || ((__cli_command_end__ - __FLASH1_segment_start__) <= __FLASH1_segment_size__)), error: .cli_command is too large to fit in FLASH1 memory segment)
-                0x0000000000031ce0                __crypto_data_load_start__ = ALIGN (__cli_command_end__, 0x4)
+                0x0000000000031cf0                __crypto_data_load_start__ = ALIGN (__cli_command_end__, 0x4)
 
-.crypto_data    0x0000000000031ce0        0x0
-                0x0000000000031ce0                __crypto_data_start__ = .
-                0x0000000000031ce0                __start_crypto_data = __crypto_data_start__
+.crypto_data    0x0000000000031cf0        0x0
+                0x0000000000031cf0                __crypto_data_start__ = .
+                0x0000000000031cf0                __start_crypto_data = __crypto_data_start__
  *(SORT_BY_NAME(.crypto_data*))
-                0x0000000000031ce0                __crypto_data_end__ = (__crypto_data_start__ + SIZEOF (.crypto_data))
+                0x0000000000031cf0                __crypto_data_end__ = (__crypto_data_start__ + SIZEOF (.crypto_data))
                 0x0000000000000000                __crypto_data_size__ = SIZEOF (.crypto_data)
-                0x0000000000031ce0                __stop_crypto_data = __crypto_data_end__
-                0x0000000000031ce0                __crypto_data_load_end__ = __crypto_data_end__
+                0x0000000000031cf0                __stop_crypto_data = __crypto_data_end__
+                0x0000000000031cf0                __crypto_data_load_end__ = __crypto_data_end__
                 0x0000000000000001                . = ASSERT (((__crypto_data_start__ == __crypto_data_end__) || ((__crypto_data_end__ - __FLASH1_segment_start__) <= __FLASH1_segment_size__)), error: .crypto_data is too large to fit in FLASH1 memory segment)
-                0x0000000000031ce0                __log_const_data_load_start__ = ALIGN (__crypto_data_end__, 0x4)
+                0x0000000000031cf0                __log_const_data_load_start__ = ALIGN (__crypto_data_end__, 0x4)
 
 .log_const_data
-                0x0000000000031ce0        0x0
-                0x0000000000031ce0                __log_const_data_start__ = .
-                0x0000000000031ce0                __start_log_const_data = __log_const_data_start__
+                0x0000000000031cf0        0x0
+                0x0000000000031cf0                __log_const_data_start__ = .
+                0x0000000000031cf0                __start_log_const_data = __log_const_data_start__
  *(SORT_BY_NAME(.log_const_data*))
-                0x0000000000031ce0                __log_const_data_end__ = (__log_const_data_start__ + SIZEOF (.log_const_data))
+                0x0000000000031cf0                __log_const_data_end__ = (__log_const_data_start__ + SIZEOF (.log_const_data))
                 0x0000000000000000                __log_const_data_size__ = SIZEOF (.log_const_data)
-                0x0000000000031ce0                __stop_log_const_data = __log_const_data_end__
-                0x0000000000031ce0                __log_const_data_load_end__ = __log_const_data_end__
+                0x0000000000031cf0                __stop_log_const_data = __log_const_data_end__
+                0x0000000000031cf0                __log_const_data_load_end__ = __log_const_data_end__
                 0x0000000000000001                . = ASSERT (((__log_const_data_start__ == __log_const_data_end__) || ((__log_const_data_end__ - __FLASH1_segment_start__) <= __FLASH1_segment_size__)), error: .log_const_data is too large to fit in FLASH1 memory segment)
-                0x0000000000031ce0                __log_backends_load_start__ = ALIGN (__log_const_data_end__, 0x4)
+                0x0000000000031cf0                __log_backends_load_start__ = ALIGN (__log_const_data_end__, 0x4)
 
-.log_backends   0x0000000000031ce0        0x0
-                0x0000000000031ce0                __log_backends_start__ = .
-                0x0000000000031ce0                __start_log_backends = __log_backends_start__
+.log_backends   0x0000000000031cf0        0x0
+                0x0000000000031cf0                __log_backends_start__ = .
+                0x0000000000031cf0                __start_log_backends = __log_backends_start__
  *(SORT_BY_NAME(.log_backends*))
-                0x0000000000031ce0                __log_backends_end__ = (__log_backends_start__ + SIZEOF (.log_backends))
+                0x0000000000031cf0                __log_backends_end__ = (__log_backends_start__ + SIZEOF (.log_backends))
                 0x0000000000000000                __log_backends_size__ = SIZEOF (.log_backends)
-                0x0000000000031ce0                __stop_log_backends = __log_backends_end__
-                0x0000000000031ce0                __log_backends_load_end__ = __log_backends_end__
+                0x0000000000031cf0                __stop_log_backends = __log_backends_end__
+                0x0000000000031cf0                __log_backends_load_end__ = __log_backends_end__
                 0x0000000000000001                . = ASSERT (((__log_backends_start__ == __log_backends_end__) || ((__log_backends_end__ - __FLASH1_segment_start__) <= __FLASH1_segment_size__)), error: .log_backends is too large to fit in FLASH1 memory segment)
-                0x0000000000031ce0                __nrf_sections_load_start__ = ALIGN (__log_backends_end__, 0x4)
+                0x0000000000031cf0                __nrf_sections_load_start__ = ALIGN (__log_backends_end__, 0x4)
 
-.nrf_sections   0x0000000000031ce0        0x0
-                0x0000000000031ce0                __nrf_sections_start__ = .
-                0x0000000000031ce0                __start_nrf_sections = __nrf_sections_start__
+.nrf_sections   0x0000000000031cf0        0x0
+                0x0000000000031cf0                __nrf_sections_start__ = .
+                0x0000000000031cf0                __start_nrf_sections = __nrf_sections_start__
  *(.nrf_sections .nrf_sections.*)
-                0x0000000000031ce0                __nrf_sections_end__ = (__nrf_sections_start__ + SIZEOF (.nrf_sections))
+                0x0000000000031cf0                __nrf_sections_end__ = (__nrf_sections_start__ + SIZEOF (.nrf_sections))
                 0x0000000000000000                __nrf_sections_size__ = SIZEOF (.nrf_sections)
-                0x0000000000031ce0                __nrf_sections_load_end__ = __nrf_sections_end__
+                0x0000000000031cf0                __nrf_sections_load_end__ = __nrf_sections_end__
                 0x0000000000000001                . = ASSERT (((__nrf_sections_start__ == __nrf_sections_end__) || ((__nrf_sections_end__ - __FLASH1_segment_start__) <= __FLASH1_segment_size__)), error: .nrf_sections is too large to fit in FLASH1 memory segment)
-                0x0000000000031ce0                __cli_sorted_cmd_ptrs_load_start__ = ALIGN (__nrf_sections_end__, 0x4)
+                0x0000000000031cf0                __cli_sorted_cmd_ptrs_load_start__ = ALIGN (__nrf_sections_end__, 0x4)
 
 .cli_sorted_cmd_ptrs
-                0x0000000020002300        0x0 load address 0x0000000000031ce0
+                0x0000000020002300        0x0 load address 0x0000000000031cf0
                 0x0000000020002300                __cli_sorted_cmd_ptrs_start__ = .
  *(.cli_sorted_cmd_ptrs*)
                 0x0000000020002300                __cli_sorted_cmd_ptrs_end__ = (__cli_sorted_cmd_ptrs_start__ + SIZEOF (.cli_sorted_cmd_ptrs))
                 0x0000000000000000                __cli_sorted_cmd_ptrs_size__ = SIZEOF (.cli_sorted_cmd_ptrs)
-                0x0000000000031ce0                __cli_sorted_cmd_ptrs_load_end__ = (__cli_sorted_cmd_ptrs_load_start__ + SIZEOF (.cli_sorted_cmd_ptrs))
+                0x0000000000031cf0                __cli_sorted_cmd_ptrs_load_end__ = (__cli_sorted_cmd_ptrs_load_start__ + SIZEOF (.cli_sorted_cmd_ptrs))
                 0x0000000000000001                . = ASSERT (((__cli_sorted_cmd_ptrs_load_start__ == __cli_sorted_cmd_ptrs_load_end__) || ((__cli_sorted_cmd_ptrs_load_end__ - __FLASH1_segment_start__) <= __FLASH1_segment_size__)), error: .cli_sorted_cmd_ptrs is too large to fit in FLASH1 memory segment)
 
 .cli_sorted_cmd_ptrs_run
@@ -12920,14 +12918,14 @@ Linker script and memory map
                 0x0000000020002300                __stop_cli_sorted_cmd_ptrs = __cli_sorted_cmd_ptrs_run_end__
                 0x0000000020002300                __cli_sorted_cmd_ptrs_run_load_end__ = __cli_sorted_cmd_ptrs_run_end__
                 0x0000000000000001                . = ASSERT (((__cli_sorted_cmd_ptrs_run_start__ == __cli_sorted_cmd_ptrs_run_end__) || ((__cli_sorted_cmd_ptrs_run_end__ - __RAM1_segment_start__) <= __RAM1_segment_size__)), error: .cli_sorted_cmd_ptrs_run is too large to fit in RAM1 memory segment)
-                0x0000000000031ce0                __fs_data_load_start__ = ALIGN ((__cli_sorted_cmd_ptrs_load_start__ + SIZEOF (.cli_sorted_cmd_ptrs)), 0x4)
+                0x0000000000031cf0                __fs_data_load_start__ = ALIGN ((__cli_sorted_cmd_ptrs_load_start__ + SIZEOF (.cli_sorted_cmd_ptrs)), 0x4)
 
-.fs_data        0x0000000020002300        0x0 load address 0x0000000000031ce0
+.fs_data        0x0000000020002300        0x0 load address 0x0000000000031cf0
                 0x0000000020002300                __fs_data_start__ = .
  *(.fs_data*)
                 0x0000000020002300                __fs_data_end__ = (__fs_data_start__ + SIZEOF (.fs_data))
                 0x0000000000000000                __fs_data_size__ = SIZEOF (.fs_data)
-                0x0000000000031ce0                __fs_data_load_end__ = (__fs_data_load_start__ + SIZEOF (.fs_data))
+                0x0000000000031cf0                __fs_data_load_end__ = (__fs_data_load_start__ + SIZEOF (.fs_data))
                 0x0000000000000001                . = ASSERT (((__fs_data_load_start__ == __fs_data_load_end__) || ((__fs_data_load_end__ - __FLASH1_segment_start__) <= __FLASH1_segment_size__)), error: .fs_data is too large to fit in FLASH1 memory segment)
 
 .fs_data_run    0x0000000020002300        0x0
@@ -12938,15 +12936,15 @@ Linker script and memory map
                 0x0000000020002300                __stop_fs_data = __fs_data_run_end__
                 0x0000000020002300                __fs_data_run_load_end__ = __fs_data_run_end__
                 0x0000000000000001                . = ASSERT (((__fs_data_run_start__ == __fs_data_run_end__) || ((__fs_data_run_end__ - __RAM1_segment_start__) <= __RAM1_segment_size__)), error: .fs_data_run is too large to fit in RAM1 memory segment)
-                0x0000000000031ce0                __log_dynamic_data_load_start__ = ALIGN ((__fs_data_load_start__ + SIZEOF (.fs_data)), 0x4)
+                0x0000000000031cf0                __log_dynamic_data_load_start__ = ALIGN ((__fs_data_load_start__ + SIZEOF (.fs_data)), 0x4)
 
 .log_dynamic_data
-                0x0000000020002300        0x0 load address 0x0000000000031ce0
+                0x0000000020002300        0x0 load address 0x0000000000031cf0
                 0x0000000020002300                __log_dynamic_data_start__ = .
  *(SORT_BY_NAME(.log_dynamic_data*))
                 0x0000000020002300                __log_dynamic_data_end__ = (__log_dynamic_data_start__ + SIZEOF (.log_dynamic_data))
                 0x0000000000000000                __log_dynamic_data_size__ = SIZEOF (.log_dynamic_data)
-                0x0000000000031ce0                __log_dynamic_data_load_end__ = (__log_dynamic_data_load_start__ + SIZEOF (.log_dynamic_data))
+                0x0000000000031cf0                __log_dynamic_data_load_end__ = (__log_dynamic_data_load_start__ + SIZEOF (.log_dynamic_data))
                 0x0000000000000001                . = ASSERT (((__log_dynamic_data_load_start__ == __log_dynamic_data_load_end__) || ((__log_dynamic_data_load_end__ - __FLASH1_segment_start__) <= __FLASH1_segment_size__)), error: .log_dynamic_data is too large to fit in FLASH1 memory segment)
 
 .log_dynamic_data_run
@@ -12958,15 +12956,15 @@ Linker script and memory map
                 0x0000000020002300                __stop_log_dynamic_data = __log_dynamic_data_run_end__
                 0x0000000020002300                __log_dynamic_data_run_load_end__ = __log_dynamic_data_run_end__
                 0x0000000000000001                . = ASSERT (((__log_dynamic_data_run_start__ == __log_dynamic_data_run_end__) || ((__log_dynamic_data_run_end__ - __RAM1_segment_start__) <= __RAM1_segment_size__)), error: .log_dynamic_data_run is too large to fit in RAM1 memory segment)
-                0x0000000000031ce0                __log_filter_data_load_start__ = ALIGN ((__log_dynamic_data_load_start__ + SIZEOF (.log_dynamic_data)), 0x4)
+                0x0000000000031cf0                __log_filter_data_load_start__ = ALIGN ((__log_dynamic_data_load_start__ + SIZEOF (.log_dynamic_data)), 0x4)
 
 .log_filter_data
-                0x0000000020002300        0x0 load address 0x0000000000031ce0
+                0x0000000020002300        0x0 load address 0x0000000000031cf0
                 0x0000000020002300                __log_filter_data_start__ = .
  *(SORT_BY_NAME(.log_filter_data*))
                 0x0000000020002300                __log_filter_data_end__ = (__log_filter_data_start__ + SIZEOF (.log_filter_data))
                 0x0000000000000000                __log_filter_data_size__ = SIZEOF (.log_filter_data)
-                0x0000000000031ce0                __log_filter_data_load_end__ = (__log_filter_data_load_start__ + SIZEOF (.log_filter_data))
+                0x0000000000031cf0                __log_filter_data_load_end__ = (__log_filter_data_load_start__ + SIZEOF (.log_filter_data))
                 0x0000000000000001                . = ASSERT (((__log_filter_data_load_start__ == __log_filter_data_load_end__) || ((__log_filter_data_load_end__ - __FLASH1_segment_start__) <= __FLASH1_segment_size__)), error: .log_filter_data is too large to fit in FLASH1 memory segment)
 
 .log_filter_data_run
@@ -12989,153 +12987,156 @@ Linker script and memory map
                 0x0000000000000000                __nrf_sections_run_end_size__ = SIZEOF (.nrf_sections_run_end)
                 0x0000000020002300                __nrf_sections_run_end_load_end__ = __nrf_sections_run_end_end__
                 0x0000000000000001                . = ASSERT (((__nrf_sections_run_end_start__ == __nrf_sections_run_end_end__) || ((__nrf_sections_run_end_end__ - __RAM1_segment_start__) <= __RAM1_segment_size__)), error: .nrf_sections_run_end is too large to fit in RAM1 memory segment)
-                0x0000000000031ce0                __dtors_load_start__ = ALIGN ((__log_filter_data_load_start__ + SIZEOF (.log_filter_data)), 0x4)
+                0x0000000000031cf0                __dtors_load_start__ = ALIGN ((__log_filter_data_load_start__ + SIZEOF (.log_filter_data)), 0x4)
 
-.dtors          0x0000000000031ce0        0x0
-                0x0000000000031ce0                __dtors_start__ = .
+.dtors          0x0000000000031cf0        0x0
+                0x0000000000031cf0                __dtors_start__ = .
  *(SORT_BY_NAME(.dtors.*))
  *(.dtors)
  *(.fini_array)
  *(SORT_BY_NAME(.fini_array.*))
-                0x0000000000031ce0                __dtors_end__ = (__dtors_start__ + SIZEOF (.dtors))
+                0x0000000000031cf0                __dtors_end__ = (__dtors_start__ + SIZEOF (.dtors))
                 0x0000000000000000                __dtors_size__ = SIZEOF (.dtors)
-                0x0000000000031ce0                __dtors_load_end__ = __dtors_end__
+                0x0000000000031cf0                __dtors_load_end__ = __dtors_end__
                 0x0000000000000001                . = ASSERT (((__dtors_start__ == __dtors_end__) || ((__dtors_end__ - __FLASH1_segment_start__) <= __FLASH1_segment_size__)), error: .dtors is too large to fit in FLASH1 memory segment)
-                0x0000000000031ce0                __ctors_load_start__ = ALIGN (__dtors_end__, 0x4)
+                0x0000000000031cf0                __ctors_load_start__ = ALIGN (__dtors_end__, 0x4)
 
-.ctors          0x0000000000031ce0        0x0
-                0x0000000000031ce0                __ctors_start__ = .
+.ctors          0x0000000000031cf0        0x0
+                0x0000000000031cf0                __ctors_start__ = .
  *(SORT_BY_NAME(.ctors.*))
  *(.ctors)
  *(.init_array)
  *(SORT_BY_NAME(.init_array.*))
-                0x0000000000031ce0                __ctors_end__ = (__ctors_start__ + SIZEOF (.ctors))
+                0x0000000000031cf0                __ctors_end__ = (__ctors_start__ + SIZEOF (.ctors))
                 0x0000000000000000                __ctors_size__ = SIZEOF (.ctors)
-                0x0000000000031ce0                __ctors_load_end__ = __ctors_end__
+                0x0000000000031cf0                __ctors_load_end__ = __ctors_end__
                 0x0000000000000001                . = ASSERT (((__ctors_start__ == __ctors_end__) || ((__ctors_end__ - __FLASH1_segment_start__) <= __FLASH1_segment_size__)), error: .ctors is too large to fit in FLASH1 memory segment)
-                0x0000000000031ce0                __rodata_load_start__ = ALIGN (__ctors_end__, 0x4)
+                0x0000000000031cf0                __rodata_load_start__ = ALIGN (__ctors_end__, 0x4)
 
-.rodata         0x0000000000031ce0    0x74b78
-                0x0000000000031ce0                __rodata_start__ = .
+.rodata         0x0000000000031cf0    0xa0b78
+                0x0000000000031cf0                __rodata_start__ = .
  *(.rodata .rodata.* .gnu.linkonce.r.*)
- .rodata        0x0000000000031ce0       0x70 Output/Debug/Obj/TestTask/boards.o
+ .rodata        0x0000000000031cf0       0x70 Output/Debug/Obj/TestTask/boards.o
  .rodata.m_board_led_list
-                0x0000000000031d50        0x4 Output/Debug/Obj/TestTask/boards.o
+                0x0000000000031d60        0x4 Output/Debug/Obj/TestTask/boards.o
  .rodata.m_board_btn_list
-                0x0000000000031d54        0x4 Output/Debug/Obj/TestTask/boards.o
- .rodata        0x0000000000031d58       0x4c Output/Debug/Obj/TestTask/ble_conn_state.o
- .rodata        0x0000000000031da4       0x4d Output/Debug/Obj/TestTask/nrf_drv_clock.o
- *fill*         0x0000000000031df1        0x3 
- .rodata        0x0000000000031df4       0x2e Output/Debug/Obj/TestTask/nrf_drv_twi.o
- *fill*         0x0000000000031e22        0xe 
+                0x0000000000031d64        0x4 Output/Debug/Obj/TestTask/boards.o
+ .rodata        0x0000000000031d68       0x4c Output/Debug/Obj/TestTask/ble_conn_state.o
+ .rodata        0x0000000000031db4       0x4d Output/Debug/Obj/TestTask/nrf_drv_clock.o
+ *fill*         0x0000000000031e01        0x3 
+ .rodata        0x0000000000031e04       0x2e Output/Debug/Obj/TestTask/nrf_drv_twi.o
+ *fill*         0x0000000000031e32        0xe 
  .rodata.delay_machine_code.0
-                0x0000000000031e30        0x6 Output/Debug/Obj/TestTask/nrf_drv_twi.o
- *fill*         0x0000000000031e36        0x2 
- .rodata        0x0000000000031e38       0x7b Output/Debug/Obj/TestTask/nrfx_clock.o
- *fill*         0x0000000000031eb3        0x1 
- .rodata        0x0000000000031eb4       0xb4 Output/Debug/Obj/TestTask/nrfx_gpiote.o
- .rodata        0x0000000000031f68       0x4d Output/Debug/Obj/TestTask/nrfx_prs.o
- *fill*         0x0000000000031fb5        0x3 
- .rodata        0x0000000000031fb8       0xa9 Output/Debug/Obj/TestTask/nrfx_i2s.o
- *fill*         0x0000000000032061        0x3 
- .rodata        0x0000000000032064       0x7b Output/Debug/Obj/TestTask/nrfx_timer.o
- *fill*         0x00000000000320df        0x1 
- .rodata        0x00000000000320e0       0xa9 Output/Debug/Obj/TestTask/nrfx_twi.o
- *fill*         0x0000000000032189        0x3 
+                0x0000000000031e40        0x6 Output/Debug/Obj/TestTask/nrf_drv_twi.o
+ *fill*         0x0000000000031e46        0x2 
+ .rodata        0x0000000000031e48       0x7b Output/Debug/Obj/TestTask/nrfx_clock.o
+ *fill*         0x0000000000031ec3        0x1 
+ .rodata        0x0000000000031ec4       0xb4 Output/Debug/Obj/TestTask/nrfx_gpiote.o
+ .rodata        0x0000000000031f78       0x4d Output/Debug/Obj/TestTask/nrfx_prs.o
+ *fill*         0x0000000000031fc5        0x3 
+ .rodata        0x0000000000031fc8       0xa9 Output/Debug/Obj/TestTask/nrfx_i2s.o
+ *fill*         0x0000000000032071        0x3 
+ .rodata        0x0000000000032074       0x7b Output/Debug/Obj/TestTask/nrfx_timer.o
+ *fill*         0x00000000000320ef        0x1 
+ .rodata        0x00000000000320f0       0xa9 Output/Debug/Obj/TestTask/nrfx_twi.o
+ *fill*         0x0000000000032199        0x3 
  .rodata.irq_handlers.0
-                0x000000000003218c        0x4 Output/Debug/Obj/TestTask/nrfx_twi.o
- .rodata        0x0000000000032190       0xa4 Output/Debug/Obj/TestTask/nrf_sdh.o
+                0x000000000003219c        0x4 Output/Debug/Obj/TestTask/nrfx_twi.o
+ .rodata        0x00000000000321a0       0xa4 Output/Debug/Obj/TestTask/nrf_sdh.o
  .rodata.sdh_req_observers
-                0x0000000000032234        0xc Output/Debug/Obj/TestTask/nrf_sdh.o
+                0x0000000000032244        0xc Output/Debug/Obj/TestTask/nrf_sdh.o
  .rodata.sdh_state_observers
-                0x0000000000032240        0xc Output/Debug/Obj/TestTask/nrf_sdh.o
+                0x0000000000032250        0xc Output/Debug/Obj/TestTask/nrf_sdh.o
  .rodata.sdh_stack_observers
-                0x000000000003224c        0xc Output/Debug/Obj/TestTask/nrf_sdh.o
- .rodata        0x0000000000032258       0xa4 Output/Debug/Obj/TestTask/nrf_sdh_ble.o
+                0x000000000003225c        0xc Output/Debug/Obj/TestTask/nrf_sdh.o
+ .rodata        0x0000000000032268       0xa4 Output/Debug/Obj/TestTask/nrf_sdh_ble.o
  .rodata.sdh_ble_observers
-                0x00000000000322fc        0xc Output/Debug/Obj/TestTask/nrf_sdh_ble.o
- .rodata        0x0000000000032308       0x53 Output/Debug/Obj/TestTask/app_util_platform.o
- *fill*         0x000000000003235b        0x1 
- .rodata        0x000000000003235c       0xaa Output/Debug/Obj/TestTask/drv_rtc.o
- *fill*         0x0000000000032406        0xa 
+                0x000000000003230c        0xc Output/Debug/Obj/TestTask/nrf_sdh_ble.o
+ .rodata        0x0000000000032318       0x53 Output/Debug/Obj/TestTask/app_util_platform.o
+ *fill*         0x000000000003236b        0x1 
+ .rodata        0x000000000003236c       0xaa Output/Debug/Obj/TestTask/drv_rtc.o
+ *fill*         0x0000000000032416        0xa 
  .rodata.delay_machine_code.0
-                0x0000000000032410        0x6 Output/Debug/Obj/TestTask/drv_rtc.o
- *fill*         0x0000000000032416        0x2 
- .rodata        0x0000000000032418       0x67 Output/Debug/Obj/TestTask/nrf_section_iter.o
- *fill*         0x000000000003247f        0x1 
- .rodata        0x0000000000032480       0x52 Output/Debug/Obj/TestTask/nrf_sortlist.o
- *fill*         0x00000000000324d2        0x2 
+                0x0000000000032420        0x6 Output/Debug/Obj/TestTask/drv_rtc.o
+ *fill*         0x0000000000032426        0x2 
+ .rodata        0x0000000000032428       0x67 Output/Debug/Obj/TestTask/nrf_section_iter.o
+ *fill*         0x000000000003248f        0x1 
+ .rodata        0x0000000000032490       0x52 Output/Debug/Obj/TestTask/nrf_sortlist.o
+ *fill*         0x00000000000324e2        0x2 
  .rodata.m_app_timer_sortlist
-                0x00000000000324d4        0xc Output/Debug/Obj/TestTask/app_timer2.o
- .rodata        0x00000000000324e0       0x54 Output/Debug/Obj/TestTask/app_timer2.o
+                0x00000000000324e4        0xc Output/Debug/Obj/TestTask/app_timer2.o
+ .rodata        0x00000000000324f0       0x54 Output/Debug/Obj/TestTask/app_timer2.o
  .rodata.data_range_values
-                0x0000000000032534       0x20 Output/Debug/Obj/TestTask/bma280.o
-                0x0000000000032534                data_range_values
+                0x0000000000032544       0x20 Output/Debug/Obj/TestTask/bma280.o
+                0x0000000000032544                data_range_values
  .rodata.filter_bandwidth_values
-                0x0000000000032554       0x40 Output/Debug/Obj/TestTask/bma280.o
-                0x0000000000032554                filter_bandwidth_values
+                0x0000000000032564       0x40 Output/Debug/Obj/TestTask/bma280.o
+                0x0000000000032564                filter_bandwidth_values
  .rodata.power_mode_values
-                0x0000000000032594        0x4 Output/Debug/Obj/TestTask/bma280.o
-                0x0000000000032594                power_mode_values
+                0x00000000000325a4        0x4 Output/Debug/Obj/TestTask/bma280.o
+                0x00000000000325a4                power_mode_values
  .rodata.sleep_duraction_values
-                0x0000000000032598        0xb Output/Debug/Obj/TestTask/bma280.o
-                0x0000000000032598                sleep_duraction_values
- *fill*         0x00000000000325a3        0x1 
- .rodata.twi    0x00000000000325a4       0x10 Output/Debug/Obj/TestTask/if_twi0.o
+                0x00000000000325a8        0xb Output/Debug/Obj/TestTask/bma280.o
+                0x00000000000325a8                sleep_duraction_values
+ *fill*         0x00000000000325b3        0x1 
+ .rodata.twi    0x00000000000325b4       0x10 Output/Debug/Obj/TestTask/if_twi0.o
  .rodata.twi_config
-                0x00000000000325b4       0x10 Output/Debug/Obj/TestTask/if_twi0.o
- .rodata        0x00000000000325c4       0x5c Output/Debug/Obj/TestTask/if_twi0.o
- .rodata        0x0000000000032620       0x90 Output/Debug/Obj/TestTask/if_hwtimer0.o
- .rodata.timer  0x00000000000326b0        0x8 Output/Debug/Obj/TestTask/if_hwtimer0.o
- .rodata        0x00000000000326b8       0x5f Output/Debug/Obj/TestTask/if_exti.o
- *fill*         0x0000000000032717        0x9 
+                0x00000000000325c4       0x10 Output/Debug/Obj/TestTask/if_twi0.o
+ .rodata        0x00000000000325d4       0x5c Output/Debug/Obj/TestTask/if_twi0.o
+ .rodata        0x0000000000032630       0x90 Output/Debug/Obj/TestTask/if_hwtimer0.o
+ .rodata.timer  0x00000000000326c0        0x8 Output/Debug/Obj/TestTask/if_hwtimer0.o
+ .rodata        0x00000000000326c8       0x5f Output/Debug/Obj/TestTask/if_exti.o
+ *fill*         0x0000000000032727        0x9 
  .rodata.delay_machine_code.0
-                0x0000000000032720        0x6 Output/Debug/Obj/TestTask/if_delay.o
- *fill*         0x0000000000032726        0x2 
+                0x0000000000032730        0x6 Output/Debug/Obj/TestTask/if_delay.o
+ *fill*         0x0000000000032736        0x2 
  .rodata.if_i2s_initial_buffers
-                0x0000000000032728        0x8 Output/Debug/Obj/TestTask/if_i2s.o
+                0x0000000000032738        0x8 Output/Debug/Obj/TestTask/if_i2s.o
  .rodata.if_i2s_next_buffers
-                0x0000000000032730        0x8 Output/Debug/Obj/TestTask/if_i2s.o
- .rodata        0x0000000000032738       0x5b Output/Debug/Obj/TestTask/if_i2s.o
- *fill*         0x0000000000032793        0x1 
+                0x0000000000032740        0x8 Output/Debug/Obj/TestTask/if_i2s.o
+ .rodata        0x0000000000032748       0x5b Output/Debug/Obj/TestTask/if_i2s.o
+ *fill*         0x00000000000327a3        0x1 
  .rodata.default_config.0
-                0x0000000000032794       0x14 Output/Debug/Obj/TestTask/if_i2s.o
+                0x00000000000327a4       0x14 Output/Debug/Obj/TestTask/if_i2s.o
  .rodata.ath10_cfg
-                0x00000000000327a8       0x10 Output/Debug/Obj/TestTask/mod_climate.o
+                0x00000000000327b8       0x10 Output/Debug/Obj/TestTask/mod_climate.o
  .rodata.bma280_cfg
-                0x00000000000327b8       0x20 Output/Debug/Obj/TestTask/mod_accelerometer.o
+                0x00000000000327c8       0x20 Output/Debug/Obj/TestTask/mod_accelerometer.o
  .rodata.Melody_U
-                0x00000000000327d8    0x74000 Output/Debug/Obj/TestTask/mod_audio_tracks.o
-                0x00000000000327d8                Melody_U
- .rodata        0x00000000000a67d8       0x70 Output/Debug/Obj/TestTask/mod_ble.o
- .rodata        0x00000000000a6848       0x10 Output/Debug/Obj/TestTask/ble_aas.o
-                0x00000000000a6858                . = ALIGN (MAX ((__rodata_start__ + 0x4), .), 0x4)
-                0x00000000000a6858                __rodata_end__ = (__rodata_start__ + SIZEOF (.rodata))
-                0x0000000000074b78                __rodata_size__ = SIZEOF (.rodata)
-                0x00000000000a6858                __rodata_load_end__ = __rodata_end__
+                0x00000000000327e8    0x48800 Output/Debug/Obj/TestTask/mod_audio_tracks.o
+                0x00000000000327e8                Melody_U
+ .rodata.Melody_Bergen
+                0x000000000007afe8    0x57800 Output/Debug/Obj/TestTask/mod_audio_tracks.o
+                0x000000000007afe8                Melody_Bergen
+ .rodata        0x00000000000d27e8       0x70 Output/Debug/Obj/TestTask/mod_ble.o
+ .rodata        0x00000000000d2858       0x10 Output/Debug/Obj/TestTask/ble_aas.o
+                0x00000000000d2868                . = ALIGN (MAX ((__rodata_start__ + 0x4), .), 0x4)
+                0x00000000000d2868                __rodata_end__ = (__rodata_start__ + SIZEOF (.rodata))
+                0x00000000000a0b78                __rodata_size__ = SIZEOF (.rodata)
+                0x00000000000d2868                __rodata_load_end__ = __rodata_end__
 
-.rel.dyn        0x00000000000a6858        0x0
- .rel.iplt      0x00000000000a6858        0x0 Output/Debug/Obj/TestTask/thumb_crt0.o
+.rel.dyn        0x00000000000d2868        0x0
+ .rel.iplt      0x00000000000d2868        0x0 Output/Debug/Obj/TestTask/thumb_crt0.o
                 0x0000000000000001                . = ASSERT (((__rodata_start__ == __rodata_end__) || ((__rodata_end__ - __FLASH1_segment_start__) <= __FLASH1_segment_size__)), error: .rodata is too large to fit in FLASH1 memory segment)
-                0x00000000000a6858                __ARM.exidx_load_start__ = ALIGN (__rodata_end__, 0x4)
+                0x00000000000d2868                __ARM.exidx_load_start__ = ALIGN (__rodata_end__, 0x4)
 
-.ARM.exidx      0x00000000000a6858        0x0
-                0x00000000000a6858                __ARM.exidx_start__ = .
-                0x00000000000a6858                __exidx_start = __ARM.exidx_start__
+.ARM.exidx      0x00000000000d2868        0x0
+                0x00000000000d2868                __ARM.exidx_start__ = .
+                0x00000000000d2868                __exidx_start = __ARM.exidx_start__
  *(.ARM.exidx .ARM.exidx.*)
-                0x00000000000a6858                __ARM.exidx_end__ = (__ARM.exidx_start__ + SIZEOF (.ARM.exidx))
+                0x00000000000d2868                __ARM.exidx_end__ = (__ARM.exidx_start__ + SIZEOF (.ARM.exidx))
                 0x0000000000000000                __ARM.exidx_size__ = SIZEOF (.ARM.exidx)
-                0x00000000000a6858                __exidx_end = __ARM.exidx_end__
-                0x00000000000a6858                __ARM.exidx_load_end__ = __ARM.exidx_end__
+                0x00000000000d2868                __exidx_end = __ARM.exidx_end__
+                0x00000000000d2868                __ARM.exidx_load_end__ = __ARM.exidx_end__
                 0x0000000000000001                . = ASSERT (((__ARM.exidx_start__ == __ARM.exidx_end__) || ((__ARM.exidx_end__ - __FLASH1_segment_start__) <= __FLASH1_segment_size__)), error: .ARM.exidx is too large to fit in FLASH1 memory segment)
-                0x00000000000a6858                __fast_load_start__ = ALIGN (__ARM.exidx_end__, 0x4)
+                0x00000000000d2868                __fast_load_start__ = ALIGN (__ARM.exidx_end__, 0x4)
 
-.fast           0x0000000020002300        0x0 load address 0x00000000000a6858
+.fast           0x0000000020002300        0x0 load address 0x00000000000d2868
                 0x0000000020002300                __fast_start__ = .
  *(.fast .fast.*)
                 0x0000000020002300                __fast_end__ = (__fast_start__ + SIZEOF (.fast))
                 0x0000000000000000                __fast_size__ = SIZEOF (.fast)
-                0x00000000000a6858                __fast_load_end__ = (__fast_load_start__ + SIZEOF (.fast))
+                0x00000000000d2868                __fast_load_end__ = (__fast_load_start__ + SIZEOF (.fast))
                 0x0000000000000001                . = ASSERT (((__fast_load_start__ == __fast_load_end__) || ((__fast_load_end__ - __FLASH1_segment_start__) <= __FLASH1_segment_size__)), error: .fast is too large to fit in FLASH1 memory segment)
 
 .fast_run       0x0000000020002300        0x0
@@ -13144,9 +13145,9 @@ Linker script and memory map
                 0x0000000000000000                __fast_run_size__ = (__fast_run_end__ - __fast_run_start__)
                 0x0000000020002300                __fast_run_load_end__ = __fast_run_end__
                 0x0000000000000001                . = ASSERT (((__fast_run_start__ == __fast_run_end__) || ((__fast_run_end__ - __RAM1_segment_start__) <= __RAM1_segment_size__)), error: .fast_run is too large to fit in RAM1 memory segment)
-                0x00000000000a6858                __data_load_start__ = ALIGN ((__fast_load_start__ + SIZEOF (.fast)), 0x4)
+                0x00000000000d2868                __data_load_start__ = ALIGN ((__fast_load_start__ + SIZEOF (.fast)), 0x4)
 
-.data           0x0000000020002300       0x28 load address 0x00000000000a6858
+.data           0x0000000020002300       0x28 load address 0x00000000000d2868
                 0x0000000020002300                __data_start__ = .
  *(.data .data.* .gnu.linkonce.d.*)
  .data.m_rtc_inst
@@ -13172,7 +13173,7 @@ Linker script and memory map
                 0x0000000020002318       0x10 Output/Debug/Obj/TestTask/mod_ble.o
                 0x0000000020002328                __data_end__ = (__data_start__ + SIZEOF (.data))
                 0x0000000000000028                __data_size__ = SIZEOF (.data)
-                0x00000000000a6880                __data_load_end__ = (__data_load_start__ + SIZEOF (.data))
+                0x00000000000d2890                __data_load_end__ = (__data_load_start__ + SIZEOF (.data))
 
 .igot.plt       0x0000000100000000        0x0
  .igot.plt      0x0000000100000000        0x0 Output/Debug/Obj/TestTask/thumb_crt0.o
@@ -13184,16 +13185,16 @@ Linker script and memory map
                 0x0000000000000028                __data_run_size__ = (__data_run_end__ - __data_run_start__)
                 0x0000000020002328                __data_run_load_end__ = __data_run_end__
                 0x0000000000000001                . = ASSERT (((__data_run_start__ == __data_run_end__) || ((__data_run_end__ - __RAM1_segment_start__) <= __RAM1_segment_size__)), error: .data_run is too large to fit in RAM1 memory segment)
-                0x00000000000a6880                __tdata_load_start__ = ALIGN ((__data_load_start__ + SIZEOF (.data)), 0x4)
+                0x00000000000d2890                __tdata_load_start__ = ALIGN ((__data_load_start__ + SIZEOF (.data)), 0x4)
 
-.tdata          0x0000000020002328        0x0 load address 0x00000000000a6880
+.tdata          0x0000000020002328        0x0 load address 0x00000000000d2890
                 0x0000000020002328                __tdata_start__ = .
  *(.tdata .tdata.*)
                 0x0000000020002328                __tdata_end__ = (__tdata_start__ + SIZEOF (.tdata))
                 0x0000000000000000                __tdata_size__ = SIZEOF (.tdata)
-                0x00000000000a6880                __tdata_load_end__ = (__tdata_load_start__ + SIZEOF (.tdata))
-                0x00000000000a6880                __FLASH1_segment_used_end__ = (ALIGN ((__data_load_start__ + SIZEOF (.data)), 0x4) + SIZEOF (.tdata))
-                0x00000000000a6880                __FLASH1_segment_used_size__ = (__FLASH1_segment_used_end__ - __FLASH1_segment_start__)
+                0x00000000000d2890                __tdata_load_end__ = (__tdata_load_start__ + SIZEOF (.tdata))
+                0x00000000000d2890                __FLASH1_segment_used_end__ = (ALIGN ((__data_load_start__ + SIZEOF (.data)), 0x4) + SIZEOF (.tdata))
+                0x00000000000d2890                __FLASH1_segment_used_size__ = (__FLASH1_segment_used_end__ - __FLASH1_segment_start__)
                 0x0000000000000001                . = ASSERT (((__tdata_load_start__ == __tdata_load_end__) || ((__tdata_load_end__ - __FLASH1_segment_start__) <= __FLASH1_segment_size__)), error: .tdata is too large to fit in FLASH1 memory segment)
 
 .tdata_run      0x0000000020002328        0x0
@@ -13620,7 +13621,7 @@ LOAD linker stubs
  .comment       0x000000000000003f       0x40 Output/Debug/Obj/TestTask/ntf52_it.o
  .comment       0x000000000000003f       0x40 C:/Program Files/SEGGER/SEGGER Embedded Studio for ARM 6.22a/lib/heapops_basic_v7em_little.a(heapops_basic.o)
 
-.debug_line     0x0000000000000000    0x26208
+.debug_line     0x0000000000000000    0x2620f
  .debug_line    0x0000000000000000      0x17e Output/Debug/Obj/TestTask/thumb_crt0.o
  .debug_line    0x000000000000017e      0xec7 Output/Debug/Obj/TestTask/boards.o
  .debug_line    0x0000000000001045     0x1439 Output/Debug/Obj/TestTask/ble_advdata.o
@@ -13667,14 +13668,14 @@ LOAD linker stubs
  .debug_line    0x0000000000022119      0x22b Output/Debug/Obj/TestTask/mod_climate.o
  .debug_line    0x0000000000022344      0x220 Output/Debug/Obj/TestTask/mod_swtimer.o
  .debug_line    0x0000000000022564      0x318 Output/Debug/Obj/TestTask/mod_accelerometer.o
- .debug_line    0x000000000002287c      0x3fb Output/Debug/Obj/TestTask/mod_audio_player.o
- .debug_line    0x0000000000022c77      0x14c Output/Debug/Obj/TestTask/mod_audio_tracks.o
- .debug_line    0x0000000000022dc3     0x18ba Output/Debug/Obj/TestTask/mod_ble.o
- .debug_line    0x000000000002467d      0xd94 Output/Debug/Obj/TestTask/ble_aas.o
- .debug_line    0x0000000000025411      0xc53 Output/Debug/Obj/TestTask/mod_indication.o
- .debug_line    0x0000000000026064      0x1a4 Output/Debug/Obj/TestTask/ntf52_it.o
+ .debug_line    0x000000000002287c      0x402 Output/Debug/Obj/TestTask/mod_audio_player.o
+ .debug_line    0x0000000000022c7e      0x14c Output/Debug/Obj/TestTask/mod_audio_tracks.o
+ .debug_line    0x0000000000022dca     0x18ba Output/Debug/Obj/TestTask/mod_ble.o
+ .debug_line    0x0000000000024684      0xd94 Output/Debug/Obj/TestTask/ble_aas.o
+ .debug_line    0x0000000000025418      0xc53 Output/Debug/Obj/TestTask/mod_indication.o
+ .debug_line    0x000000000002606b      0x1a4 Output/Debug/Obj/TestTask/ntf52_it.o
 
-.debug_info     0x0000000000000000    0x57f1c
+.debug_info     0x0000000000000000    0x57f40
  .debug_info    0x0000000000000000       0x22 Output/Debug/Obj/TestTask/thumb_crt0.o
  .debug_info    0x0000000000000022     0x1774 Output/Debug/Obj/TestTask/boards.o
  .debug_info    0x0000000000001796     0x3ef4 Output/Debug/Obj/TestTask/ble_advdata.o
@@ -13721,12 +13722,12 @@ LOAD linker stubs
  .debug_info    0x000000000004b139      0x317 Output/Debug/Obj/TestTask/mod_climate.o
  .debug_info    0x000000000004b450       0xfa Output/Debug/Obj/TestTask/mod_swtimer.o
  .debug_info    0x000000000004b54a      0x7a2 Output/Debug/Obj/TestTask/mod_accelerometer.o
- .debug_info    0x000000000004bcec      0x3f9 Output/Debug/Obj/TestTask/mod_audio_player.o
- .debug_info    0x000000000004c0e5       0xd7 Output/Debug/Obj/TestTask/mod_audio_tracks.o
- .debug_info    0x000000000004c1bc     0x6159 Output/Debug/Obj/TestTask/mod_ble.o
- .debug_info    0x0000000000052315     0x4a2d Output/Debug/Obj/TestTask/ble_aas.o
- .debug_info    0x0000000000056d42     0x1158 Output/Debug/Obj/TestTask/mod_indication.o
- .debug_info    0x0000000000057e9a       0x82 Output/Debug/Obj/TestTask/ntf52_it.o
+ .debug_info    0x000000000004bcec      0x41d Output/Debug/Obj/TestTask/mod_audio_player.o
+ .debug_info    0x000000000004c109       0xd7 Output/Debug/Obj/TestTask/mod_audio_tracks.o
+ .debug_info    0x000000000004c1e0     0x6159 Output/Debug/Obj/TestTask/mod_ble.o
+ .debug_info    0x0000000000052339     0x4a2d Output/Debug/Obj/TestTask/ble_aas.o
+ .debug_info    0x0000000000056d66     0x1158 Output/Debug/Obj/TestTask/mod_indication.o
+ .debug_info    0x0000000000057ebe       0x82 Output/Debug/Obj/TestTask/ntf52_it.o
 
 .debug_abbrev   0x0000000000000000     0x7592
  .debug_abbrev  0x0000000000000000       0x12 Output/Debug/Obj/TestTask/thumb_crt0.o
@@ -13980,9 +13981,9 @@ LOAD linker stubs
                                        0x5320 (size before relaxing)
  .debug_str     0x00000000000ba011      0x191 Output/Debug/Obj/TestTask/mod_accelerometer.o
                                        0x5ccf (size before relaxing)
- .debug_str     0x00000000000ba1a2      0x371 Output/Debug/Obj/TestTask/mod_audio_player.o
-                                       0x5688 (size before relaxing)
- .debug_str     0x00000000000ba513       0x70 Output/Debug/Obj/TestTask/mod_audio_tracks.o
+ .debug_str     0x00000000000ba1a2      0x37f Output/Debug/Obj/TestTask/mod_audio_player.o
+                                       0x5696 (size before relaxing)
+ .debug_str     0x00000000000ba521       0x62 Output/Debug/Obj/TestTask/mod_audio_tracks.o
                                        0x5203 (size before relaxing)
  .debug_str     0x00000000000ba583      0x906 Output/Debug/Obj/TestTask/mod_ble.o
                                       0x9f9df (size before relaxing)
