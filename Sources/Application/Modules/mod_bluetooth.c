@@ -1,12 +1,12 @@
 /*-- File description -------------------------------------------------------*/
 /**
- *   @file:    mod_ble.c
+ *   @file:    mod_bluetooth.c
  *
  *   @author:  valeriy.grimalskiy
  *   @company: Lab.
  */
 
-#include "mod_ble.h"
+#include "mod_bluetooth.h"
 
 /*-- Standard C/C++ Libraries -----------------------------------------------*/
 /*-- Other libraries --------------------------------------------------------*/
@@ -444,7 +444,7 @@ static void ble_advertising_start(void)
 }
 
 /*-- Exported functions -----------------------------------------------------*/
-void Mod_Ble_Init(void)
+void Mod_Bluetooth_Init(void)
 {
 	ble_timers_init();
 	ble_stack_init();
@@ -458,17 +458,17 @@ void Mod_Ble_Init(void)
     ble_advertising_start();
 }
 
-bool Mod_Ble_IsBusy(void)
+bool Mod_Bluetooth_IsBusy(void)
 {
 	return module_busy;
 }
 
-void Mod_Ble_EnterSleepMode(void)
+void Mod_Bluetooth_EnterSleepMode(void)
 {
 
 }
 
-void Mod_Ble_Accelerometer_NewData(uint16_t X, uint16_t Y, uint16_t Z)
+void Mod_Bluetooth_Accelerometer_NewData(uint16_t X, uint16_t Y, uint16_t Z)
 {
 	uint32_t err_code = ble_aas_on_accelerometer_new_data(m_conn_handle, &m_aas, X, Y, Z);
 
@@ -482,7 +482,7 @@ void Mod_Ble_Accelerometer_NewData(uint16_t X, uint16_t Y, uint16_t Z)
 	}
 }
 
-void Mod_Ble_Run(void)
+void Mod_Bluetooth_Run(void)
 {
 	switch (Mod_AudioPlayer_GetStatus())
 	{

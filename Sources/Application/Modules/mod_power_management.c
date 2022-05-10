@@ -19,7 +19,7 @@
 #include "mod_accelerometer.h"
 #include "mod_indication.h"
 #include "mod_audio_player.h"
-#include "mod_ble.h"
+#include "mod_bluetooth.h"
 
 /*-- Imported functions -----------------------------------------------------*/
 #include "SysTick.h"
@@ -42,14 +42,14 @@ void Mod_PowerManagement_Run(void)
 	if(
 		(!Mod_Accelerometer_IsBusy()) &&
 		(!Mod_AudioPlayer_IsBusy()) &&
-		(!Mod_Ble_IsBusy()) &&
+		(!Mod_Bluetooth_IsBusy()) &&
 		(!Mod_Indication_IsBusy())
 	)
 	{
 		//Prepare modules
 		Mod_Accelerometer_EnterSleepMode();
 		Mod_AudioPlayer_EnterSleepMode();
-		Mod_Ble_EnterSleepMode();
+		Mod_Bluetooth_EnterSleepMode();
 		Mod_Indication_EnterSleepMode();
 
 		//Set indication
@@ -69,7 +69,7 @@ void Mod_PowerManagement_Run(void)
 
 
 		//Start systick timer
-		Systick_InitTick(1);
+		Systick_InitTick(SYSTICK_FREQ_1KHZ);
 
 		//Resume timer
 		If_SwTimer_Start();

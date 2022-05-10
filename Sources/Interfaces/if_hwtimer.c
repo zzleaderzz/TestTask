@@ -1,12 +1,12 @@
 /*-- File description -------------------------------------------------------*/
 /**
- *   @file:    if_hwtimer0.c
+ *   @file:    if_hwtimer.c
  *
  *   @author:  valeriy.grimalskiy
  *   @company: Lab.
  */
 
-#include "if_hwtimer0.h"
+#include "if_hwtimer.h"
 
 /*-- Standard C/C++ Libraries -----------------------------------------------*/
 /*-- Other libraries --------------------------------------------------------*/
@@ -21,10 +21,10 @@
 /*-- Local variables --------------------------------------------------------*/
 static const nrf_drv_timer_t timer = NRF_DRV_TIMER_INSTANCE(1);
 static uint32_t time_period_ms = 1; //Time(in miliseconds) between consecutive compare events.
-static If_HwTimer0_Callback timer_callback = 0;
+static If_HwTimer_Callback timer_callback = 0;
 
 /*-- Local functions --------------------------------------------------------*/
-void HwTimer0_Event_Handler(nrf_timer_event_t event_type, void* p_context)
+void HwTimer_Event_Handler(nrf_timer_event_t event_type, void* p_context)
 {
     switch (event_type)
     {
@@ -42,7 +42,7 @@ void HwTimer0_Event_Handler(nrf_timer_event_t event_type, void* p_context)
 }
 
 /*-- Exported functions -----------------------------------------------------*/
-void If_HwTimer0_Init(uint32_t period_ms)
+void If_HwTimer_Init(uint32_t period_ms)
 {
     uint32_t time_ticks = 0;
     uint32_t err_code = NRF_SUCCESS;
@@ -55,7 +55,7 @@ void If_HwTimer0_Init(uint32_t period_ms)
 
 	//Init timer
     nrf_drv_timer_config_t timer_cfg = NRF_DRV_TIMER_DEFAULT_CONFIG;
-    err_code = nrf_drv_timer_init(&timer, &timer_cfg, HwTimer0_Event_Handler);
+    err_code = nrf_drv_timer_init(&timer, &timer_cfg, HwTimer_Event_Handler);
     APP_ERROR_CHECK(err_code);
 
 	//Configure timer
@@ -63,22 +63,22 @@ void If_HwTimer0_Init(uint32_t period_ms)
     nrf_drv_timer_extended_compare(&timer, NRF_TIMER_CC_CHANNEL0, time_ticks, NRF_TIMER_SHORT_COMPARE0_CLEAR_MASK, true);
 }
 
-void If_HwTimer0_DeInit(void)
+void If_HwTimer_DeInit(void)
 {
 	nrf_drv_timer_uninit(&timer);
 }
 
-void If_HwTimer0_RegisterCallback(If_HwTimer0_Callback callback)
+void If_HwTimer_RegisterCallback(If_HwTimer_Callback callback)
 {
 	timer_callback = callback;
 }
 
-void If_HwTimer0_Enable(void)
+void If_HwTimer_Enable(void)
 {
 	nrf_drv_timer_enable(&timer);
 }
 
-void If_HwTimer0_Disable(void)
+void If_HwTimer_Disable(void)
 {
 	nrf_drv_timer_disable(&timer);
 }

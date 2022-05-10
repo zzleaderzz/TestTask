@@ -17,8 +17,7 @@
 /*-- Project specific includes ----------------------------------------------*/
 /*-- Imported functions -----------------------------------------------------*/
 /*-- Local Macro Definitions ------------------------------------------------*/
-//#define IF_I2S_DATA_BLOCK_WORDS             10240
-#define IF_I2S_DATA_BLOCK_WORDS             1024
+#define IF_I2S_DATA_BLOCK_WORDS				1024
 
 /*-- Local Typedefs ---------------------------------------------------------*/
 typedef enum

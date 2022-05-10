@@ -11,7 +11,7 @@
 /*-- Standard C/C++ Libraries -----------------------------------------------*/
 /*-- Other libraries --------------------------------------------------------*/
 /*-- Hardware specific libraries --------------------------------------------*/
-#include "if_twi0.h"
+#include "if_twi.h"
 #include "aht10.h"
 
 /*-- Project specific includes ----------------------------------------------*/
@@ -35,8 +35,8 @@ static const AHT10_Config_t ath10_cfg =
 {
     .I2C_Functions =
     {
-        .Send = If_TWI0_Send,
-        .Receive = If_TWI0_Receive
+        .Send = If_TWI_Send,
+        .Receive = If_TWI_Receive
     },
 	.DataReadyCallback = AHT10_DataReceivedCallback,
     .Entity = &ath10_entity
@@ -51,8 +51,8 @@ static void AHT10_DataReceivedCallback(float temperature, float humidity)
 /*-- Exported functions -----------------------------------------------------*/
 void Mod_Climate_Init(void)
 {
-	If_TWI0_Init();
-	If_TWI0_Enable();
+	If_TWI_Init();
+	If_TWI_Enable();
 
 	AHT10_Set_WorkMode(&ath10_cfg, AHT10_WorkMode_AUTOMATIC);
 	AHT10_Set_Period(&ath10_cfg, 500);

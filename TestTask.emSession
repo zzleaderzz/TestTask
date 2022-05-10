@@ -3,7 +3,6 @@
  <Bookmarks/>
  <Breakpoints groups="Breakpoints" active_group="Breakpoints">
   <BreakpointListItem trigger="" line="49" counter="0" hardwareBreakpoint="" isFunctionBreakpoint="false" action="" expression="" group="Breakpoints" type="Breakpoint" state="2" filename="../../../SDK/nRF5/components/libraries/util/app_error_handler_gcc.c" useHWbreakpoint="false"/>
-  <BreakpointListItem trigger="" line="57" counter="0" hardwareBreakpoint="" isFunctionBreakpoint="false" action="" expression="" group="Breakpoints" type="Breakpoint" state="2" filename="../../../SDK/nRF5/components/libraries/util/app_error_weak.c" useHWbreakpoint="false"/>
  </Breakpoints>
  <ExecutionProfileWindow/>
  <FrameBufferWindow>
@@ -26,12 +25,17 @@
   <ProjectSessionItem path="TestTask;TestTask"/>
   <ProjectSessionItem path="TestTask;TestTask;None"/>
   <ProjectSessionItem path="TestTask;TestTask;nRF_BLE"/>
+  <ProjectSessionItem path="TestTask;TestTask;nRF_Drivers"/>
   <ProjectSessionItem path="TestTask;TestTask;nRF_Libraries"/>
   <ProjectSessionItem path="TestTask;TestTask;nRF_SoftDevice"/>
   <ProjectSessionItem path="TestTask;TestTask;Sources"/>
   <ProjectSessionItem path="TestTask;TestTask;Sources;Application"/>
+  <ProjectSessionItem path="TestTask;TestTask;Sources;Application;Interfaces"/>
   <ProjectSessionItem path="TestTask;TestTask;Sources;Application;Modules"/>
   <ProjectSessionItem path="TestTask;TestTask;Sources;Application;Modules;BLE"/>
+  <ProjectSessionItem path="TestTask;TestTask;Sources;Lib"/>
+  <ProjectSessionItem path="TestTask;TestTask;Sources;Lib;BMA280"/>
+  <ProjectSessionItem path="TestTask;TestTask;Sources;Lib;SoftwareTimer"/>
  </Project>
  <Register1>
   <RegisterWindow visibleNodes="CPU - Current Context/r0;CPU - Current Context/r1;CPU - Current Context/r2;CPU - Current Context/r3;CPU - Current Context/r4;CPU - Current Context/r5;CPU - Current Context/r6;CPU - Current Context/r7;CPU - Current Context/r8;CPU - Current Context/r9;CPU - Current Context/r10;CPU - Current Context/r11;CPU - Current Context/r12;CPU - Current Context/sp(r13);CPU - Current Context/lr(r14);CPU - Current Context/pc(r15);CPU - Current Context/apsr;CPU/r0;CPU/r1;CPU/r2;CPU/r3;CPU/r4;CPU/r5;CPU/r6;CPU/r7;CPU/r8;CPU/r9;CPU/r10;CPU/r11;CPU/r12;CPU/sp(r13);CPU/lr(r14);CPU/pc(r15);CPU/xpsr;CPU/MSP;CPU/PSP;CPU/PRIMASK;CPU/BASEPRI;CPU/FAULTMASK;CPU/CONTROL;CPU/internal" binaryNodes="" asciiNodes="" openNodes="CPU - Current Context" name="TestTask" decimalNodes="" octalNodes="" unsignedNodes=""/>
@@ -53,8 +57,8 @@
  </TraceWindow>
  <Watch1>
   <Watches active="1" update="Twice a Second">
-   <Watchpoint expression="AccelerometerData" name="AccelerometerData" radix="10" linenumber="28" filename="Sources/Application/Modules/mod_accelerometer.h"/>
-   <Watchpoint expression="m_aas" name="m_aas" radix="-1" linenumber="74" filename="Sources/Application/Modules/BLE/mod_ble.c"/>
+   <Watchpoint expression="AccelerometerData" name="AccelerometerData" radix="10" linenumber="29" filename="Sources/Application/Modules/mod_accelerometer.h"/>
+   <Watchpoint expression="m_aas" name="m_aas" radix="-1" linenumber="71" filename="Sources/Application/Modules/BLE/mod_ble.c"/>
   </Watches>
  </Watch1>
  <Watch2>
@@ -67,11 +71,21 @@
   <Watches active="0" update="Never"/>
  </Watch4>
  <Files>
-  <SessionOpenFile windowGroup="DockEditLeft" x="22" y="22" useTextEdit="1" path="Sources/Application/Modules/BLE/mod_ble.c" left="0" selected="1" top="22" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="20" y="22" useTextEdit="1" openedFrom="E:/Development/Droid/Nordic/Projects/nRF5/TestTask/Sources/Application/Modules/BLE/mod_ble.c" path="Sources/Application/Modules/mod_audio_player.h" left="0" top="4" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="2" y="204" useTextEdit="1" openedFrom="E:/Development/Droid/Nordic/Projects/nRF5/TestTask/Sources/Application/Modules/mod_audio_player.h" path="Sources/Application/Modules/mod_audio_player.c" left="0" top="190" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="76" y="15" useTextEdit="1" path="Sources/Application/main.c" left="0" top="0" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="17" y="158" useTextEdit="1" openedFrom="E:/Development/Droid/Nordic/Projects/nRF5/TestTask/Sources/Application/Modules/BLE/mod_ble.c" path="../../../SDK/nRF5/components/libraries/util/sdk_errors.h" left="0" top="129" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="141" useTextEdit="1" path="Sources/Application/Modules/mod_accelerometer.c" left="0" top="112" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="62" y="32" useTextEdit="1" path="Sources/Application/main.c" left="0" top="0" codecName=""/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="32" useTextEdit="1" openedFrom="E:/Development/Droid/Nordic/Projects/nRF5/TestTask/Sources/Application/Modules/mod_accelerometer.c" path="Sources/Application/Modules/mod_accelerometer.h" left="0" top="0" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="18" y="51" useTextEdit="1" path="Sources/Application/Modules/mod_power_management.c" left="0" top="30" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="56" y="65" useTextEdit="1" path="Sources/Application/Modules/mod_audio_player.c" left="0" top="31" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="24" y="30" useTextEdit="1" openedFrom="E:/Development/Droid/Nordic/Projects/nRF5/TestTask/Sources/Application/Modules/mod_audio_player.c" path="Sources/Application/Modules/mod_audio_player.h" left="0" top="9" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="40" y="68" useTextEdit="1" path="Sources/Application/Modules/mod_indication.c" left="0" top="57" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="26" y="28" useTextEdit="1" openedFrom="E:/Development/Droid/Nordic/Projects/nRF5/TestTask/Sources/Application/Modules/BLE/mod_ble.c" path="Sources/Application/Modules/mod_indication.h" left="0" top="22" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="126" useTextEdit="1" path="Sources/Application/Modules/BLE/mod_ble.c" left="0" selected="1" top="94" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="4" y="25" useTextEdit="1" openedFrom="E:/Development/Droid/Nordic/Projects/nRF5/TestTask/Sources/Application/Modules/BLE/mod_ble.c" path="Sources/Application/Modules/BLE/mod_ble.h" left="0" top="0" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="48" useTextEdit="1" path="../../../SDK/nRF5/components/libraries/util/app_error_handler_gcc.c" left="0" top="2" codecName=""/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="71" useTextEdit="1" openedFrom="E:/Development/Droid/Nordic/Projects/nRF5/TestTask/Sources/Application/Modules/BLE/mod_ble.c" path="../../../SDK/nRF5/components/softdevice/s140/headers/ble_err.h" left="0" top="32" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="27" y="80" useTextEdit="1" openedFrom="E:/Development/Droid/Nordic/Projects/nRF5/TestTask/Sources/Application/Modules/BLE/mod_ble.c" path="../../../SDK/nRF5/components/softdevice/s140/headers/nrf_error.h" left="0" top="44" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="0" useTextEdit="1" path="Sources/Application/Modules/BLE/ble_aas.c" left="0" top="0" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="2" y="149" useTextEdit="1" openedFrom="E:/Development/Droid/Nordic/Projects/nRF5/TestTask/Sources/Application/Modules/BLE/mod_ble.c" path="../../../SDK/nRF5/components/ble/nrf_ble_qwr/nrf_ble_qwr.h" left="0" top="118" codecName="Default"/>
  </Files>
- <EMStudioWindow activeProject="TestTask" fileDialogDefaultFilter="*" autoConnectTarget="J-Link" buildConfiguration="Debug" sessionSettings="" debugSearchFileMap="" fileDialogInitialDirectory="E:/Development/Droid/Nordic/Projects/nRF5/TestTask/Sources/Application/Modules" debugSearchPath="" autoConnectCapabilities="3199"/>
+ <EMStudioWindow activeProject="TestTask" fileDialogDefaultFilter="*" autoConnectTarget="J-Link" buildConfiguration="Debug" sessionSettings="" debugSearchFileMap="" fileDialogInitialDirectory="E:/Development/Droid/Nordic/Projects/nRF5/TestTask/Sources/Application/Modules" debugSearchPath="" autoConnectCapabilities="3711"/>
 </session>

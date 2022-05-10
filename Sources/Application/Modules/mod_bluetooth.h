@@ -1,13 +1,13 @@
 /*-- File description -------------------------------------------------------*/
 /**
- *   @file:    if_twi0.h
+ *   @file:    mod_bluetooth.h
  *
  *   @author:  valeriy.grimalskiy
  *   @company: Lab.
  */
 
-#ifndef _IF_TWI0_H
-#define _IF_TWI0_H
+#ifndef _MOD_BLUETOOTH_H
+#define _MOD_BLUETOOTH_H
 
 /*-- Standard C/C++ Libraries -----------------------------------------------*/
 #include <stdint.h>
@@ -18,17 +18,18 @@
 /*-- Project specific includes ----------------------------------------------*/
 /*-- Exported macro ---------------------------------------------------------*/
 /*-- Typedefs ---------------------------------------------------------------*/
-
 /*-- Exported variables -----------------------------------------------------*/
 /*-- Exported functions -----------------------------------------------------*/
-void If_TWI0_Init(void);
-void If_TWI0_DeInit(void);
+void Mod_Bluetooth_Init(void);
 
-void If_TWI0_Enable(void);
-void If_TWI0_Disable(void);
+bool Mod_Bluetooth_IsBusy(void);
+void Mod_Bluetooth_EnterSleepMode(void);
 
-bool If_TWI0_Send(uint8_t address, uint8_t *data, uint8_t length);
-bool If_TWI0_Receive(uint8_t address, uint8_t *data, uint8_t length);
+void Mod_Bluetooth_Accelerometer_NewData(uint16_t X, uint16_t Y, uint16_t Z);
 
-#endif // _IF_TWI0_H
+void Mod_Bluetooth_Tick(uint32_t ms);
+
+void Mod_Bluetooth_Run(void);
+
+#endif // _MOD_BLUETOOTH_H
 /*-- EOF --------------------------------------------------------------------*/

@@ -248,7 +248,7 @@ bool SwTimer_IsPresent(uint32_t id)
 	{
 		for(i = 0; i < SW_TIMER__TIMERS_COUNT; i++)
 		{
-			if((_swTimer[i].Id == id) && ((_swTimer[i].WorkCountSetup == SWTT_CONTINUOUS) || (_swTimer[i].State == SWTS_RUNNING) || (_swTimer[i].State == SWTS_PAUSED)))
+			if((_swTimer[i].Id == id) && ((_swTimer[i].WorkCountSetup == SWTT_CONTINUOUS) || (_swTimer[i].State != SWTS_CLEAR)))
 			{
 				result = true;
 				break;
@@ -362,7 +362,7 @@ void SwTimer_Stop(uint32_t id)
 	
 	for(i = 0; i < SW_TIMER__TIMERS_COUNT; i++)
 	{
-		if((_swTimer[i].Id == id) && ((_swTimer[i].State == SWTS_RUNNING) || (_swTimer[i].State == SWTS_PAUSED)))
+		if((_swTimer[i].Id == id) && (_swTimer[i].State != SWTS_CLEAR))
 		{
 			//Free timer
 			SwTimer_FreeTimer(i);
@@ -377,7 +377,7 @@ void SwTimer_Refresh(uint32_t id)
 	
 	for(i = 0; i < SW_TIMER__TIMERS_COUNT; i++)
 	{
-		if((_swTimer[i].Id == id) && ((_swTimer[i].State == SWTS_RUNNING) || (_swTimer[i].State == SWTS_PAUSED)))
+		if((_swTimer[i].Id == id) && (_swTimer[i].State != SWTS_CLEAR))
 		{
 			_swTimer[i].Ticks = _swTimer[i].Period;
 			break;

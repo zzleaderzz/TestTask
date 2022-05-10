@@ -1,13 +1,13 @@
 /*-- File description -------------------------------------------------------*/
 /**
- *   @file:    mod_ble.h
+ *   @file:    if_twi.h
  *
  *   @author:  valeriy.grimalskiy
  *   @company: Lab.
  */
 
-#ifndef _MOD_BLE_H
-#define _MOD_BLE_H
+#ifndef _IF_TWI_H
+#define _IF_TWI_H
 
 /*-- Standard C/C++ Libraries -----------------------------------------------*/
 #include <stdint.h>
@@ -18,18 +18,17 @@
 /*-- Project specific includes ----------------------------------------------*/
 /*-- Exported macro ---------------------------------------------------------*/
 /*-- Typedefs ---------------------------------------------------------------*/
+
 /*-- Exported variables -----------------------------------------------------*/
 /*-- Exported functions -----------------------------------------------------*/
-void Mod_Ble_Init(void);
+void If_TWI_Init(void);
+void If_TWI_DeInit(void);
 
-bool Mod_Ble_IsBusy(void);
-void Mod_Ble_EnterSleepMode(void);
+void If_TWI_Enable(void);
+void If_TWI_Disable(void);
 
-void Mod_Ble_Accelerometer_NewData(uint16_t X, uint16_t Y, uint16_t Z);
+bool If_TWI_Send(uint8_t address, uint8_t *data, uint8_t length);
+bool If_TWI_Receive(uint8_t address, uint8_t *data, uint8_t length);
 
-void Mod_Ble_Tick(uint32_t ms);
-
-void Mod_Ble_Run(void);
-
-#endif // _MOD_BLE_H
+#endif // _IF_TWI_H
 /*-- EOF --------------------------------------------------------------------*/

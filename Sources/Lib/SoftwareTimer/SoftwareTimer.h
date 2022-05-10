@@ -26,7 +26,7 @@ extern "C" {
 	#define SW_TIMER__EXTERNAL_TIMERS_COUNT                     5
 #endif
 
-#define SW_TIMER__ADVANCED_TICK_CALCULATE_SUPPORT               1
+#define SW_TIMER__ADVANCED_TICK_CALCULATE_SUPPORT               0
 #if (SW_TIMER__ADVANCED_TICK_CALCULATE_SUPPORT)
 	#define SW_TIMER__ADVANCED_TICK_MAXIMUM_PERIOD_MS           5000
 #endif

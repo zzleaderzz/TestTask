@@ -7,12 +7,7 @@
  */
 
 /*-- Standard C/C++ Libraries -----------------------------------------------*/
-#include <stdbool.h>
-#include <stdint.h>
-
 /*-- Other libraries --------------------------------------------------------*/
-#include "SoftwareTimer.h"
-
 /*-- Hardware specific libraries --------------------------------------------*/
 #include "if_exti.h"
 #include "if_swtimer.h"
@@ -23,7 +18,7 @@
 #include "mod_climate.h"
 #include "mod_accelerometer.h"
 #include "mod_audio_player.h"
-#include "mod_ble.h"
+#include "mod_bluetooth.h"
 
 /*-- Imported functions -----------------------------------------------------*/
 #include "SysTick.h"
@@ -36,7 +31,7 @@
 void main(void)
 {
 	//Start systick timer
-	Systick_InitTick(1);
+	Systick_InitTick(SYSTICK_FREQ_1KHZ);
 
 	//Start sw timer module
 	If_SwTimer_Init();
@@ -52,7 +47,7 @@ void main(void)
 	//Mod_Climate_Init();
 	Mod_Accelerometer_Init();
 	Mod_AudioPlayer_Init();
-	Mod_Ble_Init();
+	Mod_Bluetooth_Init();
 	Mod_PowerManagement_Init();
 
 	//Set indication
@@ -64,7 +59,7 @@ void main(void)
 		//Mod_Climate_Run();
 		Mod_Accelerometer_Run();
 		Mod_AudioPlayer_Run();
-		Mod_Ble_Run();
+		Mod_Bluetooth_Run();
 		Mod_Indication_Run();
 
 		If_SwTimer_Run();

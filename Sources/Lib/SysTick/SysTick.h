@@ -21,9 +21,9 @@ extern "C" {
 /*-- Hardware specific libraries --------------------------------------------*/
 /*-- Project specific includes ----------------------------------------------*/
 /*-- Exported macro ---------------------------------------------------------*/
-#define SYSTICK_FREQ_10HZ                   100U
-#define SYSTICK_FREQ_100HZ                  10U
-#define SYSTICK_FREQ_1KHZ                   1U
+#define SYSTICK_FREQ_10HZ                   100u
+#define SYSTICK_FREQ_100HZ                  10u
+#define SYSTICK_FREQ_1KHZ                   1u
 
 #define SYSTICK_FREQ                        SYSTICK_FREQ_1KHZ
 

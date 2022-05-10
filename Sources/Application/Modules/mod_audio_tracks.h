@@ -16,8 +16,8 @@
 /*-- Hardware specific libraries --------------------------------------------*/
 /*-- Project specific includes ----------------------------------------------*/
 /*-- Exported macro ---------------------------------------------------------*/
-#define MELODY_U_SIZE                       296960u //~10 sec
-#define MELODY_BERGEN_SIZE					358400u //~11 sec
+#define MELODY_U_SIZE                       296960u //~10 sec (Luke Bond - U)
+#define MELODY_BERGEN_SIZE					358400u //~11 sec (Purple Haze - Bergen)
 
 /*-- Typedefs ---------------------------------------------------------------*/
 /*-- Exported variables -----------------------------------------------------*/

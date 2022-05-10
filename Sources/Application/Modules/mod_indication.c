@@ -19,10 +19,10 @@
 /*-- Project specific includes ----------------------------------------------*/
 /*-- Imported functions -----------------------------------------------------*/
 /*-- Local Macro Definitions ------------------------------------------------*/
-#define LED_APP_WORKING					BSP_BOARD_LED_0                         /**< Is on when device is advertising. */
-#define LED_BT_STATE                    BSP_BOARD_LED_1                         /**< Is on when device has connected. */
-#define LED_ACCEL_STATE                 BSP_BOARD_LED_2                         /**< LED to be toggled with the help of the LED Button Service. */
-#define LED_AUDIO_STATE                 BSP_BOARD_LED_3                         /**< LED to be toggled with the help of the LED Button Service. */
+#define LED_APP_WORKING                 BSP_BOARD_LED_0         //Is on when device in sleep mode. Blink if app is in work state.
+#define LED_BT_STATE                    BSP_BOARD_LED_1         //Is on when device has connected.
+#define LED_ACCEL_STATE                 BSP_BOARD_LED_2         //LED to be toggled with when accelerometer data readed.
+#define LED_AUDIO_STATE                 BSP_BOARD_LED_3         //LED indicating audio player state.
 
 /*-- Local Typedefs ---------------------------------------------------------*/
 /*-- Local function prototypes ----------------------------------------------*/

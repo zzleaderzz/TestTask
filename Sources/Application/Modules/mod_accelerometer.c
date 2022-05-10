@@ -12,13 +12,13 @@
 /*-- Other libraries --------------------------------------------------------*/
 /*-- Hardware specific libraries --------------------------------------------*/
 #include "bma280.h"
-#include "if_twi0.h"
+#include "if_twi.h"
 #include "if_exti.h"
 #include "if_delay.h"
 #include "SysTick.h"
 
 /*-- Project specific includes ----------------------------------------------*/
-#include "mod_ble.h"
+#include "mod_bluetooth.h"
 #include "mod_indication.h"
 
 /*-- Imported functions -----------------------------------------------------*/
@@ -42,8 +42,8 @@ static const BMA280_Config_t bma280_cfg =
 	.SleepDuraction = BMA280_SleepDuraction_100ms,
     .Functions =
     {
-        .Send = If_TWI0_Send,
-        .Receive = If_TWI0_Receive,
+        .Send = If_TWI_Send,
+        .Receive = If_TWI_Receive,
 		.Delay_us = If_Delay_us,
 		.DataReadyCallback = Accelerometer_DataReady_Callback
     },
@@ -85,8 +85,8 @@ static void Accelerometer_DataReady_Callback(BMA280_Data_t *data)
 /*-- Exported functions -----------------------------------------------------*/
 void Mod_Accelerometer_Init(void)
 {
-	If_TWI0_Init();
-	If_TWI0_Enable();
+	If_TWI_Init();
+	If_TWI_Enable();
 	
 	If_Exti_RegisterCallback(If_Exti_Button_1, Accelerometer_INT_Callback);
 
@@ -139,7 +139,7 @@ void Mod_Accelerometer_Run(void)
 			Mod_Indication_SetState_Accelerometer(IndiStatus_Accelerometer_DataUpdated);
 
 			//Update thru bluetooth
-			Mod_Ble_Accelerometer_NewData(AccelerometerData.X, AccelerometerData.Y, AccelerometerData.Z);
+			Mod_Bluetooth_Accelerometer_NewData(AccelerometerData.X, AccelerometerData.Y, AccelerometerData.Z);
 		}
 
 		interrupt_triggered = false;

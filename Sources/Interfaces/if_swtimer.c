@@ -1,37 +1,54 @@
 /*-- File description -------------------------------------------------------*/
 /**
- *   @file:    aht10.c
+ *   @file:    if_swtimer.c
  *
  *   @author:  valeriy.grimalskiy
- *   @company: NIK El.
+ *   @company: Lab.
  */
 
-#include "drv_i2c.h"
+#include "if_swtimer.h"
 
 /*-- Standard C/C++ Libraries -----------------------------------------------*/
 /*-- Other libraries --------------------------------------------------------*/
 /*-- Hardware specific libraries --------------------------------------------*/
+#include "if_hwtimer.h"
+
 /*-- Project specific includes ----------------------------------------------*/
 /*-- Imported functions -----------------------------------------------------*/
+#include "SoftwareTimer.h"
+
 /*-- Local Macro Definitions ------------------------------------------------*/
+#define HW_TIMER_PERIOD                     1 //ms
+
 /*-- Local Typedefs ---------------------------------------------------------*/
 /*-- Local function prototypes ----------------------------------------------*/
 /*-- Local variables --------------------------------------------------------*/
 /*-- Local functions --------------------------------------------------------*/
-/*-- Exported functions -----------------------------------------------------*/
-void DrvI2C_Init(DrvI2c_Config_t *config)
+static void HwTimer_Callback(uint32_t period)
 {
-	if((config) && (config->Entity))
-	{
-		if(config->Instance == DrvI2c_0)
-		{
-			config->Entity->TwiModule_p = NRF_DRV_TWI_INSTANCE_0;
-		}
-		else if ()
-		{
-			config->Entity->TwiModule_p = NRF_DRV_TWI_INSTANCE_1;
-		}
-	}
+	SwTimer_TickCounter(period);
+}
+
+/*-- Exported functions -----------------------------------------------------*/
+void If_SwTimer_Init(void)
+{
+	If_HwTimer_Init(HW_TIMER_PERIOD);
+	If_HwTimer_RegisterCallback(HwTimer_Callback);
+}
+
+void If_SwTimer_Start(void)
+{
+	If_HwTimer_Enable();
+}
+
+void If_SwTimer_Stop(void)
+{
+	If_HwTimer_Disable();
+}
+
+void If_SwTimer_Run(void)
+{
+	SwTimer_Run(SWTP_LEVEL_LOWEST);
 }
 
 /*-- EOF --------------------------------------------------------------------*/
