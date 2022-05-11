@@ -87,23 +87,24 @@ static void I2S_BufferFillNeededCallback(If_I2S_Buffer_item_t *buffer, const uin
 			Mod_Indication_SetState_Audio(IndiStatus_Audio_Trigger);
 		}
 	}
-
-	
 }
 
 static void AudioPlayer_Button2_Callback(void)
 {
 	if(SysTick_WaitAfter(&button2_debounce_entity, 250, true))
 	{
-		static AudioPlayer_Track_e current_track = AudioPlayer_Track_1;
-
-		Mod_AudioPlayer_Play(current_track);
-
-		current_track++;
-
-		if(current_track > AudioPlayer_Track_2)
+		if(player_status == AudioPlayer_Status_Stopped)
 		{
-			current_track = AudioPlayer_Track_1;
+			static AudioPlayer_Track_e current_track = AudioPlayer_Track_1;
+
+			Mod_AudioPlayer_Play(current_track);
+
+			current_track++;
+
+			if(current_track > AudioPlayer_Track_2)
+			{
+				current_track = AudioPlayer_Track_1;
+			}
 		}
 	}
 }
@@ -185,7 +186,6 @@ void Mod_AudioPlayer_Play(AudioPlayer_Track_e track)
 				player_track = AudioPlayer_Track_1;
 				track_data = (uint16_t *)Melody_U;
 				track_data_length = (MELODY_U_SIZE / sizeof(uint16_t));
-				//return;
 			}
 			break;
 
@@ -194,7 +194,6 @@ void Mod_AudioPlayer_Play(AudioPlayer_Track_e track)
 				player_track = AudioPlayer_Track_2;
 				track_data = (uint16_t *)Melody_Bergen;
 				track_data_length = (MELODY_BERGEN_SIZE / sizeof(uint16_t));
-				//return;
 			}
 			break;
 
